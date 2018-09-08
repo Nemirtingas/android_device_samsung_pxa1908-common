@@ -18,31 +18,58 @@
 COMMON_PATH := device/samsung/pxa1908-common
 
 TARGET_BOARD_PLATFORM := mrvl
-TARGET_BOARD_PLATFORM_GPU := vivante-gc700
 TARGET_SOC := pxa1908
 
 TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
+
+# GPU
+TARGET_BOARD_PLATFORM_GPU := vivante-gc700
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_pxa1908
 TARGET_UNIFIED_DEVICE := true
 
-# Malloc
-MALLOC_SVELTE := true
+# Camera
+TARGET_PROVIDES_CAMERA_HAL := true
+USE_DEVICE_SPECIFIC_CAMERA := true
 
-#TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
-# CMHW
-#BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
+# Charger
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_SHOW_PERCENYAGE := true
 
-# Custom RIL class
-#BOARD_RIL_CLASS := ../../../$(COMMON_PATH)/ril
+# Charging Mode
+BOARD_CHARGING_MODE_BOOTING_LPM := true
 
-# Fonts
-#EXTENDED_FONT_FOOTPRINT := true
+# Crypto
+#TARGET_HW_DISK_ENCRYPTION := true
 
-# Properties (reset them here, include more in device if needed)
-#TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
+# Display & Graphics
+USE_OPENGL_RENDERER := true
+ENABLE_WEBGL := true
+LOCAL_CFLAGS += -DSK_SUPPORT_LEGACY_SETCONFIG
+BOARD_EGL_CFG := device/samsung/$(TARGET_DEVICE)/configs/egl/egl.cfg
+BOARD_HAVE_PIXEL_FORMAT_INFO := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+BOARD_ENABLE_MULTI_DISPLAYS := true
+BOARD_USE_VIVANTE_GRALLOC := true
+HDMI_SUPPORT_3D := true
+# Enable Marvell interface in SurfaceFlinger
+MRVL_INTERFACE_ANIMATION := true
+# Launch DMS in SurfaceFlinger process
+MRVL_LAUNCH_DMS_IN_SURFACEFLINGER := true
 
-# SELinux
-#-include device/qcom/sepolicy/sepolicy.mk
-#BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
+# Flags
+LOCAL_CFLAGS += -DMRVL_HARDWARE
+LOCAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+LOCAL_CFLAGS += -DNO_SECURE_DISCARD
+
+# Webkit
+ENABLE_WEBGL := true
+BOARD_USE_SKIA_LCDTEXT := true
+BOARD_NEEDS_CUTILS_LOG := true
+BOARD_USES_HWCOMPOSER := true
+
+# Wifi
+BOARD_WLAN_VENDOR := MRVL
+MRVL_WIRELESS_DAEMON_API := true
