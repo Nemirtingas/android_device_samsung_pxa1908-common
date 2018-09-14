@@ -15,7 +15,7 @@
 # Inherit from mrvl-common
 -include device/samsung/mrvl-common/BoardConfigCommon.mk
 
-COMMON_PATH := device/samsung/pxa1908-common
+DEVICE_PATH := device/samsung/pxa1908-common
 
 TARGET_BOARD_PLATFORM := mrvl
 TARGET_SOC := pxa1908
@@ -24,7 +24,6 @@ TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
 
 # GPU
 TARGET_BOARD_PLATFORM_GPU := vivante-gc700
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_pxa1908
@@ -48,7 +47,7 @@ BOARD_CHARGING_MODE_BOOTING_LPM := true
 USE_OPENGL_RENDERER := true
 ENABLE_WEBGL := true
 LOCAL_CFLAGS += -DSK_SUPPORT_LEGACY_SETCONFIG
-BOARD_EGL_CFG := device/samsung/$(TARGET_DEVICE)/configs/egl/egl.cfg
+BOARD_EGL_CFG := $(DEVICE_PATH)/configs/egl/egl.cfg
 BOARD_HAVE_PIXEL_FORMAT_INFO := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_ENABLE_MULTI_DISPLAYS := true
@@ -73,3 +72,14 @@ BOARD_USES_HWCOMPOSER := true
 # Wifi
 BOARD_WLAN_VENDOR := MRVL
 MRVL_WIRELESS_DAEMON_API := true
+#BOARD_WLAN_DEVICE                := qcwcn
+#BOARD_HOSTAPD_DRIVER             := NL80211
+#BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+#BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+#TARGET_PROVIDES_WCNSS_QMI        := true
+#TARGET_USES_QCOM_WCNSS_QMI       := true
+#TARGET_USES_WCNSS_CTRL           := true
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+WIFI_DRIVER_FW_PATH_STA          := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
