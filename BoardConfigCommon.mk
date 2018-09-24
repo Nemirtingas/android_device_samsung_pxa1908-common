@@ -18,13 +18,14 @@
 DEVICE_PATH := device/samsung/pxa1908-common
 
 TARGET_BOARD_PLATFORM := mrvl
-TARGET_SOC := pxa1908
+TARGET_BOARD_SOC := pxa1908
 
 TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
 
 # GPU
 TARGET_BOARD_PLATFORM_GPU := vivante-gc700
 
+# Enabling this resolv zygote's descriptor table, but ROM doesn't boot...
 #TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 # Init
@@ -75,9 +76,9 @@ BOARD_USES_HWCOMPOSER := true
 BOARD_WLAN_VENDOR := MRVL
 MRVL_WIRELESS_DAEMON_API := true
 #BOARD_WLAN_DEVICE                := qcwcn
-#BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_DRIVER             := NL80211
 #BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-#BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 #BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 #TARGET_PROVIDES_WCNSS_QMI        := true
 #TARGET_USES_QCOM_WCNSS_QMI       := true

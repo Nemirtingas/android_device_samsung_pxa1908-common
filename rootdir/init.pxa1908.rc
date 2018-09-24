@@ -3,7 +3,6 @@ import init.pxa1908.tel.rc
 import init.pxa1908.sensor.rc
 import init.pxa1908.security.rc
 import init.wifi.rc
-import init.fac.rc
 
 on init
 # See storage config details at http://source.android.com/tech/storage/

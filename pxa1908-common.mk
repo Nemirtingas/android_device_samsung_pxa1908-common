@@ -25,7 +25,7 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH  := 540
 
-#PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_basic_element_apu.xml:system/etc/audio_basic_element_apu.xml \
     $(LOCAL_PATH)/configs/audio/audio_basic_element_codec.xml:system/etc/audio_basic_element_codec.xml \
     $(LOCAL_PATH)/configs/audio/audio_effect_config.xml:system/etc/audio_effect_config.xml \
@@ -94,11 +94,23 @@ PRODUCT_COPY_FILES += \
 #    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 #    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
+# Lights
+PRODUCT_PACKAGES += \
+    lights.$(TARGET_BOARD_PLATFORM)
+
+# Power
+PRODUCT_PACKAGES += \
+    power.$(TARGET_BOARD_PLATFORM)
+
 # Wifi
-#PRODUCT_PACKAGES += \
-#    hostapd \
-#    wpa_supplicant \
-#    wpa_supplicant.conf
+PRODUCT_PACKAGES += \
+    hostapd \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
+# XML
+PRODUCT_PACKAGES += \
+    libxml2
 
 # Ramdisk
 #PRODUCT_PACKAGES += \
@@ -113,8 +125,8 @@ PRODUCT_PACKAGES += \
     ueventd.pxa1908.rc
 
 # Torch
-#PRODUCT_PACKAGES += \
-#    Torch
+PRODUCT_PACKAGES += \
+    Torch
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg
