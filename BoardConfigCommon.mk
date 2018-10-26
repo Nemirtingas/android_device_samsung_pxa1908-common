@@ -21,6 +21,7 @@ TARGET_BOARD_PLATFORM := mrvl
 TARGET_BOARD_SOC := pxa1908
 
 TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mrvl-common/tools/custom_mkbootimg.mk
 
 # GPU
 TARGET_BOARD_PLATFORM_GPU := vivante-gc700
@@ -73,16 +74,16 @@ BOARD_NEEDS_CUTILS_LOG := true
 BOARD_USES_HWCOMPOSER := true
 
 # Wifi
-BOARD_WLAN_VENDOR := MRVL
-MRVL_WIRELESS_DAEMON_API := true
+#BOARD_WLAN_VENDOR := MRVL
+#MRVL_WIRELESS_DAEMON_API := true
 #BOARD_WLAN_DEVICE                := qcwcn
-BOARD_HOSTAPD_DRIVER             := NL80211
+#BOARD_HOSTAPD_DRIVER             := NL80211
 #BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+#BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 #BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 #TARGET_PROVIDES_WCNSS_QMI        := true
 #TARGET_USES_QCOM_WCNSS_QMI       := true
 #TARGET_USES_WCNSS_CTRL           := true
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-WIFI_DRIVER_FW_PATH_STA          := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
+#WPA_SUPPLICANT_VERSION           := VER_0_8_X
+#WIFI_DRIVER_FW_PATH_STA          := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
+#WIFI_DRIVER_FW_PATH_AP           := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
