@@ -87,3 +87,7 @@ BOARD_USES_HWCOMPOSER := true
 #WPA_SUPPLICANT_VERSION           := VER_0_8_X
 #WIFI_DRIVER_FW_PATH_STA          := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
 #WIFI_DRIVER_FW_PATH_AP           := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
+#WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
+#WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/wlan/parameters/fwpath"
+#WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
+#WIFI_DRIVER_NVRAM_PATH_CONF      := "/system/etc/wifi/nvram_net.txt"
