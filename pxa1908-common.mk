@@ -128,6 +128,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Torch
 
+# Marvell binaries
+PRODUCT_PACKAGES += \
+    MarvellWirelessDaemon \
+
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg
 
