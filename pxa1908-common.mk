@@ -132,6 +132,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     MarvellWirelessDaemon \
 
+PRODUCT_PACKAGES += libion
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg
