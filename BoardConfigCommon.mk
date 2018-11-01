@@ -24,6 +24,9 @@ TARGET_BOARD_SOC := pxa1908
 TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mrvl-common/tools/custom_mkbootimg.mk
 
+# Custom RIL class
+BOARD_RIL_CLASS := ../../../$(DEVICE_PATH)/ril
+
 # GPU
 TARGET_BOARD_PLATFORM_GPU := vivante-gc700
 
@@ -77,6 +80,7 @@ BOARD_USES_HWCOMPOSER := true
 # Wifi
 # Enable Auto Channel Selection (For wifi Access Point hostapd)
 CONFIG_ACS := true
+#CONFIG_P2P := true
 BOARD_WLAN_VENDOR := MRVL
 MRVL_WIRELESS_DAEMON_API := true
 BOARD_HOSTAPD_DRIVER             := NL80211

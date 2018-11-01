@@ -19,56 +19,17 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := mdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH  := 540
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_basic_element_apu.xml:system/etc/audio_basic_element_apu.xml \
-    $(LOCAL_PATH)/configs/audio/audio_basic_element_codec.xml:system/etc/audio_basic_element_codec.xml \
-    $(LOCAL_PATH)/configs/audio/audio_effect_config.xml:system/etc/audio_effect_config.xml \
-    $(LOCAL_PATH)/configs/audio/audio_gain_calibration.xml:system/etc/audio_gain_calibration.xml \
-    $(LOCAL_PATH)/configs/audio/audio_gain_config.xml:system/etc/audio_gain_config.xml \
-    $(LOCAL_PATH)/configs/audio/audio_path_config_apu.xml:system/etc/audio_path_config_apu.xml \
-    $(LOCAL_PATH)/configs/audio/audio_path_config_codec.xml:system/etc/audio_path_config_codec.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/audio/audio_swvol_calibration_def.xml:system/etc/audio_swvol_calibration_def.xml \
-    $(LOCAL_PATH)/configs/audio/audio_swvol_config.xml:system/etc/audio_swvol_config.xml \
-    $(LOCAL_PATH)/configs/audio/audio_swvol_element.xml:system/etc/audio_swvol_element.xml \
-    $(LOCAL_PATH)/configs/audio/audio_virtualpath_config.xml:system/etc/audio_virtualpath_config.xml \
-    $(LOCAL_PATH)/configs/audio/audio_voice_calibration_ap.nvm:system/etc/audio_voice_calibration_ap.nvm \
-    $(LOCAL_PATH)/configs/audio/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-    $(LOCAL_PATH)/configs/audio/platform_audio_config.xml:system/etc/platform_audio_config.xml
-
-# Bluetooth conf
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/bluetooth/auto_pair_devlist.conf:system/etc/bluetooth/auto_pair_devlist.conf \
-    $(LOCAL_PATH)/configs/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
-    $(LOCAL_PATH)/configs/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf \
-    $(LOCAL_PATH)/configs/bluetooth/iop_bt.db:system/etc/bluetooth/iop_bt.db \
-    $(LOCAL_PATH)/configs/bluetooth/iop_device_list.conf:system/etc/bluetooth/iop_device_list.conf
-
-# Bluetooth & Wifi Firmware
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/firmware/ispfw_v325.bin:system/etc/firmware/ispfw_v325.bin \
-    $(LOCAL_PATH)/configs/firmware/mrvl/SDIO8777_SDIO_SDIO.bin:system/etc/firmware/mrvl/SDIO8777_SDIO_SDIO.bin \
-    $(LOCAL_PATH)/configs/firmware/mrvl/WlanCalData_ext.conf:system/etc/firmware/mrvl/WlanCalData_ext.conf \
-    $(LOCAL_PATH)/configs/firmware/mrvl/bt_cal_data.conf:system/etc/firmware/mrvl/bt_cal_data.conf \
-    $(LOCAL_PATH)/configs/firmware/mrvl/bt_init_cfg.conf:system/etc/firmware/mrvl/bt_init_cfg.conf \
-    $(LOCAL_PATH)/configs/firmware/mrvl/reg_alpha2:system/etc/firmware/mrvl/reg_alpha2 \
-    $(LOCAL_PATH)/configs/firmware/mrvl/sd8777_uapsta.bin:system/etc/firmware/mrvl/sd8777_uapsta.bin \
-    $(LOCAL_PATH)/configs/firmware/mrvl/txbackoff.txt:system/etc/firmware/mrvl/txbackoff.txt \
-    $(LOCAL_PATH)/configs/firmware/mrvl/txpower_FC.bin:system/etc/firmware/mrvl/txpower_FC.bin \
-    $(LOCAL_PATH)/configs/firmware/mrvl/txpwrlimit_cfg.bin:system/etc/firmware/mrvl/txpwrlimit_cfg.bin
-
-# OMX
-#PRODUCT_PACKAGES += \
-#    libOmxCore \
-#    libOmxVdec \
-#    libOmxVenc \
-#    libstagefrighthw
+PRODUCT_PACKAGES += \
+    libOmxCore \
+    libOmxVdec \
+    libOmxVenc \
+    libstagefrighthw
 
 # Permissions
 #PRODUCT_COPY_FILES += \
@@ -94,6 +55,17 @@ PRODUCT_COPY_FILES += \
 #    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 #    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
+# Audio Configs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_swvol_element.xml:system/etc/audio/audio_swvol_element.xml \
+    $(LOCAL_PATH)/configs/audio_basic_element_codec.xml:system/etc/audio_basic_element_codec.xml \
+    $(LOCAL_PATH)/configs/audio_basic_element_apu.xml:system/etc/audio_basic_element_apu.xml \
+    $(LOCAL_PATH)/configs/platform_audio_config.xml:system/etc/platform_audio_config.xml \
+    $(LOCAL_PATH)/configs/audio_virtualpath_config.xml:system/etc/audio_virtualpath_config.xml \
+    $(LOCAL_PATH)/configs/audio_path_config_apu.xml:system/etc/audio_path_config_apu.xml \
+    $(LOCAL_PATH)/configs/audio_path_config_codec.xml:system/etc/audio_path_config_codec.xml \
+    $(LOCAL_PATH)/configs/audio_gain_config.xml:system/etc/audio_gain_config.xml
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.$(TARGET_BOARD_PLATFORM)
@@ -102,12 +74,35 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.$(TARGET_BOARD_PLATFORM)
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libbt-vendor
+
 # Wifi
 PRODUCT_PACKAGES += \
     hostapd \
-    wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+
+
+# Bluetooth & Wifi Firmware
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/firmware/ispfw_v325.bin:system/etc/firmware/ispfw_v325.bin \
+    $(LOCAL_PATH)/configs/firmware/mrvl/SDIO8777_SDIO_SDIO.bin:system/etc/firmware/mrvl/SDIO8777_SDIO_SDIO.bin \
+    $(LOCAL_PATH)/configs/firmware/mrvl/WlanCalData_ext.conf:system/etc/firmware/mrvl/WlanCalData_ext.conf \
+    $(LOCAL_PATH)/configs/firmware/mrvl/bt_cal_data.conf:system/etc/firmware/mrvl/bt_cal_data.conf \
+    $(LOCAL_PATH)/configs/firmware/mrvl/bt_init_cfg.conf:system/etc/firmware/mrvl/bt_init_cfg.conf \
+    $(LOCAL_PATH)/configs/firmware/mrvl/reg_alpha2:system/etc/firmware/mrvl/reg_alpha2 \
+    $(LOCAL_PATH)/configs/firmware/mrvl/sd8777_uapsta.bin:system/etc/firmware/mrvl/sd8777_uapsta.bin \
+    $(LOCAL_PATH)/configs/firmware/mrvl/txbackoff.txt:system/etc/firmware/mrvl/txbackoff.txt \
+    $(LOCAL_PATH)/configs/firmware/mrvl/txpower_FC.bin:system/etc/firmware/mrvl/txpower_FC.bin \
+    $(LOCAL_PATH)/configs/firmware/mrvl/txpwrlimit_cfg.bin:system/etc/firmware/mrvl/txpwrlimit_cfg.bin
+
+# OMX
 # XML
 PRODUCT_PACKAGES += \
     libxml2
