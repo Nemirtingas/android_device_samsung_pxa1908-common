@@ -58,13 +58,18 @@ PRODUCT_PACKAGES += \
 # Audio Configs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_swvol_element.xml:system/etc/audio/audio_swvol_element.xml \
-    $(LOCAL_PATH)/configs/audio_basic_element_codec.xml:system/etc/audio_basic_element_codec.xml \
-    $(LOCAL_PATH)/configs/audio_basic_element_apu.xml:system/etc/audio_basic_element_apu.xml \
-    $(LOCAL_PATH)/configs/platform_audio_config.xml:system/etc/platform_audio_config.xml \
-    $(LOCAL_PATH)/configs/audio_virtualpath_config.xml:system/etc/audio_virtualpath_config.xml \
-    $(LOCAL_PATH)/configs/audio_path_config_apu.xml:system/etc/audio_path_config_apu.xml \
-    $(LOCAL_PATH)/configs/audio_path_config_codec.xml:system/etc/audio_path_config_codec.xml \
-    $(LOCAL_PATH)/configs/audio_gain_config.xml:system/etc/audio_gain_config.xml
+    $(LOCAL_PATH)/configs/audio/audio_basic_element_codec.xml:system/etc/audio_basic_element_codec.xml \
+    $(LOCAL_PATH)/configs/audio/audio_basic_element_apu.xml:system/etc/audio_basic_element_apu.xml \
+    $(LOCAL_PATH)/configs/audio/platform_audio_config.xml:system/etc/platform_audio_config.xml \
+    $(LOCAL_PATH)/configs/audio/audio_virtualpath_config.xml:system/etc/audio_virtualpath_config.xml \
+    $(LOCAL_PATH)/configs/audio/audio_path_config_apu.xml:system/etc/audio_path_config_apu.xml \
+    $(LOCAL_PATH)/configs/audio/audio_path_config_codec.xml:system/etc/audio_path_config_codec.xml \
+    $(LOCAL_PATH)/configs/audio/audio_gain_config.xml:system/etc/audio_gain_config.xml
+
+# GPS Configs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/gps/mrvl_gps_platform.conf:system/etc/mrvl_gps_platform.conf \
+    $(LOCAL_PATH)/configs/gps/pxa_testcfg.ini:system/etc/pxa_textcfg.ini
 
 # Lights
 PRODUCT_PACKAGES += \
