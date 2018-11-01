@@ -17,39 +17,26 @@
 
 DEVICE_PATH := device/samsung/pxa1908-common
 
-TARGET_BOARD_PLATFORM := mrvl
-TARGET_BOOTLOADER_BOARD_NAME := mrvl
-TARGET_BOARD_SOC := pxa1908
-
-TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mrvl-common/tools/custom_mkbootimg.mk
-
-# Custom RIL class
-BOARD_RIL_CLASS := ../../../$(DEVICE_PATH)/ril
-
-# GPU
-TARGET_BOARD_PLATFORM_GPU := vivante-gc700
+include $(DEVICE_PATH)/board/*.mk
 
 # Enabling this resolv zygote's descriptor table, but ROM doesn't boot...
 #TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
+TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mrvl-common/tools/custom_mkbootimg.mk
+
+# CMHW
+#BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw
+
+# Custom RIL class
+BOARD_RIL_CLASS := ../../../$(DEVICE_PATH)/ril
+
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
+
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_pxa1908
 TARGET_UNIFIED_DEVICE := true
-
-# Camera
-TARGET_PROVIDES_CAMERA_HAL := true
-USE_DEVICE_SPECIFIC_CAMERA := true
-
-# Charger
-BOARD_CHARGER_ENABLE_SUSPEND := true
-BOARD_CHARGER_SHOW_PERCENYAGE := true
-
-# Charging Mode
-BOARD_CHARGING_MODE_BOOTING_LPM := true
-
-# Crypto
-#TARGET_HW_DISK_ENCRYPTION := true
 
 # Display & Graphics
 USE_OPENGL_RENDERER := true
@@ -76,22 +63,3 @@ ENABLE_WEBGL := true
 BOARD_USE_SKIA_LCDTEXT := true
 BOARD_NEEDS_CUTILS_LOG := true
 BOARD_USES_HWCOMPOSER := true
-
-# Wifi
-# Enable Auto Channel Selection (For wifi Access Point hostapd)
-CONFIG_ACS := true
-#CONFIG_P2P := true
-BOARD_WLAN_VENDOR := MRVL
-MRVL_WIRELESS_DAEMON_API := true
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_WLAN_DEVICE                := mrvl
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-WIFI_DRIVER_FW_PATH_STA          := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
-WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
-WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/wlan/parameters/fwpath"
-WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
-WIFI_DRIVER_NVRAM_PATH_CONF      := "/system/etc/wifi/nvram_net.txt"

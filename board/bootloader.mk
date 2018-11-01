@@ -1,0 +1,2 @@
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := mrvl
