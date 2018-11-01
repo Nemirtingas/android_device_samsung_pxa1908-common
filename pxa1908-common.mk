@@ -65,6 +65,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_path_config_apu.xml:system/etc/audio_path_config_apu.xml \
     $(LOCAL_PATH)/configs/audio/audio_path_config_codec.xml:system/etc/audio_path_config_codec.xml \
     $(LOCAL_PATH)/configs/audio/audio_gain_config.xml:system/etc/audio_gain_config.xml
+    $(LOCAL_PATH)/configs/audio/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/audio/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    $(LOCAL_PATH)/configs/audio/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    $(LOCAL_PATH)/configs/audio/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 # GPS Configs
 PRODUCT_COPY_FILES += \

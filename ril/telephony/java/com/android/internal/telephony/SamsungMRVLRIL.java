@@ -36,21 +36,23 @@ import com.android.internal.telephony.uicc.IccUtils;
  * Marvell RIL for Samsung PXA1908 Dual-sim devices
  * {@hide}
  */
-public class SamsungPXA1908RIL extends RIL {
+public class SamsungMRVLRIL extends RIL {
     private static final int RIL_REQUEST_10001 = 10001;
     private static final int RIL_UNSOL_11001   = 11001;
 
-    public SamsungPXA1908RIL(Context context, int preferredNetworkType, int cdmaSubscription) {
+    public SamsungMRVLRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
         mQANElements = 6;
+        riljLog("Building SamsungPXA1908RIL");
     }
 
 
 
-    public SamsungPXA1908RIL(Context context, int preferredNetworkType,
+    public SamsungMRVLRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
         mQANElements = 6;
+        riljLog("Building SamsungPXA1908RIL");
     }
 
 
@@ -58,6 +60,7 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     public void
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
+        riljLog("Starting SamsungPXA1908RIL::dial");
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_DIAL, result);
         rr.mParcel.writeString(address);
         rr.mParcel.writeInt(clirMode);
@@ -106,6 +109,7 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     protected Object
     responseIccCardStatus(Parcel p) {
+        riljLog("Starting SamsungPXA1908RIL::responseIccCardStatus");
         IccCardApplicationStatus appStatus;
 
         IccCardStatus cardStatus = new IccCardStatus();
@@ -150,6 +154,7 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     protected Object
     responseCallList(Parcel p) {
+        riljLog("Starting SamsungPXA1908RIL::responseCallList");
         int num = p.readInt();
         ArrayList<DriverCall> response = new ArrayList(num);
         for (int i = 0; i < num; i++) {
@@ -293,6 +298,7 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     protected Object
     responseSignalStrength(Parcel p) {
+        riljLog("Starting SamsungPXA1908RIL::responseSignalStrength");
         return SignalStrength.makeSignalStrengthFromRilParcel(p);
     /*
         int gsmSignalStrength = p.readInt() & 0xff;
@@ -340,6 +346,7 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     protected void
     processUnsolicited (Parcel p) {
+        riljLog("Starting SamsungPXA1908RIL::processUnsolicited");
         Object ret;
         int dataPosition = p.dataPosition();
         int response = p.readInt();
@@ -533,11 +540,13 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     public void
     acceptCall (Message result) {
+        riljLog("Starting SamsungPXA1908RIL::acceptCall");
         acceptCall(0, result);
     }
 
     public void
     acceptCall (int type, Message result) {
+        riljLog("Starting SamsungPXA1908RIL::acceptCall");
         RILRequest rr = RILRequest.obtain(40, result);
         riljLog(rr.serialString() + "> " + requestToString(rr.mRequest) + " " + type);
         rr.mParcel.writeInt(1);
@@ -546,6 +555,7 @@ public class SamsungPXA1908RIL extends RIL {
     }
 
     public void dialEmergencyCall(String address, int clirMode, Message result) {
+        riljLog("Starting SamsungPXA1908RIL::dialEmergencyCall");
         RILRequest rr = RILRequest.obtain(10001, result);
         rr.mParcel.writeString(address);
         rr.mParcel.writeInt(clirMode);
@@ -561,6 +571,7 @@ public class SamsungPXA1908RIL extends RIL {
     protected RILRequest
     processSolicited (Parcel p)
     {
+        riljLog("Starting SamsungPXA1908RIL::processSolicited");
         int serial, error;
         boolean found = false;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
@@ -674,6 +685,7 @@ public class SamsungPXA1908RIL extends RIL {
 
     private Object
     responseDataRegistrationState(Parcel p) {
+        riljLog("Starting SamsungPXA1908RIL::responseDataRegistrationState");
         String response[] = (String[])responseStrings(p);
         /* DANGER WILL ROBINSON
          * In some cases from Vodaphone we are receiving a RAT of 102
