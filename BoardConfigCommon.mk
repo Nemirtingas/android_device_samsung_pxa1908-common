@@ -19,6 +19,8 @@ DEVICE_PATH := device/samsung/pxa1908-common
 
 include $(DEVICE_PATH)/board/*.mk
 
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
+
 # Enabling this resolv zygote's descriptor table, but ROM doesn't boot...
 #TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
