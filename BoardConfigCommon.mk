@@ -25,7 +25,7 @@ TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 #TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mrvl-common/tools/custom_mkbootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := hardware/mrvl/bootimage/mkbootimg.mk
 
 # CMHW
 #BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw
