@@ -15,11 +15,9 @@
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(BOARD_VENDOR),samsung)
-ifeq ($(TARGET_BOARD_PLATFORM),mrvl)
 ifeq ($(TARGET_BOARD_SOC),pxa1908)
 
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
-endif
 endif
 endif

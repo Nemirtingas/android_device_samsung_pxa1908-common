@@ -44,7 +44,8 @@ PRODUCT_PACKAGES += \
     gralloc.default \
     gralloc.$(TARGET_BOARD_PLATFORM) \
     hwcomposer.$(TARGET_BOARD_PLATFORM) \
-    memtrack.$(TARGET_BOARD_PLATFORM)
+    memtrack.$(TARGET_BOARD_PLATFORM) \
+    libion
 
 # Input Device Config
     $(LOCAL_PATH)/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc
@@ -119,7 +120,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/mrvl_gps_platform.conf:system/etc/mrvl_gps_platform.conf \
-    $(LOCAL_PATH)/configs/gps/pxa_testcfg.ini:system/etc/pxa_textcfg.ini
+    $(LOCAL_PATH)/configs/gps/pxa_testcfg.ini:system/etc/pxa_testcfg.ini
 
 # Bluetooth
 PRODUCT_PACKAGES += \

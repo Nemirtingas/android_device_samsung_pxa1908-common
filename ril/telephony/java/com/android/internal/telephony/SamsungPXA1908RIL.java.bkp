@@ -36,11 +36,11 @@ import com.android.internal.telephony.uicc.IccUtils;
  * Marvell RIL for Samsung PXA1908 Dual-sim devices
  * {@hide}
  */
-public class SamsungMRVLRIL extends RIL {
+public class SamsungPXA1908RIL extends RIL {
     private static final int RIL_REQUEST_10001 = 10001;
     private static final int RIL_UNSOL_11001   = 11001;
 
-    public SamsungMRVLRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
+    public SamsungPXA1908RIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
         mQANElements = 6;
         riljLog("Building SamsungPXA1908RIL");
@@ -48,7 +48,7 @@ public class SamsungMRVLRIL extends RIL {
 
 
 
-    public SamsungMRVLRIL(Context context, int preferredNetworkType,
+    public SamsungPXA1908RIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
         mQANElements = 6;

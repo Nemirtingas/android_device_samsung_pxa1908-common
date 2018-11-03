@@ -1,8 +1,9 @@
 # Wifi
 # Enable Auto Channel Selection (For wifi Access Point hostapd)
-CONFIG_ACS := true
-BOARD_WLAN_VENDOR := MRVL
-MRVL_WIRELESS_DAEMON_API := true
+CONFIG_ACS                       := true
+BOARD_WLAN_VENDOR                := MRVL
+MRVL_WIRELESS_DAEMON_API         := true
+BOARD_HAS_MRVL_WLAN              := true
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WLAN_DEVICE                := mrvl
