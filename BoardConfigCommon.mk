@@ -22,7 +22,7 @@ include $(DEVICE_PATH)/board/*.mk
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
 # Enabling this resolv zygote's descriptor table, but ROM doesn't boot...
-TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
+#TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
 BOARD_CUSTOM_BOOTIMG_MK := hardware/mrvl/bootimage/mkbootimg.mk

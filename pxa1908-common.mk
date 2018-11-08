@@ -120,6 +120,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/mrvl_gps_platform.conf:system/etc/mrvl_gps_platform.conf \
+    $(LOCAL_PATH)/configs/gps/mrvl_agps_default.conf:system/etc/mrvl_agps_default.conf \
     $(LOCAL_PATH)/configs/gps/pxa_testcfg.ini:system/etc/pxa_testcfg.ini
 
 # Bluetooth
