@@ -1,5 +1,4 @@
-#/dev/snd/* 0660 system audio
-/dev/snd/* 0777 system audio
+/dev/snd/* 0660 system audio
 /dev/i2c-2 0600 system system
 /dev/citty* 0660 radio system
 /dev/ccichar 0640 radio radio
@@ -35,8 +34,7 @@
 /dev/alarm-poweroff 0440 system system
 # telephony
 /dev/cctdev* 0660 system system
-#/dev/umts_* 0660 system system
-/dev/umts_* 0777 system system
+/dev/umts_* 0660 system system
 /dev/msocket 0660 system system
 /dev/msocket_dump 0660 system system
 /dev/diag_dump 0660 system system

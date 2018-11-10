@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2010 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+     -->
+ <CamProfiles>
+     <BufferReq horstride="16" verstride="16" />
+     <NV21_InternalFormat
+         SmtPreview="yuv420p-i420" SmtRecording="yuv420p-i420"
+         DxoPreview="yuv420sp" DxoRecording="yuv420sp" />
+     <CamConfig sensorname="raw_sensor">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+             <PreviewSize width="1920" height="1080"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2592" height="1944"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <VideoSize width="1920" height="1080"/>
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="ovt.ov2680">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+<CamConfig sensorname="ssa.s5k5e3">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="69"   verviewangle="54"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+	     <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="1280" height="960"/>
+             <PreviewSize width="1280" height="720"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="960" height="540"/>
+             <PreviewSize width="720" height="540"/>
+             <PreviewSize width="640" height="480"/>         
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="176" height="144"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2576" height="1932"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+<CamConfig sensorname="samsung.s5k4h5">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="56"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="720" height="540"/>
+             <PreviewSize width="960" height="540"/>
+	     <PreviewSize width="1280" height="720"/>
+             <PreviewSize width="1280" height="960"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2560" height="1920"/>
+             <PictureSize width="3264" height="2448"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="ovt.ov13850">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+             <PreviewSize width="1920" height="1080"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2560" height="1920"/>
+             <PictureSize width="3264" height="2448"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <VideoSize width="1920" height="1080"/>
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="ovt.ov8858r2a">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+             <PreviewSize width="1920" height="1080"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2560" height="1920"/>
+             <PictureSize width="3264" height="2448"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <VideoSize width="1920" height="1080"/>
+         </VideoRecordingConfig>
+     </CamConfig>
+
+
+     <CamConfig sensorname="ov8825">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1920" maxpreviewheight="1080"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2592" height="1944"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="lsi3h7">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1920" maxpreviewheight="1080"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+             <PreviewSize width="1920" height="1080"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2592" height="1944"/>
+             <!--8M picture-->
+             <PictureSize width="3264" height="2448"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <VideoSize width="1920" height="1080"/>
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="ov5647">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1600" height="1200"/>
+             <PictureSize width="2048" height="1536"/>
+             <PictureSize width="2592" height="1944"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="ov5640">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144" />
+             <PreviewSize width="240" height="160" />
+             <PreviewSize width="320" height="240" />
+             <PreviewSize width="640" height="480" />
+             <PreviewSize width="720" height="480" />
+             <PreviewSize width="1280" height="720" />
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <!--PictureSize width="2592" height="1944"/-->
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <!--VideoSize width="1280" height="720"/-->
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="BasicSensor-ov2659">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144" />
+             <PreviewSize width="240" height="160" />
+             <PreviewSize width="320" height="240" />
+             <PreviewSize width="640" height="480" />
+             <PreviewSize width="720" height="480" />
+             <PreviewSize width="1280" height="720" />
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <!--PictureSize width="2592" height="1944"/-->
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <!--VideoSize width="1280" height="720"/-->
+             <!--VideoFormat format="yuv420sp"/-->
+         </VideoRecordingConfig>
+     </CamConfig>
+
+     <CamConfig sensorname="ov9760">
+         <BoardConfig
+             previewbufcnt="9" stillbufcnt="3"
+             videobufcnt="9"
+             maxpreviewwidth="1280" maxpreviewheight="720"
+             horviewangle="50"   verviewangle="50"
+             productname="dkb"/>
+         <PreviewConfig>
+             <PreviewFormat format="yuv420sp"/>
+             <PreviewFormat format="yuv420p"/>
+             <PreviewSize width="176" height="144"/>
+             <PreviewSize width="240" height="160"/>
+             <PreviewSize width="320" height="240"/>
+             <PreviewSize width="352" height="288"/>
+             <PreviewSize width="640" height="360"/>
+             <PreviewSize width="640" height="480"/>
+             <PreviewSize width="720" height="480"/>
+             <PreviewSize width="800" height="480"/>
+             <PreviewSize width="1280" height="720"/>
+         </PreviewConfig>
+         <PictureConfig>
+             <!--PictureFormat format="jpeg"/-->
+             <PictureSize width="640" height="480"/>
+             <PictureSize width="1024" height="768"/>
+             <PictureSize width="1472" height="1104"/>
+         </PictureConfig>
+
+         <VideoRecordingConfig>
+             <VideoSize width="176" height="144"/>
+             <VideoSize width="320" height="240"/>
+             <VideoSize width="640" height="480"/>
+             <VideoSize width="720" height="480"/>
+             <VideoSize width="800" height="480"/>
+             <VideoSize width="1280" height="720"/>
+         </VideoRecordingConfig>
+     </CamConfig>
+
+</CamProfiles>

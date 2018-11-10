@@ -1,4 +1,4 @@
-ifneq ($(filter pxa1908 ,$(TARGET_BOARD_SOC)),)
+ifneq ($(filter pxa1908,$(TARGET_BOARD_SOC)),)
 LOCAL_PATH := $(call my-dir)
 
 # HAL module implemenation stored in

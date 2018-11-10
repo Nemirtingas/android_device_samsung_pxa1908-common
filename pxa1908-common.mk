@@ -36,8 +36,64 @@ PRODUCT_PACKAGES += \
 ############
 ##  WIP  ###
 ############
-#PRODUCT_PACKAGES += \
-    camera.$(TARGET_BOARD_PLATFORM)
+PRODUCT_PACKAGES += \
+    camera.$(TARGET_BOARD_PLATFORM) \
+    camera_client
+
+# Data patterns
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/datapattern_420sp.yuv:system/cameradata/datapattern_420sp.yuv \
+    $(LOCAL_PATH)/configs/camera/datapattern_front_420sp.yuv:system/cameradata/datapattern_front_420sp.yuv
+
+# Camera configs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/back_camera_scene.cfg:system/etc/back_camera_scene.cfg \
+    $(LOCAL_PATH)/configs/camera/camera_module_info.xml:system/etc/camera_module_info.xml \
+    $(LOCAL_PATH)/configs/camera/camera_profiles.xml:system/etc/camera_profiles.xml \
+    $(LOCAL_PATH)/configs/camera/control_param_uvdns.txt:system/etc/control_param_uvdns.txt \
+    $(LOCAL_PATH)/configs/camera/front_camera_scene.cfg:system/etc/front_camera_scene.cfg \
+    $(LOCAL_PATH)/configs/camera/pipeline_config.xml:system/etc/pipeline_config.xml
+
+# Camera datas
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/common_scene_tuning.data:system/etc/common_scene_tuning.data \
+    $(LOCAL_PATH)/configs/camera/gc2235_still_tuning.data:system/etc/gc2235_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/gc2235_video_tuning.data:system/etc/gc2235_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/imx132_still_tuning.data:system/etc/imx132_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/imx132_video_tuning.data:system/etc/imx132_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/imx135_still_tuning.data:system/etc/imx135_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/imx135_video_tuning.data:system/etc/imx135_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/kerr_samsung.s5k4h5_tuning.data:system/etc/kerr_samsung.s5k4h5_tuning.data \
+    $(LOCAL_PATH)/configs/camera/lsi3h5_still_tuning.data:system/etc/lsi3h5_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/lsi3h5_video_tuning.data:system/etc/lsi3h5_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/lsi3h7_still_tuning.data:system/etc/lsi3h7_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/lsi3h7_video_tuning.data:system/etc/lsi3h7_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5647_darling_still_tuning.data:system/etc/ov5647_darling_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5647_darling_video_tuning.data:system/etc/ov5647_darling_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5647_qtech_still_tuning.data:system/etc/ov5647_qtech_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5647_qtech_video_tuning.data:system/etc/ov5647_qtech_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5647_sunny_still_tuning.data:system/etc/ov5647_sunny_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5647_sunny_video_tuning.data:system/etc/ov5647_sunny_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5648_sunny_af_still_tuning.data:system/etc/ov5648_sunny_af_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5648_sunny_af_video_tuning.data:system/etc/ov5648_sunny_af_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5648_sunny_ff_still_tuning.data:system/etc/ov5648_sunny_ff_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov5648_sunny_ff_video_tuning.data:system/etc/ov5648_sunny_ff_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov8825_still_tuning.data:system/etc/ov8825_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov8825_video_tuning.data:system/etc/ov8825_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov8835_still_tuning.data:system/etc/ov8835_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov8835_video_tuning.data:system/etc/ov8835_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov8850_still_tuning.data:system/etc/ov8850_still_tuning.data \
+    $(LOCAL_PATH)/configs/camera/ov8850_video_tuning.data:system/etc/ov8850_video_tuning.data \
+    $(LOCAL_PATH)/configs/camera/semco_3h5_tuning.data:system/etc/semco_3h5_tuning.data \
+    $(LOCAL_PATH)/configs/camera/semco_imx219_tuning.data:system/etc/semco_imx219_tuning.data \
+    $(LOCAL_PATH)/configs/camera/semco_samsung.s5k3l2_tuning.data:system/etc/semco_samsung.s5k3l2_tuning.data \
+    $(LOCAL_PATH)/configs/camera/semco_samsung.sr544_tuning.data:system/etc/semco_samsung.sr544_tuning.data \
+    $(LOCAL_PATH)/configs/camera/semco_ssa.s5k5e3_tuning.data:system/etc/semco_ssa.s5k5e3_tuning.data \
+    $(LOCAL_PATH)/configs/camera/semco_xcover_samsung.sr544_tuning.data:system/etc/semco_xcover_samsung.sr544_tuning.data \
+    $(LOCAL_PATH)/configs/camera/sunny_ovt.ov13850_tuning.data:system/etc/sunny_ovt.ov13850_tuning.data \
+    $(LOCAL_PATH)/configs/camera/sunny_ovt.ov13850r2a_tuning.data:system/etc/sunny_ovt.ov13850r2a_tuning.data \
+    $(LOCAL_PATH)/configs/camera/sunny_ovt.ov2680_tuning.data:system/etc/sunny_ovt.ov2680_tuning.data \
+    $(LOCAL_PATH)/configs/camera/sunny_ovt.ov5648_tuning.data:system/etc/sunny_ovt.ov5648_tuning.data
 
 # Display
 PRODUCT_PACKAGES += \

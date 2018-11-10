@@ -320,6 +320,9 @@ on boot
     setprop ro.media.gst.enabled 1
     setprop service.camera.af 1
 
+    # Fix camera parameter
+    chgrp /sys/devices/virtual/camera/rear/Cam_antibanding
+
     #enable camera ZSL feature
     setprop service.camera.zsl_mask 1
 
