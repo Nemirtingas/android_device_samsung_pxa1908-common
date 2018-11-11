@@ -320,9 +320,6 @@ on boot
     setprop ro.media.gst.enabled 1
     setprop service.camera.af 1
 
-    # Fix camera parameter
-    chgrp camera /sys/devices/virtual/camera/rear/Cam_antibanding
-
     #enable camera ZSL feature
     setprop service.camera.zsl_mask 1
 
@@ -402,6 +399,9 @@ on boot
     chown system radio /sys/class/power_supply/battery/lcd
     chown system radio /sys/class/power_supply/ps/status
     chmod 0664 /sys/class/power_supply/ps/status
+
+    # Fix camera parameter
+    chgrp camera /sys/devices/virtual/camera/rear/Cam_antibanding
 
 on charger
     class_start charger

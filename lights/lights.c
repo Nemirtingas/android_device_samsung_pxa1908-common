@@ -30,26 +30,6 @@
 
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
-//static int g_haveTrackballLight = 0;
-//static struct light_state_t g_notification;
-//static struct light_state_t g_battery;
-//static int g_backlight = 255;
-//static int g_trackball = -1;
-//static int g_buttons = 0;
-//static int g_attention = 0;
-//static int g_haveAmberLed = 0;
-//char const*const TRACKBALL_FILE   = "/sys/class/leds/jogball-backlight/brightness";
-//char const*const RED_LED_FILE     = "/sys/class/leds/red/brightness";
-//char const*const GREEN_LED_FILE   = "/sys/class/leds/green/brightness";
-//char const*const BLUE_LED_FILE    = "/sys/class/leds/blue/brightness";
-//char const*const AMBER_LED_FILE   = "/sys/class/leds/amber/brightness";
-//char const*const LCD_FILE         = "/sys/class/leds/lcd-backlight/brightness";
-//char const*const RED_FREQ_FILE    = "/sys/class/leds/red/device/grpfreq";
-//char const*const RED_PWM_FILE     = "/sys/class/leds/red/device/grppwm";
-//char const*const RED_BLINK_FILE   = "/sys/class/leds/red/device/blink";
-//char const*const AMBER_BLINK_FILE = "/sys/class/leds/amber/blink";
-//char const*const KEYBOARD_FILE    = "/sys/class/leds/keyboard-backlight/brightness";
-//char const*const BUTTON_FILE      = "/sys/class/leds/button-backlight/brightness";
 
 char const*const LIGHT_ID_LEDSERVICE = "ledservice";
 
@@ -143,21 +123,23 @@ void initialize_fds()
     char const* filePath;
     int32_t fd;
     int i,j;
-    for( i = 0; i < 5; ++i )
+
+    ALOGE("%s: start", __FUNCTION__);
+    for( i = 0; i < (sizeof(g_lights_file_paths)/sizeof(g_lights_file_paths[0])); ++i )
     {
         filePaths = g_lights_file_paths[i]; 
         for( j = 0; filePaths[j] != NULL; ++j )
         {
             filePath = filePaths[j];
-            ALOGD("!@ initialize_fds : g_lights_file_paths[%d][%d] : %s\n", i, j, filePath);
+            ALOGE("!@ initialize_fds : g_lights_file_paths[%d][%d] : %s\n", i, j, filePath);
             fd = open(filePath, O_RDWR);
             g_lights_fds[i] = fd;
             if( fd >= 0 )
             {
-                    ALOGD("!@ initialize_fds : g_lights_file_paths : FOUND! : 0x%x\n", fd);
+                    ALOGE("!@ initialize_fds : g_lights_file_paths : FOUND! : 0x%x\n", fd);
                     break;
             }
-            ALOGD("!@ initialize_fds : g_lights_fds Open error! : [%d]\n", errno);
+            ALOGE("!@ initialize_fds : g_lights_fds Open error! : [%d]\n", errno);
         }
     }
     if( g_lights_fds[4] < 0 )
@@ -228,7 +210,7 @@ int32_t write_led_info(int fd, const char *format, ...)
     }
     len = vsnprintf(buffer, 20, format, vlist);
     res = write(fd, buffer, len);
-    ALOGD("write_led_info : %s\n", buffer);
+    ALOGE("write_led_info : %s\n", buffer);
     return 0;
 }
 
@@ -243,7 +225,7 @@ static int write_int(int32_t fd, int value)
         v5 = fd_to_string(fd);
 
         int amt = write(fd, buffer, bytes);
-        ALOGD("%s : %d -\n", v5, value);
+        ALOGE("%s : %d -\n", v5, value);
         if( amt != -1 )
             return 0;
     }
@@ -334,7 +316,7 @@ int32_t sub_C1C(int32_t color, int32_t flashOnMS, int32_t flashOffMS)
     return 0;
 }
 
-int32_t sub_1118(struct light_state_t const* state)
+int32_t set_light_leds(struct light_state_t const* state)
 {
     int32_t flashOnMS = state->flashOnMS;
     int32_t flashOffMS = state->flashOffMS;
@@ -363,9 +345,9 @@ int32_t sub_1118(struct light_state_t const* state)
             else
             {
                 len = snprintf(buffer, 32, "0x%x %d %d\n", state->color, state->flashOnMS, state->flashOffMS);
-                ALOGD("%s : %s +\n", fd_to_string(g_lights_fds[4]), buffer);
+                ALOGE("%s : %s +\n", fd_to_string(g_lights_fds[4]), buffer);
                 res = write(g_lights_fds[4], buffer, len);
-                ALOGD("%s : %s -\n", fd_to_string(g_lights_fds[4]), buffer);
+                ALOGE("%s : %s -\n", fd_to_string(g_lights_fds[4]), buffer);
                 if( res == -1 )
                     res = -errno;
                 else
@@ -432,25 +414,25 @@ static int set_light_buttons(struct light_device_t* dev, struct light_state_t co
 static int set_light_battery(struct light_device_t* dev, struct light_state_t const* state)
 {
     UNUSED(dev);
-    return sub_1118(state);
+    return set_light_leds(state);
 }
 
 static int set_light_notifications(struct light_device_t* dev, struct light_state_t const* state)
 {
     UNUSED(dev);
-    return sub_1118(state);
+    return set_light_leds(state);
 }
 
 static int set_light_attention(struct light_device_t* dev, struct light_state_t const* state)
 {
     UNUSED(dev);
-    return sub_1118(state);
+    return set_light_leds(state);
 }
 
 static int set_light_ledservice(struct light_device_t* dev, struct light_state_t const* state)
 {
     UNUSED(dev);
-    return sub_1118(state);
+    return set_light_leds(state);
 }
 
 /** Close the lights device */
@@ -471,46 +453,35 @@ static int open_lights(const struct hw_module_t* module, char const* name, struc
     int (*set_light)(struct light_device_t* dev,
             struct light_state_t const* state);
     if (0 == strcmp(LIGHT_ID_BACKLIGHT, name))
-    {
         set_light = set_light_backlight;
-    }
     else if (0 == strcmp(LIGHT_ID_KEYBOARD, name))
-    {
         set_light = set_light_keyboard;
-    }
     else if (0 == strcmp(LIGHT_ID_BUTTONS, name))
-    {
         set_light = set_light_buttons;
-    }
     else if (0 == strcmp(LIGHT_ID_BATTERY, name))
-    {
         set_light = set_light_battery;
-    }
     else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
-    {
         set_light = set_light_notifications;
-    }
     else if (0 == strcmp(LIGHT_ID_ATTENTION, name))
-    {
         set_light = set_light_attention;
-    }
     else if (0 == strcmp(LIGHT_ID_LEDSERVICE, name))
-    {
         set_light = set_light_ledservice;
-    }
     else
-    {
         return -EINVAL;
-    }
+
     pthread_once(&g_init, init_globals);
+
     struct light_device_t *dev = malloc(sizeof(struct light_device_t));
     memset(dev, 0, sizeof(*dev));
+
     dev->common.tag = HARDWARE_DEVICE_TAG;
     dev->common.version = 0;
     dev->common.module = (struct hw_module_t*)module;
     dev->common.close = (int (*)(struct hw_device_t*))close_lights;
     dev->set_light = set_light;
+
     *device = (struct hw_device_t*)dev;
+
     return 0;
 }
 

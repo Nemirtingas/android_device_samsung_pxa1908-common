@@ -101,6 +101,7 @@ PRODUCT_PACKAGES += \
     gralloc.$(TARGET_BOARD_PLATFORM) \
     hwcomposer.$(TARGET_BOARD_PLATFORM) \
     memtrack.$(TARGET_BOARD_PLATFORM) \
+    libmvmem \
     libion
 
 # Input Device Config
