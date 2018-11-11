@@ -78,20 +78,20 @@ typedef enum {
 //////////////////////////////////////////
 // Oem structures
 
-struct CallDetails
+typedef struct CallDetails
 {
   int32_t call_type;
   int32_t call_domain;
   int32_t num_strings;
   int32_t z;
   char **getCsvFromExtras;
-};
+} CallDetails;
 
-struct RIL_OEMCallArgs
+typedef struct RIL_OEMCallArgs
 {
     int32_t *x;
     CallDetails *callDetails;
-};
+} RIL_OEMCallArgs;
 
 
 #define OEM_SOL_BASE 10000
