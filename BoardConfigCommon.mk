@@ -30,7 +30,6 @@ BOARD_MKBOOTIMG_MRVL := true
 BOARD_PROVIDES_MKIMAGE := true
 BOARD_MKIMAGE_MRVL := true
 
-TARGET_CUSTOM_DTBTOOL := dtbToolpxa1908
 BOARD_CUSTOM_BOOTIMG_MK := hardware/mrvl/bootimage/mkbootimg.mk
 
 # CMHW
