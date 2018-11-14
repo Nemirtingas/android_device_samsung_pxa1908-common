@@ -87,19 +87,6 @@ public class SamsungPXA1908RIL extends RIL {
     }
 
     @Override
-    public void
-    getIccCardStatus(Message result) {
-        riljLog("SamsungPXA1908RIL::getIccCardStatus");
-        super.getIccCardStatus(result);
-    }
-
-    public void setUiccSubscription(int slotId, int appIndex, int subId,
-            int subStatus, Message result) {
-        riljLog("SamsungPXA1908RIL::setUiccSubscription");
-        super.setUiccSubscription(slotId,appIndex,subId,subStatus,result);
-    }
-
-    @Override
     protected Object
     responseIccCardStatus(Parcel p) {
         IccCardStatus cardStatus = new IccCardStatus();

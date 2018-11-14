@@ -1,3 +1,4 @@
+ifeq (0,1)
 ifneq ($(filter pxa1908,$(TARGET_BOARD_SOC)),)
 LOCAL_PATH := $(call my-dir)
 
@@ -10,4 +11,5 @@ LOCAL_MODULE:= libmvmem
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
 
+endif
 endif

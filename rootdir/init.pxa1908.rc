@@ -25,12 +25,6 @@ on init
     mount ext4 /dev/block/platform/soc.2/by-name/HIDDEN /preload nosuid nodev ro barrier=1
     setprop storage.preload.complete 1
 
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
-    export SECONDARY_STORAGE /storage/extSdCard
-
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
@@ -216,7 +210,7 @@ on fs
     mkdir /persdata/absolute 0750 system system
 
     wait /dev/block/platform/soc.2/by-name/PERSDATA
-    check_fs /dev/block/platform/soc.2/by-name/PERSDATA ext4
+#    check_fs /dev/block/platform/soc.2/by-name/PERSDATA ext4
     mount ext4 /dev/block/platform/soc.2/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1
 
     chown system system /persdata
@@ -225,7 +219,7 @@ on fs
     chmod 0750 /persdata/absolute
 
 # Google FRP symlink
-    symlink /dev/block/platform/soc.2/by-name/PERSISTENT  /dev/block/persistent
+#    symlink /dev/block/platform/soc.2/by-name/PERSISTENT  /dev/block/persistent
 
 # permissions for IPSec
     chown root system /dev/socket
@@ -401,7 +395,7 @@ on boot
     chmod 0664 /sys/class/power_supply/ps/status
 
     # Fix camera parameter
-    chgrp camera /sys/devices/virtual/camera/rear/Cam_antibanding
+    chown system camera /sys/devices/virtual/camera/rear/Cam_antibanding
 
 on charger
     class_start charger

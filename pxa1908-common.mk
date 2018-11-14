@@ -101,7 +101,6 @@ PRODUCT_PACKAGES += \
     gralloc.$(TARGET_BOARD_PLATFORM) \
     hwcomposer.$(TARGET_BOARD_PLATFORM) \
     memtrack.$(TARGET_BOARD_PLATFORM) \
-    libmvmem \
     libion
 
 # Input Device Config
@@ -186,7 +185,7 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 
 # Wifi
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     hostapd \
     wpa_supplicant
 
