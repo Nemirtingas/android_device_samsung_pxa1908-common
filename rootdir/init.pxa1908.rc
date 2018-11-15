@@ -4,15 +4,11 @@ import init.pxa1908.sensor.rc
 import init.pxa1908.security.rc
 import init.wifi.rc
 
+on early-init
+    export LD_SHIM_LIBS "/system/lib/libui.so|libui_shim.so:/system/lib/libutils.so|libutils_shim.so"
+
 on init
-# See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/media_rw/extSdCard 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UsbDriveA 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UsbDriveB 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UsbDriveC 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UsbDriveD 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UsbDriveE 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UsbDriveF 0700 media_rw media_rw
+    symlink /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name /dev/block/platform/soc.2/by-name
 
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -25,31 +21,7 @@ on init
     mount ext4 /dev/block/platform/soc.2/by-name/HIDDEN /preload nosuid nodev ro barrier=1
     setprop storage.preload.complete 1
 
-    # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    symlink /mnt/shell/emulated/0 /storage/emulated/0
-
-    # map "real" external storages paths also in same way. backwards compatibility.
-    symlink /storage/extSdCard /mnt/extSdCard
-    symlink /storage/UsbDriveA /mnt/UsbDriveA
-    symlink /storage/UsbDriveB /mnt/UsbDriveB
-    symlink /storage/UsbDriveC /mnt/UsbDriveC
-    symlink /storage/UsbDriveD /mnt/UsbDriveD
-    symlink /storage/UsbDriveE /mnt/UsbDriveE
-    symlink /storage/UsbDriveF /mnt/UsbDriveF
-
     mkdir /efs 0771 radio system
-
-    mkdir /storage/extSdCard 0700 root root
-    mkdir /storage/UsbDriveA 0700 root root
-    mkdir /storage/UsbDriveB 0700 root root
-    mkdir /storage/UsbDriveC 0700 root root
-    mkdir /storage/UsbDriveD 0700 root root
-    mkdir /storage/UsbDriveE 0700 root root
-    mkdir /storage/UsbDriveF 0700 root root
 
     setprop ro.board.platform mrvl
 
@@ -210,16 +182,12 @@ on fs
     mkdir /persdata/absolute 0750 system system
 
     wait /dev/block/platform/soc.2/by-name/PERSDATA
-#    check_fs /dev/block/platform/soc.2/by-name/PERSDATA ext4
     mount ext4 /dev/block/platform/soc.2/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1
 
     chown system system /persdata
     chmod 0755 /persdata
     chown system system /persdata/absolute
     chmod 0750 /persdata/absolute
-
-# Google FRP symlink
-#    symlink /dev/block/platform/soc.2/by-name/PERSISTENT  /dev/block/persistent
 
 # permissions for IPSec
     chown root system /dev/socket
@@ -233,8 +201,6 @@ service ipsec-daemon /system/bin/IPSecService
     group system net_raw inet net_admin
 
 on post-fs
-    # insmod /lib/modules/galcore.ko registerMemBase=0xc0400000 registerMemSize=0x1000 irqLine=40 contiguousSize=0x2000000 pmemSize=0 registerMemBase2D=0xd420c000 irqLine2D=104  registerMemSize2D=0x1000
-
     chown system system /sys/devices/platform/galcore/power/control
     #gpu
     chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_governor
@@ -394,9 +360,6 @@ on boot
     chown system radio /sys/class/power_supply/ps/status
     chmod 0664 /sys/class/power_supply/ps/status
 
-    # Fix camera parameter
-    chown system camera /sys/devices/virtual/camera/rear/Cam_antibanding
-
 on charger
     class_start charger
 
@@ -405,71 +368,9 @@ on charger
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 
 # virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+service sdcard /system/bin/sdcard -u 1023 -g 1023 /mnt/shell/emulated
     class late_start
     oneshot
-
-service fuse_extSdCard /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d -f /mnt/media_rw/extSdCard /storage/extSdCard
-    class late_start
-    disabled
-    oneshot
-
-service fuse_UsbDriveA /system/bin/sdcard -u 1023 -g 1023 -d -f /mnt/media_rw/UsbDriveA /storage/UsbDriveA
-    class late_start
-    disabled
-    oneshot
-
-service fuse_UsbDriveB /system/bin/sdcard -u 1023 -g 1023 -d -f /mnt/media_rw/UsbDriveB /storage/UsbDriveB
-    class late_start
-    disabled
-    oneshot
-
-service fuse_UsbDriveC /system/bin/sdcard -u 1023 -g 1023 -d -f /mnt/media_rw/UsbDriveC /storage/UsbDriveC
-    class late_start
-    disabled
-    oneshot
-
-service fuse_UsbDriveD /system/bin/sdcard -u 1023 -g 1023 -d -f /mnt/media_rw/UsbDriveD /storage/UsbDriveD
-    class late_start
-    disabled
-    oneshot
-
-service fuse_UsbDriveE /system/bin/sdcard -u 1023 -g 1023 -d -f /mnt/media_rw/UsbDriveE /storage/UsbDriveE
-    class late_start
-    disabled
-    oneshot
-
-service fuse_UsbDriveF /system/bin/sdcard -u 1023 -g 1023 -d -f /mnt/media_rw/UsbDriveF /storage/UsbDriveF
-    class late_start
-    disabled
-    oneshot
-
-#service filemonitor /system/bin/FileMonitorService
-#    class main
-#    user system
-#    group system
-
-#service phservice /system/bin/phservice
-#    class main
-#    user system
-#    group system
-
-# daemon service for IPSec
-#service ipsecd /system/bin/ipsecd
-#    class main
-#    socket ipsec stream 660 net_admin radio
-#    user net_admin
-#    group net_admin system
-
-# init.rc does not yet support applying capabilities, so run as root and
-# let FMRadioServer drop uid to system with the right linux capabilities
-#service FMRadiod /system/bin/FMRadioServer
-#    class main
-
-#service mned /system/bin/MarvellNfcExtensionsDaemon
-#    class main
-#    user nfc
-#    group nfc
 
 # RTCC V3
 service rtccd /system/bin/rtccd3 -a 350m -x 0.5

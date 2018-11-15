@@ -185,7 +185,7 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 
 # Wifi
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     hostapd \
     wpa_supplicant
 
