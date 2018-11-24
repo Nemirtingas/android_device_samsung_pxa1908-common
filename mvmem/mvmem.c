@@ -1,15 +1,8 @@
-#include <stdint.h>
-
-typedef struct __uint128_t
-{
-    uint64_t val[4];
-} __uint128_t;
-
-
 #include <sys/mman.h>
 #include <ion/ion.h>
 #include <linux/ion.h>
 #include <pthread.h>
+#include <errno.h>
 #include <unistd.h>
 
 #include "mvmem.h"
