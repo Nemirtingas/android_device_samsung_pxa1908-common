@@ -8,6 +8,7 @@ on early-init
     export LD_SHIM_LIBS "/system/lib/libui.so|libui_shim.so:/system/lib/libutils.so|libutils_shim.so"
 
 on init
+    write /sys/devices/platform/sd8x-rfkill/pwr_ctrl 1
     symlink /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name /dev/block/platform/soc.2/by-name
 
     # See storage config details at http://source.android.com/tech/storage/
@@ -166,6 +167,8 @@ on init
     setprop battery.fake_ac 1
 
 on fs
+    # create directory for NVM data, and mount nvm partition on it
+    mkdir /NVM 0744 system system
     # mount /data by fstab to support encryption.
     mount_all /fstab.pxa1908
 
