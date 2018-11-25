@@ -1,0 +1,55 @@
+#! /system/bin/sh
+
+DEVICE="/dev/block/zram0"
+
+function disk_size_to_bytes
+{
+  unit="$(echo "$DISKSIZE" | sed 's/.*\(.\)$/\1/')"
+  case "$unit" in
+    0|1|2|3|4|5|6|7|8|9) DISKSIZE="$1";;
+    k|K) DISKSIZE=$(($(echo "$DISKSIZE" | sed 's/.$//')*1024));;
+    m|M) DISKSIZE=$(($(echo "$DISKSIZE" | sed 's/.$//')*1024*1024));;
+    g|G) DISKSIZE=$(($(echo "$DISKSIZE" | sed 's/.$//')*1024*1024*1024));;
+  esac
+}
+
+while [ $# -ne 0 ]; do
+  cmd="$1"
+  shift
+  case "$cmd" in
+    "-a")
+      DISKSIZE="$1"
+      disk_size_to_bytes
+      [ -z "$DISKSIZE" -o "$DISKSIZE" == "0" ] && DISKSIZE=209715200
+      echo "$DISKSIZE" > /sys/block/zram0/disksize
+      mkswap /dev/block/zram0
+      swapon /dev/block/zram0
+      echo 0 > /proc/sys/vm/page-cluster
+      chown 1000.1000 /sys/class/rtcc/rtcc_trigger
+      chown 1000.1000 /sys/module/rtcc/parameters/grade
+      chown 1000.1000 /sys/module/rtcc/parameters/minfree
+      shift
+      ;;
+    "-x")
+      GRADE="$1"
+      shift
+      GRADES=($(sed 's/,/ /g' /sys/module/rtcc/parameters/grade))
+      # Until we can use float in sh, just skip the grade stuff
+      # What should happen here is:
+      # for each( grade in grades )
+      #   multiply grade by GRADE
+      #echo "${GRADES[0]},${GRADES[1]},${GRADES[2]},${GRADES[3]},${GRADES[4]}" >/sys/module/rtcc/parameters/grade
+      echo "256,384,512,1024,2048" >/sys/module/rtcc/parameters/grade
+      ;;
+    "-d") swapoff "$DEVICE" ;;
+    "-e") swapon  "$DEVICE" ;;
+    "-f")
+      DISKSIZE="$1"
+      disk_size_to_bytes
+      [ -z "$DISKSIZE" -o "$DISKSIZE" == "0" ] && DISKSIZE=209715200
+      echo "$DISKSIZE" > /sys/block/zram0/disksize
+      mkswap /dev/block/zram0
+      shift
+
+  esac
+done
