@@ -31,9 +31,11 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    audio.primary.default.so \
+    audio_policy.default.so \
     audio.a2dp.default \
-    audio.primary.$(TARGET_BOARD_PLATFORM) \
     audio.r_submix.default \
+    audio.primary.mrvl \
     audio.usb.default
 
 # Camera
@@ -41,7 +43,7 @@ PRODUCT_PACKAGES += \
 ##  WIP  ###
 ############
 PRODUCT_PACKAGES += \
-    camera.$(TARGET_BOARD_PLATFORM) \
+    camera.mrvl \
     camera_client
 
 # Data patterns
@@ -102,9 +104,9 @@ PRODUCT_COPY_FILES += \
 # Display
 PRODUCT_PACKAGES += \
     gralloc.default \
-    gralloc.$(TARGET_BOARD_PLATFORM) \
-    hwcomposer.$(TARGET_BOARD_PLATFORM) \
-    memtrack.$(TARGET_BOARD_PLATFORM) \
+    gralloc.mrvl \
+    hwcomposer.mrvl \
+    memtrack.mrvl \
     libion
 
 # Input Device Config
@@ -125,11 +127,11 @@ PRODUCT_COPY_FILES += \
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.default \
-    keystore.$(TARGET_BOARD_PLATFORM)
+    keystore.mrvl
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.$(TARGET_BOARD_PLATFORM)
+    lights.mrvl
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -172,11 +174,11 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.$(TARGET_BOARD_PLATFORM)
+    power.mrvl
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.$(TARGET_BOARD_PLATFORM)
+    gps.mrvl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/mrvl_gps_platform.conf:system/etc/mrvl_gps_platform.conf \
@@ -222,10 +224,6 @@ PRODUCT_PACKAGES += \
 # Torch
 PRODUCT_PACKAGES += \
     Torch
-
-# Marvell binaries
-PRODUCT_PACKAGES += \
-    MarvellWirelessDaemon \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg
