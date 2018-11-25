@@ -25,6 +25,10 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH  := 540
 
+# RTCCD3 (zram daemon)
+PRODUCT_PACKAGES += \
+    rtccd3
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \

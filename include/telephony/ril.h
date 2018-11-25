@@ -42,22 +42,19 @@ extern "C" {
 #define SIM_COUNT 1
 #endif
 
-#ifndef ANDROID_MULTI_SIM
-#define SIM_COUNT 1
-#endif
-
 #define RIL_VERSION 11     /* Current version */
 #define RIL_VERSION_MIN 6 /* Minimum RIL_VERSION supported */
 
 #define CDMA_ALPHA_INFO_BUFFER_LENGTH 64
 #define CDMA_NUMBER_INFO_BUFFER_LENGTH 81
 
-#define MAX_RILDS 4
+#define MAX_RILDS 3
 #define MAX_SOCKET_NAME_LENGTH 6
 #define MAX_CLIENT_ID_LENGTH 2
 #define MAX_DEBUG_SOCKET_NAME_LENGTH 12
 #define MAX_QEMU_PIPE_NAME_LENGTH  11
 #define MAX_UUID_LENGTH 64
+
 
 typedef void * RIL_Token;
 
@@ -93,74 +90,6 @@ typedef struct RIL_OEMCallArgs
     CallDetails *callDetails;
 } RIL_OEMCallArgs;
 
-
-#define OEM_SOL_BASE 10000
-
-#define RIL_SAMSUNG_REQUEST_DIAL_EMERGENCY_CALL                10001
-#define RIL_SAMSUNG_REQUEST_CALL_DEFLECTION                    10002
-#define RIL_SAMSUNG_REQUEST_MODIFY_CALL_INITIATE               10003
-#define RIL_SAMSUNG_REQUEST_MODIFY_CALL_CONFIRM                10004
-#define RIL_SAMSUNG_REQUEST_SET_VOICE_DOMAIN_PREF              10005
-#define RIL_SAMSUNG_REQUEST_SAFE_MODE                          10006
-#define RIL_SAMSUNG_REQUEST_SET_TRANSMIT_POWER                 10007
-#define RIL_SAMSUNG_REQUEST_GET_CELL_BROADCAST_CONFIG          10008
-#define RIL_SAMSUNG_REQUEST_GET_PHONEBOOK_STORAGE_INFO         10009
-#define RIL_SAMSUNG_REQUEST_GET_PHONEBOOK_ENTRY                10010
-#define RIL_SAMSUNG_REQUEST_ACCESS_PHONEBOOK_ENTRY             10011
-#define RIL_SAMSUNG_REQUEST_USIM_PB_CAPA                       10012
-#define RIL_SAMSUNG_REQUEST_LOCK_INFO                          10013
-#define RIL_SAMSUNG_REQUEST_STK_SIM_INIT_EVENT                 10014
-#define RIL_SAMSUNG_REQUEST_SET_PREFERRED_NETWORK_LIST         10015
-#define RIL_SAMSUNG_REQUEST_GET_PREFERRED_NETWORK_LIST         10016
-#define RIL_SAMSUNG_REQUEST_CHANGE_SIM_PERSO                   10017
-#define RIL_SAMSUNG_REQUEST_ENTER_SIM_PERSO                    10018
-#define RIL_SAMSUNG_REQUEST_SEND_ENCODED_USSD                  10019
-#define RIL_SAMSUNG_REQUEST_CDMA_SEND_SMS_EXPECT_MORE          10020
-#define RIL_SAMSUNG_REQUEST_HANGUP_VT                          10021
-#define RIL_SAMSUNG_REQUEST_HOLD                               10022
-#define RIL_SAMSUNG_REQUEST_SET_SIM_POWER                      10023
-#define RIL_SAMSUNG_REQUEST_SET_LTE_BAND_MODE                  10024
-#define RIL_SAMSUNG_REQUEST_UICC_GBA_AUTHENTICATE_BOOTSTRAP    10025
-#define RIL_SAMSUNG_REQUEST_UICC_GBA_AUTHENTICATE_NAF          10026
-#define RIL_SAMSUNG_REQUEST_GET_INCOMING_COMMUNICATION_BARRING 10027
-#define RIL_SAMSUNG_REQUEST_SET_INCOMING_COMMUNICATION_BARRING 10028
-
-#define LAST_OEM_SOL RIL_SAMSUNG_REQUEST_SET_INCOMING_COMMUNICATION_BARRING
-
-/* OEM RIL UNSOL */
-#define OEM_UNSOL_BASE 11000
-
-#define RIL_SAMSUNG_UNSOL_RESPONSE_NEW_CB_MSG            11000
-#define RIL_SAMSUNG_UNSOL_RELEASE_COMPLETE_MESSAGE       11001
-#define RIL_SAMSUNG_UNSOL_STK_SEND_SMS_RESULT            11002
-#define RIL_SAMSUNG_UNSOL_STK_CALL_CONTROL_RESULT        11003
-#define RIL_SAMSUNG_UNSOL_DEVICE_READY_NOTI              11008
-#define RIL_SAMSUNG_UNSOL_GPS_NOTI                       11009
-#define RIL_SAMSUNG_UNSOL_AM                             11010
-#define RIL_SAMSUNG_UNSOL_SAP                            11013
-#define RIL_SAMSUNG_UNSOL_UART                           11020
-#define RIL_SAMSUNG_UNSOL_SIM_PB_READY                   11021
-#define RIL_SAMSUNG_UNSOL_VE                             11024
-#define RIL_SAMSUNG_UNSOL_FACTORY_AM                     11026
-#define RIL_SAMSUNG_UNSOL_IMS_REGISTRATION_STATE_CHANGED 11027
-#define RIL_SAMSUNG_UNSOL_MODIFY_CALL                    11028
-#define RIL_SAMSUNG_UNSOL_CS_FALLBACK                    11030
-#define RIL_SAMSUNG_UNSOL_VOICE_SYSTEM_ID                11032
-#define RIL_SAMSUNG_UNSOL_IMS_RETRYOVER                  11034
-#define RIL_SAMSUNG_UNSOL_PB_INIT_COMPLETE               11035
-#define RIL_SAMSUNG_UNSOL_HYSTERESIS_DCN                 11037
-#define RIL_SAMSUNG_UNSOL_CP_POSITION                    11038
-#define RIL_SAMSUNG_UNSOL_HOME_NETWORK_NOTI              11043
-#define RIL_SAMSUNG_UNSOL_STK_CALL_STATUS                11054
-#define RIL_SAMSUNG_UNSOL_MODEM_CAP                      11056
-#define RIL_SAMSUNG_UNSOL_DUN                            11060
-#define RIL_SAMSUNG_UNSOL_IMS_PREFERENCE_CHANGED         11061
-#define RIL_SAMSUNG_UNSOL_UNKNOWN_11062                  11062
-#define RIL_SAMSUNG_UNSOL_SIM_ICCID_NOTI                 11064
-
-#define LAST_OEM_UNSOL RIL_SAMSUNG_UNSOL_SIM_ICCID_NOTI
-
-//////////////////////////////////////////
 
 typedef enum {
     RIL_E_SUCCESS = 0,
@@ -198,7 +127,8 @@ typedef enum {
     RIL_E_SS_MODIFIED_TO_DIAL = 24,             /* SS request modified to DIAL */
     RIL_E_SS_MODIFIED_TO_USSD = 25,             /* SS request modified to USSD */
     RIL_E_SUBSCRIPTION_NOT_SUPPORTED = 26,      /* Subscription not supported by RIL */
-    RIL_E_SS_MODIFIED_TO_SS = 27                /* SS request modified to different SS request */
+    RIL_E_SS_MODIFIED_TO_SS = 27,               /* SS request modified to different SS request */
+    RIL_E_LCE_NOT_SUPPORTED = 36                /* LCE service not supported(36 in RILConstants.java) */
 
 
 } RIL_Errno;
@@ -247,7 +177,8 @@ typedef enum {
     RADIO_TECH_LTE = 14,
     RADIO_TECH_HSPAP = 15, // HSPA+
     RADIO_TECH_GSM = 16, // Only supports voice
-    RADIO_TECH_TD_SCDMA = 17
+    RADIO_TECH_TD_SCDMA = 17,
+    RADIO_TECH_IWLAN = 18
 } RIL_RadioTechnology;
 
 typedef enum {
@@ -656,6 +587,27 @@ typedef struct {
                         */
 } RIL_NeighboringCell;
 
+typedef struct {
+  char lce_status;                 /* LCE service status:
+                                    * -1 = not supported;
+                                    * 0 = stopped;
+                                    * 1 = active.
+                                    */
+  unsigned int actual_interval_ms; /* actual LCE reporting interval,
+                                    * meaningful only if LCEStatus = 1.
+                                    */
+} RIL_LceStatusInfo;
+
+typedef struct {
+  unsigned int last_hop_capacity_kbps; /* last-hop cellular capacity: kilobits/second. */
+  unsigned char confidence_level;      /* capacity estimate confidence: 0-100 */
+  unsigned char lce_suspended;         /* LCE report going to be suspended? (e.g., radio
+                                        * moves to inactive state or network type change)
+                                        * 1 = suspended;
+                                        * 0 = not suspended.
+                                        */
+} RIL_LceDataInfo;
+
 /* See RIL_REQUEST_LAST_CALL_FAIL_CAUSE */
 typedef enum {
     CALL_FAIL_UNOBTAINABLE_NUMBER = 1,
@@ -683,6 +635,11 @@ typedef enum {
     CALL_FAIL_CDMA_ACCESS_BLOCKED = 1009, /* CDMA network access probes blocked */
     CALL_FAIL_ERROR_UNSPECIFIED = 0xffff
 } RIL_LastCallFailCause;
+
+typedef struct {
+  RIL_LastCallFailCause cause_code;
+  char *                vendor_cause;
+} RIL_LastCallFailCauseInfo;
 
 /* See RIL_REQUEST_LAST_DATA_CALL_FAIL_CAUSE */
 typedef enum {
@@ -1484,6 +1441,24 @@ typedef struct {
     /* true to enable the profile, 0 to disable, 1 to enable */
     int enabled;
 } RIL_DataProfileInfo;
+
+/* Tx Power Levels */
+#define RIL_NUM_TX_POWER_LEVELS     5
+
+typedef struct {
+
+  /* period (in ms) when modem is power collapsed */
+  uint32_t sleep_mode_time_ms;
+
+  /* period (in ms) when modem is awake and in idle mode*/
+  uint32_t idle_mode_time_ms;
+
+  /* period (in ms) for which Tx is active */
+  uint32_t tx_mode_time_ms[RIL_NUM_TX_POWER_LEVELS];
+
+  /* period (in ms) for which Rx is active */
+  uint32_t rx_mode_time_ms;
+} RIL_ActivityStatsInfo;
 
 /**
  * RIL_REQUEST_GET_SIM_STATUS
@@ -4344,6 +4319,7 @@ typedef struct {
 /**
  * RIL_REQUEST_GET_DC_RT_INFO
  *
+ * The request is DEPRECATED, use RIL_REQUEST_GET_ACTIVITY_INFO
  * Requests the Data Connection Real Time Info
  *
  * "data" is NULL
@@ -4362,6 +4338,7 @@ typedef struct {
 /**
  * RIL_REQUEST_SET_DC_RT_INFO_RATE
  *
+ * The request is DEPRECATED
  * This is the minimum number of milliseconds between successive
  * RIL_UNSOL_DC_RT_INFO_CHANGED messages and defines the highest rate
  * at which RIL_UNSOL_DC_RT_INFO_CHANGED's will be sent. A value of
@@ -4414,9 +4391,7 @@ typedef struct {
  *
  * Used to get phone radio capablility.
  *
- * "data" is int *
- * ((int *)data)[0] is the phone radio access family defined in
- * RadioAccessFamily. It's a bit mask value to represent the support type.
+ * "data" is the RIL_RadioCapability structure
  *
  * Valid errors:
  *  SUCCESS
@@ -4443,6 +4418,73 @@ typedef struct {
  *  GENERIC_FAILURE
  */
 #define RIL_REQUEST_SET_RADIO_CAPABILITY 131
+
+/**
+ * RIL_REQUEST_START_LCE
+ *
+ * Start Link Capacity Estimate (LCE) service if supported by the radio.
+ *
+ * "data" is const int *
+ * ((const int*)data)[0] specifies the desired reporting interval (ms).
+ * ((const int*)data)[1] specifies the LCE service mode. 1: PULL; 0: PUSH.
+ *
+ * "response" is the RIL_LceStatusInfo.
+ *
+ * Valid errors:
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE
+ * LCE_NOT_SUPPORTED
+ */
+#define RIL_REQUEST_START_LCE 132
+
+/**
+ * RIL_REQUEST_STOP_LCE
+ *
+ * Stop Link Capacity Estimate (LCE) service, the STOP operation should be
+ * idempotent for the radio modem.
+ *
+ * "response" is the RIL_LceStatusInfo.
+ *
+ * Valid errors:
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE
+ * LCE_NOT_SUPPORTED
+ */
+#define RIL_REQUEST_STOP_LCE 133
+
+/**
+ * RIL_REQUEST_PULL_LCEDATA
+ *
+ * Pull LCE service for capacity information.
+ *
+ * "response" is the RIL_LceDataInfo.
+ *
+ * Valid errors:
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE
+ * LCE_NOT_SUPPORTED
+ */
+#define RIL_REQUEST_PULL_LCEDATA 134
+
+/**
+ * RIL_REQUEST_GET_ACTIVITY_INFO
+ *
+ * Get modem activity statisitics info.
+ *
+ * There can be multiple RIL_REQUEST_GET_ACTIVITY_INFO calls to modem.
+ * Once the response for the request is sent modem will clear
+ * current statistics information.
+ *
+ * "data" is null
+ * "response" is const RIL_ActivityStatsInfo *
+ *
+ * Valid errors:
+ *
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE (radio resetting)
+ * GENERIC_FAILURE
+ */
+#define RIL_REQUEST_GET_ACTIVITY_INFO 135
 
 /***********************************************************************/
 
@@ -4990,6 +5032,7 @@ typedef struct {
 /**
  * RIL_UNSOL_DC_RT_INFO_CHANGED
  *
+ * The message is DEPRECATED, use RIL_REQUEST_GET_ACTIVITY_INFO
  * Sent when the DC_RT_STATE changes but the time
  * between these messages must not be less than the
  * value set by RIL_REQUEST_SET_DC_RT_RATE.
@@ -5032,7 +5075,85 @@ typedef struct {
  */
 #define RIL_UNSOL_STK_CC_ALPHA_NOTIFY 1044
 
+/**
+ * RIL_UNSOL_LCEDATA_RECV
+ *
+ * Called when there is an incoming Link Capacity Estimate (LCE) info report.
+ *
+ * "data" is the RIL_LceDataInfo structure.
+ *
+ */
+#define RIL_UNSOL_LCEDATA_RECV 1045
+
 /***********************************************************************/
+
+#define OEM_SOL_BASE 10000
+
+#define RIL_SAMSUNG_REQUEST_DIAL_EMERGENCY_CALL                10001
+#define RIL_SAMSUNG_REQUEST_CALL_DEFLECTION                    10002
+#define RIL_SAMSUNG_REQUEST_MODIFY_CALL_INITIATE               10003
+#define RIL_SAMSUNG_REQUEST_MODIFY_CALL_CONFIRM                10004
+#define RIL_SAMSUNG_REQUEST_SET_VOICE_DOMAIN_PREF              10005
+#define RIL_SAMSUNG_REQUEST_SAFE_MODE                          10006
+#define RIL_SAMSUNG_REQUEST_SET_TRANSMIT_POWER                 10007
+#define RIL_SAMSUNG_REQUEST_GET_CELL_BROADCAST_CONFIG          10008
+#define RIL_SAMSUNG_REQUEST_GET_PHONEBOOK_STORAGE_INFO         10009
+#define RIL_SAMSUNG_REQUEST_GET_PHONEBOOK_ENTRY                10010
+#define RIL_SAMSUNG_REQUEST_ACCESS_PHONEBOOK_ENTRY             10011
+#define RIL_SAMSUNG_REQUEST_USIM_PB_CAPA                       10012
+#define RIL_SAMSUNG_REQUEST_LOCK_INFO                          10013
+#define RIL_SAMSUNG_REQUEST_STK_SIM_INIT_EVENT                 10014
+#define RIL_SAMSUNG_REQUEST_SET_PREFERRED_NETWORK_LIST         10015
+#define RIL_SAMSUNG_REQUEST_GET_PREFERRED_NETWORK_LIST         10016
+#define RIL_SAMSUNG_REQUEST_CHANGE_SIM_PERSO                   10017
+#define RIL_SAMSUNG_REQUEST_ENTER_SIM_PERSO                    10018
+#define RIL_SAMSUNG_REQUEST_SEND_ENCODED_USSD                  10019
+#define RIL_SAMSUNG_REQUEST_CDMA_SEND_SMS_EXPECT_MORE          10020
+#define RIL_SAMSUNG_REQUEST_HANGUP_VT                          10021
+#define RIL_SAMSUNG_REQUEST_HOLD                               10022
+#define RIL_SAMSUNG_REQUEST_SET_SIM_POWER                      10023
+#define RIL_SAMSUNG_REQUEST_SET_LTE_BAND_MODE                  10024
+#define RIL_SAMSUNG_REQUEST_UICC_GBA_AUTHENTICATE_BOOTSTRAP    10025
+#define RIL_SAMSUNG_REQUEST_UICC_GBA_AUTHENTICATE_NAF          10026
+#define RIL_SAMSUNG_REQUEST_GET_INCOMING_COMMUNICATION_BARRING 10027
+#define RIL_SAMSUNG_REQUEST_SET_INCOMING_COMMUNICATION_BARRING 10028
+
+#define LAST_OEM_SOL RIL_SAMSUNG_REQUEST_SET_INCOMING_COMMUNICATION_BARRING
+
+/* OEM RIL UNSOL */
+#define OEM_UNSOL_BASE 11000
+
+#define RIL_SAMSUNG_UNSOL_RESPONSE_NEW_CB_MSG            11000
+#define RIL_SAMSUNG_UNSOL_RELEASE_COMPLETE_MESSAGE       11001
+#define RIL_SAMSUNG_UNSOL_STK_SEND_SMS_RESULT            11002
+#define RIL_SAMSUNG_UNSOL_STK_CALL_CONTROL_RESULT        11003
+#define RIL_SAMSUNG_UNSOL_DEVICE_READY_NOTI              11008
+#define RIL_SAMSUNG_UNSOL_GPS_NOTI                       11009
+#define RIL_SAMSUNG_UNSOL_AM                             11010
+#define RIL_SAMSUNG_UNSOL_SAP                            11013
+#define RIL_SAMSUNG_UNSOL_UART                           11020
+#define RIL_SAMSUNG_UNSOL_SIM_PB_READY                   11021
+#define RIL_SAMSUNG_UNSOL_VE                             11024
+#define RIL_SAMSUNG_UNSOL_FACTORY_AM                     11026
+#define RIL_SAMSUNG_UNSOL_IMS_REGISTRATION_STATE_CHANGED 11027
+#define RIL_SAMSUNG_UNSOL_MODIFY_CALL                    11028
+#define RIL_SAMSUNG_UNSOL_CS_FALLBACK                    11030
+#define RIL_SAMSUNG_UNSOL_VOICE_SYSTEM_ID                11032
+#define RIL_SAMSUNG_UNSOL_IMS_RETRYOVER                  11034
+#define RIL_SAMSUNG_UNSOL_PB_INIT_COMPLETE               11035
+#define RIL_SAMSUNG_UNSOL_HYSTERESIS_DCN                 11037
+#define RIL_SAMSUNG_UNSOL_CP_POSITION                    11038
+#define RIL_SAMSUNG_UNSOL_HOME_NETWORK_NOTI              11043
+#define RIL_SAMSUNG_UNSOL_STK_CALL_STATUS                11054
+#define RIL_SAMSUNG_UNSOL_MODEM_CAP                      11056
+#define RIL_SAMSUNG_UNSOL_DUN                            11060
+#define RIL_SAMSUNG_UNSOL_IMS_PREFERENCE_CHANGED         11061
+#define RIL_SAMSUNG_UNSOL_UNKNOWN_11062                  11062
+#define RIL_SAMSUNG_UNSOL_SIM_ICCID_NOTI                 11064
+
+#define LAST_OEM_UNSOL RIL_SAMSUNG_UNSOL_SIM_ICCID_NOTI
+
+//////////////////////////////////////////
 
 #if defined(ANDROID_MULTI_SIM)
 /**
@@ -5263,7 +5384,6 @@ void RIL_requestTimedCallback (RIL_TimedCallback callback,
 
 
 #endif /* RIL_SHLIB */
-
 
 #ifdef __cplusplus
 }
