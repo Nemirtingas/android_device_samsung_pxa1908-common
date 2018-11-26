@@ -19,7 +19,7 @@ mrvl_camera_info_t FakeCam::mCameraInfo[NUM_FAKE_CAMERAS] = {
     },
 };
 
-android::CameraParameters FakeCam::mCamParameters[NUM_FAKE_CAMERAS];
+static android::CameraParameters FakeCamParameters[NUM_FAKE_CAMERAS];
 
 void FakeCam::getCameraInfo(int id, mrvl_camera_info_t *caminfo)
 {
