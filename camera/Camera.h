@@ -37,6 +37,24 @@ struct mrvl_camera_info_t
     int32_t ports;
 };
 
+struct ModuleInfo
+{
+    char data[44];
+    char field_2C[8];
+    char field_34[864];
+};
+
+struct CameraProperties
+{
+    char name[32];
+    int orient;
+    int face;
+    int portnum;
+    ModuleInfo info;
+};
+
+typedef struct _CamHandle* CamHandle;
+
 namespace default_camera_hal {
 // Camera represents a physical camera on a device.
 // This is constructed when the HAL module is loaded, one per physical camera.

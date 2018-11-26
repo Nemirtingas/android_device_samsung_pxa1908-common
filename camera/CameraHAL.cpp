@@ -66,6 +66,7 @@ namespace default_camera_hal {
 
 // Can we open multiple cameras at a time
 static bool gMultiopen;
+static int gOtpDataExists = 1;
 static int gFake;
 static int gCamerasOpen;
 static int gNumCameras;
@@ -78,6 +79,7 @@ pthread_mutex_t gCameraMutex = PTHREAD_MUTEX_INITIALIZER;
 
 void HAL_getCameraInfo(int id, mrvl_camera_info_t *info)
 {
+    log_func_entry;
     if( gFake )
         FakeCam::getCameraInfo(id, info);
     else
@@ -86,20 +88,80 @@ void HAL_getCameraInfo(int id, mrvl_camera_info_t *info)
 
 int HAL_getNumberOfCameras()
 {
+    log_func_entry;
     char prop[PROPERTY_VALUE_MAX];
+    mrvl_camera_info_t caminfo;
+    int fake_cnt;
+    int probed_cnt;
+    int rawproc;
+    ModuleInfo unkown;
 
     property_get("persist.service.camera.fake", prop, "0");
     gFake = atoi(prop);
 
-    ALOGE("%s:persist.service.camera.fake=%d", __FUNCTION__, gFake);
+    ALOGI("%s:persist.service.camera.fake=%d", __FUNCTION__, gFake);
 
     if ( gFake )
     {
-        ALOGE("%s:Enable fake camera!", __FUNCTION__);
+        ALOGI("%s:Enable fake camera!", __FUNCTION__);
         return FakeCam::getNumberOfCameras();
     }
 
-    return 0;
+    property_get("persist.service.camera.cnt", prop, "-1");
+    ALOGI("%s:persist.service.camera.cnt=%s", __FUNCTION__, prop);
+    fake_cnt = atoi(prop);
+    if ( !fake_cnt )
+    {
+        ALOGI("%s:use fake cnt=%d", __FUNCTION__, 0);
+        return fake_cnt;
+    }
+
+    probed_cnt = Engine::getNumberOfCameras();
+    if( fake_cnt > 0 )
+    {
+        ALOGI("%s:actually probed sensor cnt=%d; but use fake sensor cnt=%d", __FUNCTION__, probed_cnt, fake_cnt);
+        return fake_cnt;
+    }
+
+    ALOGI("%s:use actually probed sensor cnt=%d", __FUNCTION__, probed_cnt);
+    property_get("persist.service.camera.rawproc", prop, "0");
+    rawproc = atoi(prop);
+
+    if( probed_cnt > 0 && rawproc == 0 )
+    {
+        Engine::getCameraInfo(0, &caminfo);
+        if( caminfo.ports == 2 )
+        {
+            memset(unknown, 0, sizeof(ModuleInfo));
+            Engine::getModuleInfo(0, unknown);
+            if( *(int32_t*)&unknown.data[628] )
+            {
+                char OTPDATA[] = "/data/log/camera/merged_otp_0.data";
+                property_get("service.camera.cmtb", prop, "");
+
+                if( gOtpDataExists )
+                {
+                    if( !access(OTPDATA, R_OK) )
+                        unlink(OTPDATA);
+                    gOtpDataExists = 0;
+                }
+
+                if( !prop[0] && access(OTPDATA, R_OK) )
+                {
+                    ALOGI("%s:No otp file is found, generate it by read OTP", __FUNCTION__);
+
+                    CameraHardwareBase camhw(0);
+                    camhw.sendCommand(4003, 1, 0);
+                    camhw.startPreview();
+                    camhw.stopPreview();
+                    ALOGI("%s:Read OTP is complete", __FUNCTION__);
+                }
+            }
+
+        }
+    }
+
+    return probed_cnt;
 }
 
 extern "C" {

@@ -42,3 +42,46 @@ SettingCamInfo* CameraSetting::getMrvlCameraInfo(int id)
 
     return &mMrvlCameraInfo[i];
 }
+
+int CameraSetting::initCameraTable(CameraProperties *camprop, int sensorid, int engsendorid, int facing, int orient)
+{
+    ALOGI("%s: sensorname=%s, sensorid=%d, engsensorid=%d, portnum=%d, facing=%d, orient=%d", camprop->name, sensorid, engsendorid, camprop->portnum+1, facing, orient);
+    if( iNumOfSensors <= 4 )
+    {
+        SettingCamInfo *caminfo = &mMrvlCameraInfo[iNumOfSensors];
+        strncpy(caminfo->sensor, camprop->name, sizeof(caminfo->sensor)-1);
+        caminfo->sensor[sizeof(caminfo->sensor)-1] = '\0';
+        caminfo->camera_id = sensorid;
+        caminfo->engsensorid;
+        caminfo->facing = facing;
+        caminfo->ports = camprop->portnum + 1;
+        caminfo->orientation = orient;
+
+        if( camprop->info.field_2C[0] )
+        {
+            strncpy(caminfo->field_3C, camprop->info.field_2C, sizeof(caminfo->field_3C));
+        }
+        else if( !strcmp(camprop->name, "sr200") )
+        {
+            strncpy(caminfo->field_3C, "2.35", sizeof(caminfo->field_3C));
+        }
+        else
+        {
+            strncpy(caminfo->field_3C, "3.7", sizeof(caminfo->field_3C));
+        }
+        caminfo->field_3C[7] = 0;
+
+        ++iNumOfSensors;
+        return 0;
+    }
+    else
+    {
+        ALOGE("Invalid sensor cnt=%d, max cnt=%d", iNumOfSensors, 4);
+        return -EINVAL;
+    }
+}
+
+int CameraSetting::getNumOfCameras()
+{
+    return iNumOfSensors;
+}

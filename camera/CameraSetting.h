@@ -7,12 +7,12 @@ struct SettingCamInfo
 {
   int facing;
   int orientation;
-  char gap8[40];
-  int camera_id;
-  int field_34;
+  char gap8[8];
+  char sensor[32];
+  int sensorid;
+  int engsensorid;
   int ports;
-  int field_3C;
-  int field_40;
+  char field_3C[8];
 };
 
 
@@ -22,7 +22,10 @@ class CameraSetting
 public:
     static SettingCamInfo mMrvlCameraInfo[NUM_CAMERAS];
     static int iNumOfSensors;
-    SettingCamInfo* getMrvlCameraInfo(int id);
+
+    static SettingCamInfo* getMrvlCameraInfo(int id);
+    static int initCameraTable(CameraProperties *camprop, int sensorid, int engsendorid, int facing, int orient);
+    static int getNumOfCameras();
 };
 
 #endif
