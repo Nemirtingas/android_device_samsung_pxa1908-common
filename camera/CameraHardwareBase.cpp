@@ -31,6 +31,11 @@ CameraHardwareBase::CameraHardwareBase(int cameraId):camera_mutex(PTHREAD_MUTEX_
 {
 }
 
+CameraHardwareBase::CameraHardwareBase(int cameraId, int)
+{
+
+}
+
 CameraHardwareBase::~CameraHardwareBase()
 {
 }
@@ -69,13 +74,13 @@ void CameraHardwareBase::disableMsgType(int32_t msg_type)
 int CameraHardwareBase::msgTypeEnabled(int32_t msg_type)
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 int CameraHardwareBase::startPreview()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 void CameraHardwareBase::stopPreview()
@@ -86,13 +91,13 @@ void CameraHardwareBase::stopPreview()
 int CameraHardwareBase::previewEnabled()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 int CameraHardwareBase::storeMetaDataInBuffers(int store)
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 int CameraHardwareBase::startRecording()
@@ -120,36 +125,41 @@ void CameraHardwareBase::releaseRecordingFrame(const void *frame)
 int CameraHardwareBase::autoFocus()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 int CameraHardwareBase::cancelAutoFocus()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 int CameraHardwareBase::takePicture()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 int CameraHardwareBase::cancelPicture()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 int CameraHardwareBase::setParameters(const char *parameters)
 {
     log_func_entry;
-    return -EINVAL;
+
+    log_func_line("%s", parameters);
+
+    return 0;
 }
 
 void CameraHardwareBase::putParameters(char *parameters)
 {
     log_func_entry;
+
+    free(parameters);
 }
 
 char* CameraHardwareBase::getParameters()
@@ -182,7 +192,7 @@ char* CameraHardwareBase::getParameters()
 int CameraHardwareBase::sendCommand(int32_t cmd, int32_t arg1, int32_t arg2)
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 void CameraHardwareBase::release()
@@ -193,5 +203,5 @@ void CameraHardwareBase::release()
 int CameraHardwareBase::dump(int fd)
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }

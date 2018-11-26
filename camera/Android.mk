@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+ifeq (0,1)
+
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -27,12 +29,13 @@ LOCAL_C_INCLUDES += \
 LOCAL_SRC_FILES := \
     CameraHAL.cpp \
     Camera.cpp \
-    CameraSetting \
+    CameraSetting.cpp \
     CameraHardwareBase.cpp \
     CameraHardwareSmt.cpp \
     CameraHardwareDxO.cpp \
     FakeCam.cpp \
     Engine.cpp \
+    cameraengine.cpp \
 
 LOCAL_SHARED_LIBRARIES := \
 	libcamera_metadata \
@@ -48,3 +51,5 @@ LOCAL_CFLAGS += -Wall -Wextra -fvisibility=hidden
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif

@@ -6,8 +6,7 @@
 class CameraHardwareDxO : public CameraHardwareBase
 {
 public:
-    CameraHardwareDxO(int cameraId) : CameraHardwareBase(cameraId)
-    {}
+    CameraHardwareDxO(int cameraId);
 };
 
 #endif

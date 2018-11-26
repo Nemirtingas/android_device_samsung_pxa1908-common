@@ -2,6 +2,7 @@
 
 #include <camera/CameraParameters.h>
 #include <cutils/properties.h>
+#include <cstdlib>
 
 mrvl_camera_info_t FakeCam::mCameraInfo[NUM_FAKE_CAMERAS] = {
     {

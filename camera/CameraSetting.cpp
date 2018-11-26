@@ -27,13 +27,18 @@ SettingCamInfo CameraSetting::mMrvlCameraInfo[NUM_CAMERAS];
 
 SettingCamInfo* CameraSetting::getMrvlCameraInfo(int id)
 {
+
     int i;
     for( i = 0; i < iNumOfSensors; ++i )
     {
-        int cam_id = mMrvlCameraInfo[i].camera_id;
+        int cam_id = mMrvlCameraInfo[i].sensorid;
         if( cam_id != -1 && cam_id == id )
+        {
+            ALOGD("Found %d at %d", cam_id, i);
             break;
+        }
     }
+
     if( i == iNumOfSensors )
     {
         ALOGE("No matching sensor in list. Pls check CameraSetting::mMrvlCameraInfo[]");
@@ -45,13 +50,14 @@ SettingCamInfo* CameraSetting::getMrvlCameraInfo(int id)
 
 int CameraSetting::initCameraTable(CameraProperties *camprop, int sensorid, int engsendorid, int facing, int orient)
 {
-    ALOGI("%s: sensorname=%s, sensorid=%d, engsensorid=%d, portnum=%d, facing=%d, orient=%d", camprop->name, sensorid, engsendorid, camprop->portnum+1, facing, orient);
+
+    ALOGI("%s: sensorname=%s, sensorid=%d, engsensorid=%d, portnum=%d, facing=%d, orient=%d", __FUNCTION__, camprop->name, sensorid, engsendorid, camprop->portnum+1, facing, orient);
     if( iNumOfSensors <= 4 )
     {
         SettingCamInfo *caminfo = &mMrvlCameraInfo[iNumOfSensors];
         strncpy(caminfo->sensor, camprop->name, sizeof(caminfo->sensor)-1);
         caminfo->sensor[sizeof(caminfo->sensor)-1] = '\0';
-        caminfo->camera_id = sensorid;
+        caminfo->sensorid = sensorid;
         caminfo->engsensorid;
         caminfo->facing = facing;
         caminfo->ports = camprop->portnum + 1;

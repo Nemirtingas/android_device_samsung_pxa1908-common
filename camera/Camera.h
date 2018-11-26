@@ -53,8 +53,6 @@ struct CameraProperties
     ModuleInfo info;
 };
 
-typedef struct _CamHandle* CamHandle;
-
 namespace default_camera_hal {
 // Camera represents a physical camera on a device.
 // This is constructed when the HAL module is loaded, one per physical camera.

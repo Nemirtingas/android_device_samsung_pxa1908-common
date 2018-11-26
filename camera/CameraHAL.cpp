@@ -79,7 +79,7 @@ pthread_mutex_t gCameraMutex = PTHREAD_MUTEX_INITIALIZER;
 
 void HAL_getCameraInfo(int id, mrvl_camera_info_t *info)
 {
-    log_func_entry;
+
     if( gFake )
         FakeCam::getCameraInfo(id, info);
     else
@@ -88,13 +88,12 @@ void HAL_getCameraInfo(int id, mrvl_camera_info_t *info)
 
 int HAL_getNumberOfCameras()
 {
-    log_func_entry;
     char prop[PROPERTY_VALUE_MAX];
     mrvl_camera_info_t caminfo;
     int fake_cnt;
     int probed_cnt;
     int rawproc;
-    ModuleInfo unkown;
+    ModuleInfo unknown;
 
     property_get("persist.service.camera.fake", prop, "0");
     gFake = atoi(prop);
@@ -132,9 +131,9 @@ int HAL_getNumberOfCameras()
         Engine::getCameraInfo(0, &caminfo);
         if( caminfo.ports == 2 )
         {
-            memset(unknown, 0, sizeof(ModuleInfo));
-            Engine::getModuleInfo(0, unknown);
-            if( *(int32_t*)&unknown.data[628] )
+            memset(&unknown, 0, sizeof(ModuleInfo));
+            Engine::getModuleInfo(0, &unknown);
+            if( *(int32_t *)&unknown.field_34[576] )
             {
                 char OTPDATA[] = "/data/log/camera/merged_otp_0.data";
                 property_get("service.camera.cmtb", prop, "");
@@ -168,8 +167,6 @@ extern "C" {
 
 static int camera_get_number_of_cameras()
 {
-    log_func_entry;
-
     gNumCameras = HAL_getNumberOfCameras();
 
     return gNumCameras;
@@ -177,8 +174,6 @@ static int camera_get_number_of_cameras()
 
 static int camera_get_camera_info(int id, struct camera_info* info)
 {
-    log_func_entry;
-
     mrvl_camera_info_t caminfo;
 
     HAL_getCameraInfo(id, &caminfo);
@@ -193,7 +188,6 @@ static int camera_get_camera_info(int id, struct camera_info* info)
 
 static int camera_set_preview_window(camera_device_t *_dev, struct preview_stream_ops *ops)
 {
-    log_func_entry;
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if( dev == NULL )
         return -EINVAL;
@@ -206,7 +200,7 @@ static void camera_set_callbacks(camera_device *_dev, camera_notify_callback not
                                                       camera_data_timestamp_callback timestamp_callback,
                                                       camera_request_memory request_memory, void *datas)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->setCallbacks(notify_callback, data_callback, timestamp_callback, request_memory,datas);
@@ -214,7 +208,7 @@ static void camera_set_callbacks(camera_device *_dev, camera_notify_callback not
 
 static void camera_enable_msg_type(camera_device_t *_dev, int32_t msg_type)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->enableMsgType(msg_type);
@@ -222,7 +216,7 @@ static void camera_enable_msg_type(camera_device_t *_dev, int32_t msg_type)
 
 static void camera_disable_msg_type(camera_device_t *_dev, int32_t msg_type)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->disableMsgType(msg_type);
@@ -230,7 +224,7 @@ static void camera_disable_msg_type(camera_device_t *_dev, int32_t msg_type)
 
 static int camera_msg_type_enabled(camera_device_t *_dev, int32_t msg_type)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->msgTypeEnabled(msg_type);
@@ -240,7 +234,7 @@ static int camera_msg_type_enabled(camera_device_t *_dev, int32_t msg_type)
 
 static int camera_start_preview(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->startPreview();
@@ -250,7 +244,7 @@ static int camera_start_preview(camera_device_t *_dev)
 
 static void camera_stop_preview(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->stopPreview();
@@ -258,7 +252,7 @@ static void camera_stop_preview(camera_device_t *_dev)
 
 static int camera_preview_enabled(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->previewEnabled();
@@ -268,7 +262,7 @@ static int camera_preview_enabled(camera_device_t *_dev)
 
 static int camera_store_meta_data_in_buffers(camera_device_t *_dev, int store)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->storeMetaDataInBuffers(store);
@@ -278,7 +272,7 @@ static int camera_store_meta_data_in_buffers(camera_device_t *_dev, int store)
 
 static int camera_start_recording(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->startRecording();
@@ -288,7 +282,7 @@ static int camera_start_recording(camera_device_t *_dev)
 
 static void camera_stop_recording(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->stopRecording();
@@ -296,7 +290,7 @@ static void camera_stop_recording(camera_device_t *_dev)
 
 static int camera_recording_enabled(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->recordingEnabled();
@@ -306,7 +300,7 @@ static int camera_recording_enabled(camera_device_t *_dev)
 
 static void camera_release_recording_frame(camera_device_t *_dev, const void *frame)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->releaseRecordingFrame(frame);
@@ -314,7 +308,7 @@ static void camera_release_recording_frame(camera_device_t *_dev, const void *fr
 
 static int camera_auto_focus(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->autoFocus();
@@ -324,7 +318,7 @@ static int camera_auto_focus(camera_device_t *_dev)
 
 static int camera_cancel_auto_focus(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->cancelAutoFocus();
@@ -334,7 +328,7 @@ static int camera_cancel_auto_focus(camera_device_t *_dev)
 
 static int camera_take_picture(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->takePicture();
@@ -344,7 +338,7 @@ static int camera_take_picture(camera_device_t *_dev)
 
 static int camera_cancel_picture(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->cancelPicture();
@@ -354,7 +348,7 @@ static int camera_cancel_picture(camera_device_t *_dev)
 
 static int camera_set_parameters(camera_device_t *_dev, const char *parameters)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->setParameters(parameters);
@@ -364,7 +358,7 @@ static int camera_set_parameters(camera_device_t *_dev, const char *parameters)
 
 static void camera_put_parameters(camera_device_t *_dev, char *parameters)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->putParameters(parameters);
@@ -372,7 +366,7 @@ static void camera_put_parameters(camera_device_t *_dev, char *parameters)
 
 static char* camera_get_parameters(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->getParameters();
@@ -382,7 +376,7 @@ static char* camera_get_parameters(camera_device_t *_dev)
 
 static int camera_send_command(camera_device_t *_dev, int32_t cmd, int32_t arg1, int32_t arg2)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->sendCommand(cmd, arg1, arg2);
@@ -392,7 +386,7 @@ static int camera_send_command(camera_device_t *_dev, int32_t cmd, int32_t arg1,
 
 static void camera_release(camera_device_t *_dev)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         gCameraHals[dev->cameraId]->release();
@@ -400,7 +394,7 @@ static void camera_release(camera_device_t *_dev)
 
 static int camera_dump(camera_device_t *_dev, int fd)
 {
-    log_func_entry;
+
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
     if ( dev )
         return gCameraHals[dev->cameraId]->dump(fd);
@@ -410,7 +404,7 @@ static int camera_dump(camera_device_t *_dev, int fd)
 
 static int camera_device_close(hw_device_t *_dev)
 {
-    log_func_entry;
+
     int res = -EINVAL;
     int cameraId;
     mrvl_device_t *dev = (mrvl_device_t*)_dev;
@@ -439,7 +433,7 @@ static int camera_device_close(hw_device_t *_dev)
 
 static int camera_device_open(const hw_module_t* mod, const char* name, hw_device_t** dev)
 {
-    log_func_entry;
+
     char multiopenprop[PROPERTY_VALUE_MAX];
     int camera_id;
     mrvl_device_t *camera_dev;
@@ -529,9 +523,15 @@ static int camera_device_open(const hw_module_t* mod, const char* name, hw_devic
         if( gCameraInfo[camera_id].ports <= 0 )
             ALOGE("Camera has too many / too less ports, not supported!");
         else if( gCameraInfo[camera_id].ports == 1 )
+        {
             gCameraHals[camera_id] = new CameraHardwareSmt(camera_id);
+            ALOGE("Making CameraHardwareSmt");
+        }
         else
+        {
             gCameraHals[camera_id] = new CameraHardwareDxO(camera_id);
+            ALOGE("Making CameraHardwareDxO");
+        }
     }
 
     ++gCamerasOpen;
