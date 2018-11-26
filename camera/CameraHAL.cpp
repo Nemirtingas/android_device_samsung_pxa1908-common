@@ -49,6 +49,7 @@ class __DEBUG_CLASS__
 
 #include "CameraHAL.h"
 
+#include "Engine.h"
 #include "CameraHardwareSmt.h"
 #include "CameraHardwareDxO.h"
 
@@ -64,28 +65,65 @@ namespace default_camera_hal {
 
 // Can we open multiple cameras at a time
 static bool gMultiopen;
+static int gFake;
 static int gCamerasOpen;
 static int gNumCameras;
-static CameraHardwareBase *gCameraHals[5];
-static mrvl_camera_info_t  gCameraInfo[5];
+static CameraHardwareBase *gCameraHals[NUM_CAMERAS];
+static mrvl_camera_info_t  gCameraInfo[NUM_CAMERAS];
 
 static void *vendor_camera_library;
 
 pthread_mutex_t gCameraMutex = PTHREAD_MUTEX_INITIALIZER;
 
-extern "C" {
-
-static int get_number_of_cameras()
+void HAL_getCameraInfo(int id, mrvl_camera_info_t *info)
 {
-    log_func_entry;
-    return 0;
+    if( gFake )
+        FakeCam::getCameraInfo(id, info);
+    else
+        Engine::getCameraInfo(id, info);
 }
 
-static int get_camera_info(int id, struct camera_info* info)
+int HAL_getNumberOfCameras()
+{
+    char prop[PROPERTY_VALUE_MAX];
+
+    property_get("persist.service.camera.fake", prop, "0");
+    gFake = atoi(prop);
+
+    ALOGE("%s:persist.service.camera.fake=%d", __FUNCTION__, gFake);
+
+    if ( gFake )
+    {
+        ALOGE("%s:Enable fake camera!", __FUNCTION__);
+        return FakeCam::getNumberOfCameras();
+    }
+
+
+}
+
+extern "C" {
+
+static int camera_get_number_of_cameras()
 {
     log_func_entry;
 
+    gNumCameras = HAL_getNumberOfCameras();
 
+    return gNumCameras;
+}
+
+static int camera_get_camera_info(int id, struct camera_info* info)
+{
+    log_func_entry;
+
+    mrvl_camera_info_t caminfo;
+
+    HAL_getCameraInfo(id, &caminfo);
+
+    gCameraInfo[id] = caminfo;
+
+    info->facing      = caminfo.facing;
+    info->orientation = caminfo.orientation;
 
     return 0;
 }
@@ -440,10 +478,6 @@ static int camera_device_open(const hw_module_t* mod, const char* name, hw_devic
     return 0;
 }
 
-void null()
-{
-}
-
 static hw_module_methods_t gCameraModuleMethods = {
     open : camera_device_open
 };
@@ -460,8 +494,8 @@ camera_module_t HAL_MODULE_INFO_SYM __attribute__ ((visibility("default"))) = {
         dso                : NULL,
         reserved           : {0},
     },
-    get_number_of_cameras : get_number_of_cameras,
-    get_camera_info       : get_camera_info,
+    get_number_of_cameras : camera_get_number_of_cameras,
+    get_camera_info       : camera_get_camera_info,
     set_callbacks         : NULL,
     //set_callbacks         : (int (*)(const camera_module_callbacks_t*))null,
     get_vendor_tag_ops    : NULL,

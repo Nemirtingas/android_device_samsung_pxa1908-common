@@ -98,7 +98,7 @@ int CameraHardwareBase::storeMetaDataInBuffers(int store)
 int CameraHardwareBase::startRecording()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 void CameraHardwareBase::stopRecording()
@@ -109,7 +109,7 @@ void CameraHardwareBase::stopRecording()
 int CameraHardwareBase::recordingEnabled()
 {
     log_func_entry;
-    return -EINVAL;
+    return 0;
 }
 
 void CameraHardwareBase::releaseRecordingFrame(const void *frame)

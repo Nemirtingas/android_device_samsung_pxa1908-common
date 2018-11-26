@@ -23,6 +23,8 @@
 #include <system/camera_vendor_tags.h>
 #include "Camera.h"
 
+#define NUM_CAMERAS 5
+
 namespace default_camera_hal {
 // CameraHAL contains all module state that isn't specific to an individual
 // camera device.
