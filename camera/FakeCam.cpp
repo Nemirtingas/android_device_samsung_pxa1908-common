@@ -1,5 +1,7 @@
 #include "FakeCam.h"
 
+#include <camera/CameraParameters.h>
+
 mrvl_camera_info_t FakeCam::mCameraInfo[NUM_FAKE_CAMERAS] = {
     {
         .facing = 0,
