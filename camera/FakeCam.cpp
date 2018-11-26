@@ -1,6 +1,7 @@
 #include "FakeCam.h"
 
 #include <camera/CameraParameters.h>
+#include <cutils/properties.h>
 
 mrvl_camera_info_t FakeCam::mCameraInfo[NUM_FAKE_CAMERAS] = {
     {
@@ -26,7 +27,7 @@ void FakeCam::getCameraInfo(int id, mrvl_camera_info_t *caminfo)
     char prop[PROPERTY_VALUE_MAX];
 
     *caminfo = mCameraInfo[id];
-    property_get("service.camera.fake.facing", v7, &NULL_STR);
+    property_get("service.camera.fake.facing", prop, "");
     if ( !strcmp(prop, "back") )
     {
         caminfo->facing = 0;
@@ -35,7 +36,7 @@ void FakeCam::getCameraInfo(int id, mrvl_camera_info_t *caminfo)
     {
         caminfo->facing = 1;
     }
-    property_get("service.camera.fake.orient", prop, &NULL_STR);
+    property_get("service.camera.fake.orient", prop, "");
     if ( prop[0] )
         caminfo->orientation = atoi(prop);
     caminfo->field_8 = 256;
@@ -88,17 +89,17 @@ int FakeCam::getNumberOfCameras()
     params.set(android::CameraParameters::KEY_SMOOTH_ZOOM_SUPPORTED         , "false");
     params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED      , "false");
 
-    mCamParameters[0] = params;
-    mCamParameters[1] = params;
+    FakeCamParameters[0] = params;
+    FakeCamParameters[1] = params;
 
-    mCamParameters[0].set(android::CameraParameters::KEY_PREVIEW_SIZE, "640x480");
-    mCamParameters[1].set(android::CameraParameters::KEY_PREVIEW_SIZE, "720x480");
+    FakeCamParameters[0].set(android::CameraParameters::KEY_PREVIEW_SIZE, "640x480");
+    FakeCamParameters[1].set(android::CameraParameters::KEY_PREVIEW_SIZE, "720x480");
 
-    mCamParameters[0].setPreviewFormat("yuv420sp");
-    mCamParameters[1].setPreviewFormat("yuv420sp");
+    FakeCamParameters[0].setPreviewFormat("yuv420sp");
+    FakeCamParameters[1].setPreviewFormat("yuv420sp");
 
-    mCamParameters[0].set(android::CameraParameters::KEY_VIDEO_FRAME_FORMAT, "yuv420sp");
-    mCamParameters[1].set(android::CameraParameters::KEY_VIDEO_FRAME_FORMAT, "yuv420sp");
+    FakeCamParameters[0].set(android::CameraParameters::KEY_VIDEO_FRAME_FORMAT, "yuv420sp");
+    FakeCamParameters[1].set(android::CameraParameters::KEY_VIDEO_FRAME_FORMAT, "yuv420sp");
 
     return 2;
 }
