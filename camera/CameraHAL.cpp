@@ -99,7 +99,7 @@ int HAL_getNumberOfCameras()
         return FakeCam::getNumberOfCameras();
     }
 
-
+    return 0;
 }
 
 extern "C" {
