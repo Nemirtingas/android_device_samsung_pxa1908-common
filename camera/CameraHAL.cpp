@@ -52,6 +52,7 @@ class __DEBUG_CLASS__
 #include "Engine.h"
 #include "CameraHardwareSmt.h"
 #include "CameraHardwareDxO.h"
+#include "FakeCam.h"
 
 #include <dlfcn.h>
 

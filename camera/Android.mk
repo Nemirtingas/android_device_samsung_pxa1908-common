@@ -25,11 +25,14 @@ LOCAL_C_INCLUDES += \
     framework/av/include \
 
 LOCAL_SRC_FILES := \
-	CameraHAL.cpp \
+    CameraHAL.cpp \
     Camera.cpp \
+    CameraSetting \
     CameraHardwareBase.cpp \
     CameraHardwareSmt.cpp \
     CameraHardwareDxO.cpp \
+    FakeCam.cpp \
+    Engine.cpp \
 
 LOCAL_SHARED_LIBRARIES := \
 	libcamera_metadata \
