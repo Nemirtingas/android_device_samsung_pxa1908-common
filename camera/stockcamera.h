@@ -14,6 +14,9 @@ public:
     static libstockcamera& Inst();
 
     int   (*open_dev)(const hw_module_t* mod, const char* name, hw_device_t** dev);
+    int   (*HAL_getNumberOfCameras)();
+    void  (*HAL_getCameraInfo)(int id, mrvl_camera_info_t *info);
+
     void* (*CameraHardwareDxOConstructor1)(void* ptr, int cameraId);
     void* (*CameraHardwareDxODestructor1)(void* ptr);
     void* (*CameraHardwareSmtConstructor1)(void* ptr, int cameraId);
@@ -30,10 +33,10 @@ public:
         void  (*stopPreview)           (void*);
         int   (*previewEnabled)        (void*);
         int   (*storeMetaDataInBuffers)(void*, int store);
-        int   (*startRecording)        (void*);
-        void  (*stopRecording)         (void*);
-        int   (*recordingEnabled)      (void*);
-        void  (*releaseRecordingFrame) (void*, const void *frame);
+        int   (startRecording)        (void*){return 0;}
+        void  (stopRecording)         (void*){}
+        int   (recordingEnabled)      (void*){return 0;}
+        void  (releaseRecordingFrame) (void*, const void *frame){}
         int   (*autoFocus)             (void*);
         int   (*cancelAutoFocus)       (void*);
         int   (*takePicture)           (void*);
@@ -45,6 +48,24 @@ public:
         void  (*release)               (void*);
         int   (*dump)                  (void*, int fd);
     } CameraHardwareBase;
+
+    struct
+    {
+        int  (*startRecording)(void *obj);
+        void (*stopRecording)(void *obj);
+        int  (*recordingEnabled)(void *obj);
+        void (*releaseRecordingFrame)(void *obj, const void *frame);
+    } CameraHardwareDxO;
+    
+    struct
+    {
+        int  (*startRecording)(void *obj);
+        void (*stopRecording)(void *obj);
+        int  (*recordingEnabled)(void *obj);
+        void (*releaseRecordingFrame)(void *obj, const void *frame);
+    } CameraHardwareSmt;
+
+    int *iNumOfSensors;
 };
 
 class StockCameraHardwareBase
@@ -182,6 +203,27 @@ public:
     {
         libstockcamera::Inst().CameraHardwareDxODestructor1(memory);
     }
+    /*
+    virtual int startRecording()
+    {
+        return libstockcamera::Inst().CameraHardwareDxO.startRecording(memory);
+    }
+
+    virtual void stopRecording()
+    {
+        libstockcamera::Inst().CameraHardwareDxO.stopRecording(memory);
+    }
+
+    virtual int recordingEnabled()
+    {
+        return libstockcamera::Inst().CameraHardwareDxO.recordingEnabled(memory);
+    }
+
+    virtual void releaseRecordingFrame(const void *frame)
+    {
+        libstockcamera::Inst().CameraHardwareDxO.releaseRecordingFrame(memory, frame);
+    }
+    */
 };
 
 class StockCameraHardwareSmt : public StockCameraHardwareBase
@@ -196,6 +238,27 @@ public:
     {
         libstockcamera::Inst().CameraHardwareSmtDestructor1(memory);
     }
+    /*
+    virtual int startRecording()
+    {
+        return libstockcamera::Inst().CameraHardwareSmt.startRecording(memory);
+    }
+
+    virtual void stopRecording()
+    {
+        libstockcamera::Inst().CameraHardwareSmt.stopRecording(memory);
+    }
+
+    virtual int recordingEnabled()
+    {
+        return libstockcamera::Inst().CameraHardwareSmt.recordingEnabled(memory);
+    }
+
+    virtual void releaseRecordingFrame(const void *frame)
+    {
+        libstockcamera::Inst().CameraHardwareSmt.releaseRecordingFrame(memory, frame);
+    }
+    */
 };
 
 #endif

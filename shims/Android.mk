@@ -17,12 +17,3 @@ LOCAL_MODULE := libutils_shim
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := bindershm.cpp
-LOCAL_SHARED_LIBRARIES := libbinder
-LOCAL_MODULE := bindershm
-LOCAL_MODULE_TAGS := optional
-
-include $(BUILD_SHARED_LIBRARY)

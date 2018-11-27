@@ -78,7 +78,6 @@ pthread_mutex_t gCameraMutex = PTHREAD_MUTEX_INITIALIZER;
 
 void HAL_getCameraInfo(int id, mrvl_camera_info_t *info)
 {
-
     if( gFake )
         FakeCam::getCameraInfo(id, info);
     else
@@ -166,7 +165,13 @@ extern "C" {
 
 static int camera_get_number_of_cameras()
 {
-    gNumCameras = HAL_getNumberOfCameras();
+    ALOGE("%x %d", libstockcamera::Inst().iNumOfSensors, libstockcamera::Inst().iNumOfSensors?*libstockcamera::Inst().iNumOfSensors:-1);
+    if( *libstockcamera::Inst().iNumOfSensors != 2 )
+        libstockcamera::Inst().HAL_getNumberOfCameras();
+
+    gNumCameras = *libstockcamera::Inst().iNumOfSensors;
+
+    //gNumCameras = HAL_getNumberOfCameras();
 
     return gNumCameras;
 }
@@ -175,7 +180,8 @@ static int camera_get_camera_info(int id, struct camera_info* info)
 {
     mrvl_camera_info_t caminfo;
 
-    HAL_getCameraInfo(id, &caminfo);
+    //HAL_getCameraInfo(id, &caminfo);
+    libstockcamera::Inst().HAL_getCameraInfo(id, &caminfo);
 
     gCameraInfo[id] = caminfo;
 
