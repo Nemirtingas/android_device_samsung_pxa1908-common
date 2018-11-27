@@ -1,0 +1,1 @@
+Apply current patchs to framework/native/libs/binder/ to support camera mods

@@ -1,0 +1,164 @@
+*** ../../../../../frameworks/native/libs/binder/MemoryHeapBase.cpp	Tue Nov 27 21:42:07 2018
+--- MemoryHeapBase.cpp	Tue Nov 27 21:40:58 2018
+***************
+*** 31,49 ****
+  
+  #include <binder/MemoryHeapBase.h>
+  
+  namespace android {
+  
+  // ---------------------------------------------------------------------------
+  
+  MemoryHeapBase::MemoryHeapBase()
+      : mFD(-1), mSize(0), mBase(MAP_FAILED),
+!       mDevice(NULL), mNeedUnmap(false), mOffset(0)
+  {
+  }
+  
+  MemoryHeapBase::MemoryHeapBase(size_t size, uint32_t flags, char const * name)
+      : mFD(-1), mSize(0), mBase(MAP_FAILED), mFlags(flags),
+!       mDevice(0), mNeedUnmap(false), mOffset(0)
+  {
+      const size_t pagesize = getpagesize();
+      size = ((size + pagesize-1) & ~(pagesize-1));
+--- 31,51 ----
+  
+  #include <binder/MemoryHeapBase.h>
+  
++ #include <mvmem.h>
++ 
+  namespace android {
+  
+  // ---------------------------------------------------------------------------
+  
+  MemoryHeapBase::MemoryHeapBase()
+      : mFD(-1), mSize(0), mBase(MAP_FAILED),
+!       mDevice(NULL), mNeedUnmap(false), mOffset(0), mFD2(-1)
+  {
+  }
+  
+  MemoryHeapBase::MemoryHeapBase(size_t size, uint32_t flags, char const * name)
+      : mFD(-1), mSize(0), mBase(MAP_FAILED), mFlags(flags),
+!       mDevice(0), mNeedUnmap(false), mOffset(0), mFD2(-1)
+  {
+      const size_t pagesize = getpagesize();
+      size = ((size + pagesize-1) & ~(pagesize-1));
+*************** MemoryHeapBase::MemoryHeapBase(const cha
+*** 71,82 ****
+      if (fd >= 0) {
+          const size_t pagesize = getpagesize();
+          size = ((size + pagesize-1) & ~(pagesize-1));
+!         if (mapfd(fd, size) == NO_ERROR) {
+              mDevice = device;
+          }
+      }
+  }
+  
+  MemoryHeapBase::MemoryHeapBase(int fd, size_t size, uint32_t flags, uint32_t offset)
+      : mFD(-1), mSize(0), mBase(MAP_FAILED), mFlags(flags),
+        mDevice(0), mNeedUnmap(false), mOffset(0)
+--- 73,139 ----
+      if (fd >= 0) {
+          const size_t pagesize = getpagesize();
+          size = ((size + pagesize-1) & ~(pagesize-1));
+!         if( mapion(fd, size) ) {
+!         //if (mapfd(fd, size) == NO_ERROR) {
+              mDevice = device;
+          }
+      }
+  }
+  
++ status_t MemoryHeapBase::mapion(int fd, size_t size, uint32_t offset)
++ {
++     int flags;
++ 
++     if( size == 0 )
++     {
++         ALOGE("error: mapion size = 0");
++         return -EINVAL;
++     }
++    
++     if( mFlags & 0x100 )
++     {
++         mFD = -1;
++         mBase = 0;
++         mNeedUnmap = 0;
++         mSize = size;
++         mOffset = offset;
++         return 0;
++     }
++ 
++     if( mFlags & 0x400 )
++     {
++         if( mFlags & 0x200 )
++             flags = 2;
++         else
++             flags = 0x30002;
++     }
++     else if( mFlags & 0x200 )
++         flags = 1;
++     else
++         flags = 0x30001;
++ 
++     int handlefd = mvmem_alloc(size, flags, 4096);
++     if( handlefd >= 0 )
++     {
++         mvmem_set_name(handlefd, "binder");
++         void *base = mvmem_mmap(handlefd, size, offset);
++         if( base == (void*)-1 )
++         {
++             close(fd);
++             return -errno;
++         }
++         mBase = base;
++         mNeedUnmap = 1;
++         mFD = handlefd;
++         mFD2 = fd;
++         mSize = size;
++         mOffset = offset;
++         return 0;
++     }
++     close(fd);
++     return -errno;
++ }
++ 
+  MemoryHeapBase::MemoryHeapBase(int fd, size_t size, uint32_t flags, uint32_t offset)
+      : mFD(-1), mSize(0), mBase(MAP_FAILED), mFlags(flags),
+        mDevice(0), mNeedUnmap(false), mOffset(0)
+*************** void MemoryHeapBase::dispose()
+*** 140,152 ****
+  {
+      int fd = android_atomic_or(-1, &mFD);
+      if (fd >= 0) {
+!         if (mNeedUnmap) {
+!             //ALOGD("munmap(fd=%d, base=%p, size=%lu)", fd, mBase, mSize);
+!             munmap(mBase, mSize);
+          }
+          mBase = 0;
+          mSize = 0;
+!         close(fd);
+      }
+  }
+  
+--- 197,217 ----
+  {
+      int fd = android_atomic_or(-1, &mFD);
+      if (fd >= 0) {
+!         if( mBase )
+!         {
+!             if (mNeedUnmap) {
+!                 //ALOGD("munmap(fd=%d, base=%p, size=%lu)", fd, mBase, mSize);
+!                 //munmap(mBase, mSize);
+!                 mvmem_munmap(mBase, mSize);
+!             }
+          }
++         mvmem_free(mFD);
++         close(mFD2);
+          mBase = 0;
+          mSize = 0;
+!         mFD = -1;
+!         mFD2 = -1;
+!         //close(fd);
+      }
+  }
+  
