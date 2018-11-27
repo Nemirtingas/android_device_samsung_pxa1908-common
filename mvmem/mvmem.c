@@ -4,6 +4,8 @@
 #include <pthread.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "mvmem.h"
 
@@ -18,7 +20,6 @@
 #define ALOGF(...)
 #endif
 
-#include <stdio.h>
 
 static pthread_mutex_t mvmem_mutex = PTHREAD_MUTEX_INITIALIZER; 
 

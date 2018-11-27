@@ -1,6 +1,6 @@
 #include "CameraHardwareDxO.h"
 
- CameraHardwareDxO::CameraHardwareDxO(int cameraId): CameraHardwareBase(cameraId, 0)
+ CameraHardwareDxO::CameraHardwareDxO(int cameraId): CameraHardwareBase(cameraId)
  {
     field_100 = 2;
  }

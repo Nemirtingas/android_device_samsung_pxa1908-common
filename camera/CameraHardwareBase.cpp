@@ -31,11 +31,6 @@ CameraHardwareBase::CameraHardwareBase(int cameraId):camera_mutex(PTHREAD_MUTEX_
 {
 }
 
-CameraHardwareBase::CameraHardwareBase(int cameraId, int)
-{
-
-}
-
 CameraHardwareBase::~CameraHardwareBase()
 {
 }

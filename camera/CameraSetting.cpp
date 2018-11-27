@@ -54,6 +54,15 @@ int CameraSetting::initCameraTable(CameraProperties *camprop, int sensorid, int 
     ALOGI("%s: sensorname=%s, sensorid=%d, engsensorid=%d, portnum=%d, facing=%d, orient=%d", __FUNCTION__, camprop->name, sensorid, engsendorid, camprop->portnum+1, facing, orient);
     if( iNumOfSensors <= 4 )
     {
+        // Check if we already initialized this sensor
+        for( int i = 0; i < iNumOfSensors; ++i )
+        {
+            if( !strcmp(mMrvlCameraInfo[i].sensor, camprop->name) )
+            {
+                return 0;
+            }
+        }
+
         SettingCamInfo *caminfo = &mMrvlCameraInfo[iNumOfSensors];
         strncpy(caminfo->sensor, camprop->name, sizeof(caminfo->sensor)-1);
         caminfo->sensor[sizeof(caminfo->sensor)-1] = '\0';

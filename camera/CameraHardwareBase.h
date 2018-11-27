@@ -2,6 +2,7 @@
 #define __CAMERAHARDWAREBASE_DEFINED__
 
 #include "Camera.h"
+#include "stockcamera.h"
 #include <utils/RefBase.h>
 
 class CameraMsg;
@@ -87,7 +88,6 @@ public:
 
 
     CameraHardwareBase(int cameraId);
-    CameraHardwareBase(int cameraId, int);
     virtual ~CameraHardwareBase();
     void cameraLock();
     void cameraUnlock();

@@ -70,10 +70,9 @@ static int gOtpDataExists = 1;
 static int gFake;
 static int gCamerasOpen;
 static int gNumCameras;
-static CameraHardwareBase *gCameraHals[NUM_CAMERAS];
+//static CameraHardwareBase *gCameraHals[NUM_CAMERAS];
+static StockCameraHardwareBase *gCameraHals[NUM_CAMERAS];
 static mrvl_camera_info_t  gCameraInfo[NUM_CAMERAS];
-
-static void *vendor_camera_library;
 
 pthread_mutex_t gCameraMutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -524,12 +523,12 @@ static int camera_device_open(const hw_module_t* mod, const char* name, hw_devic
             ALOGE("Camera has too many / too less ports, not supported!");
         else if( gCameraInfo[camera_id].ports == 1 )
         {
-            gCameraHals[camera_id] = new CameraHardwareSmt(camera_id);
+            gCameraHals[camera_id] = new StockCameraHardwareSmt(camera_id);
             ALOGE("Making CameraHardwareSmt");
         }
         else
         {
-            gCameraHals[camera_id] = new CameraHardwareDxO(camera_id);
+            gCameraHals[camera_id] = new StockCameraHardwareDxO(camera_id);
             ALOGE("Making CameraHardwareDxO");
         }
     }
@@ -568,22 +567,5 @@ camera_module_t HAL_MODULE_INFO_SYM __attribute__ ((visibility("default"))) = {
     reserved              : {0},
 };
 } // extern "C"
-
-__attribute__((constructor)) void __module_load__()
-{
-    vendor_camera_library = dlopen("/system/lib/hw/camera.stock.mrvl.so", RTLD_LAZY);
-    if( vendor_camera_library == NULL )
-        ALOGE("Failed to load /system/lib/hw/camera.stock.mrvl.so");
-    //dlsym(vendor_camera_library, "");
-}
-
-__attribute__((destructor)) void __module_unload__()
-{
-    if( vendor_camera_library )
-    {
-        dlclose(vendor_camera_library);
-        vendor_camera_library = NULL;
-    }
-}
 
 } // namespace default_camera_hal
