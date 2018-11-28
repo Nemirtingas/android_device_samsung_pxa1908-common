@@ -43,6 +43,7 @@ PRODUCT_PACKAGES += \
 ##  WIP  ###
 ############
 PRODUCT_PACKAGES += \
+    libstlport \
     camera.mrvl \
     camera_client
 
