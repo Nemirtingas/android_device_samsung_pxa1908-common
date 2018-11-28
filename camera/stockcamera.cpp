@@ -11,7 +11,9 @@
 libstockcamera::libstockcamera()
 {
     _lib = dlopen("/system/lib/hw/camera.stock.mrvl.so", RTLD_NOW);
+
     LOAD_FUNC(_lib, open_dev);
+
     LOAD_FUNC_CXX(_lib, HAL_getNumberOfCameras        , "_ZN7android22HAL_getNumberOfCamerasEv");
     LOAD_FUNC_CXX(_lib, HAL_getCameraInfo             , "_ZN7android17HAL_getCameraInfoEiPNS_16mrvl_camera_infoE");
     LOAD_FUNC_CXX(_lib, CameraHardwareDxOConstructor1 , "_ZN7android17CameraHardwareDxOC1Ei");

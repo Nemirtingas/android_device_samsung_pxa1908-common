@@ -166,13 +166,16 @@ extern "C" {
 static int camera_get_number_of_cameras()
 {
     ALOGE("%x %d", libstockcamera::Inst().iNumOfSensors, libstockcamera::Inst().iNumOfSensors?*libstockcamera::Inst().iNumOfSensors:-1);
-    if( *libstockcamera::Inst().iNumOfSensors != 2 )
-        libstockcamera::Inst().HAL_getNumberOfCameras();
 
-    gNumCameras = *libstockcamera::Inst().iNumOfSensors;
+    if( libstockcamera::Inst().iNumOfSensors )
+    {
+        if( *libstockcamera::Inst().iNumOfSensors != 2 )
+            libstockcamera::Inst().HAL_getNumberOfCameras();
 
-    //gNumCameras = HAL_getNumberOfCameras();
+        gNumCameras = *libstockcamera::Inst().iNumOfSensors;
 
+        //gNumCameras = HAL_getNumberOfCameras();
+    }
     return gNumCameras;
 }
 
