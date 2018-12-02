@@ -111,19 +111,16 @@ PRODUCT_PACKAGES += \
     libion
 
 # Input Device Config
-    $(LOCAL_PATH)/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc
-    $(LOCAL_PATH)/idc/elan-ts.idc:system/usr/idc/elan-ts.idc
-    $(LOCAL_PATH)/idc/ft5306-ts.idc:system/usr/idc/ft5306-ts.idc
-    $(LOCAL_PATH)/idc/msg2133.idc:system/usr/idc/msg2133.idc
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc \
+    $(LOCAL_PATH)/idc/elan-ts.idc:system/usr/idc/elan-ts.idc \
+    $(LOCAL_PATH)/idc/ft5306-ts.idc:system/usr/idc/ft5306-ts.idc \
+    $(LOCAL_PATH)/idc/msg2133.idc:system/usr/idc/msg2133.idc \
     $(LOCAL_PATH)/idc/synaptics_dsx_i2c.idc:system/usr/idc/synaptics_dsx_i2c.idc
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/pxa27x-keypad.kl:system/usr/keylayout/pxa27x-keypad.kl
-
-# Keychars
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keychars/pxa27x-keypad.kcm:system/usr/keychars/pxa27x-keypad.kcm
+    $(LOCAL_PATH)/keylayout/sec-touchscreen.kl:system/usr/keylayout/sec-touchscreen.kl
 
 # Keystore
 PRODUCT_PACKAGES += \

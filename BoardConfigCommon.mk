@@ -15,14 +15,14 @@
 # Inherit from mrvl-common
 -include device/samsung/mrvl-common/BoardConfigCommon.mk
 
-DEVICE_PATH := device/samsung/pxa1908-common
+COMMON_PATH := device/samsung/pxa1908-common
 
-include $(DEVICE_PATH)/board/*.mk
+include $(COMMON_PATH)/board/*.mk
 
-TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
+TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
 
 # Enabling this resolv zygote's descriptor table, but ROM doesn't boot...
-TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
+TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
 BOARD_PROVIDES_MKBOOTIMG := true
 BOARD_MKBOOTIMG_MRVL := true
@@ -33,10 +33,10 @@ BOARD_MKIMAGE_MRVL := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/marvell/bootimage/mkbootimg.mk
 
 # CMHW
-#BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw
+#BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
 
 # Custom RIL class
-BOARD_RIL_CLASS := ../../../$(DEVICE_PATH)/ril
+BOARD_RIL_CLASS := ../../../$(COMMON_PATH)/ril
 
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -49,7 +49,7 @@ TARGET_UNIFIED_DEVICE := true
 USE_OPENGL_RENDERER := true
 ENABLE_WEBGL := true
 LOCAL_CFLAGS += -DSK_SUPPORT_LEGACY_SETCONFIG
-BOARD_EGL_CFG := $(DEVICE_PATH)/configs/egl/egl.cfg
+BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl/egl.cfg
 BOARD_HAVE_PIXEL_FORMAT_INFO := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_ENABLE_MULTI_DISPLAYS := true
