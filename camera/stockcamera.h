@@ -13,7 +13,9 @@ class libstockcamera
 public:
     static libstockcamera& Inst();
 
-    int   (*open_dev)(const hw_module_t* mod, const char* name, hw_device_t** dev);
+    int   (*camera_open_dev)(const hw_module_t* mod, const char* name, hw_device_t** dev);
+    int   (*camera_get_number_of_cameras)();
+    int   (*camera_get_camera_info)(int id, struct camera_info* info);
     int   (*HAL_getNumberOfCameras)();
     void  (*HAL_getCameraInfo)(int id, mrvl_camera_info_t *info);
 
@@ -56,7 +58,7 @@ public:
         int  (*recordingEnabled)(void *obj);
         void (*releaseRecordingFrame)(void *obj, const void *frame);
     } CameraHardwareDxO;
-    
+
     struct
     {
         int  (*startRecording)(void *obj);
@@ -65,6 +67,7 @@ public:
         void (*releaseRecordingFrame)(void *obj, const void *frame);
     } CameraHardwareSmt;
 
+    camera_module_t *HMI;
     int *iNumOfSensors;
 };
 
