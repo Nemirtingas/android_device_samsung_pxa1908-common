@@ -120,7 +120,7 @@ PRODUCT_COPY_FILES += \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/sec-touchscreen.kl:system/usr/keylayout/sec-touchscreen.kl
+    $(LOCAL_PATH)/keylayout/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl
 
 # Keystore
 PRODUCT_PACKAGES += \
@@ -135,15 +135,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml  \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml
 
 # OMX
-PRODUCT_PACKAGES += \
-    libOmxCore \
-    libOmxVdec \
-    libOmxVenc \
-    libstagefrighthw
+#PRODUCT_PACKAGES += \
+#    libstagefrighthw
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -172,8 +170,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.software.webview.xml:system/etc/permissions/android.software.webview.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
-    #frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
 # Power
 PRODUCT_PACKAGES += \
