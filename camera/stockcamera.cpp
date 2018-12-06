@@ -12,11 +12,8 @@ libstockcamera::libstockcamera()
 {
     _lib = dlopen("/system/lib/hw/camera.stock.mrvl.so", RTLD_NOW);
 
-    LOAD_FUNC_CXX(_lib, HAL_getNumberOfCameras        , "_ZN7android22HAL_getNumberOfCamerasEv");
-    LOAD_FUNC_CXX(_lib, HAL_getCameraInfo             , "_ZN7android17HAL_getCameraInfoEiPNS_16mrvl_camera_infoE");
-
-    // Get the original exported structure so we can get the camera_get_camera_info & camera_get_umber_of_cameras
-    LOAD_FUNC_CXX(_lib, HMI, "HMI");
+    // Get the original exported structure so we can get the camera_get_camera_info & camera_get_number_of_cameras
+    LOAD_FUNC(_lib, HMI);
 
     camera_open_dev = HMI->common.methods->open;
     camera_get_number_of_cameras = HMI->get_number_of_cameras;

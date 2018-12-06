@@ -61,19 +61,24 @@ class __DEBUG_CLASS__
 namespace default_camera_hal {
 
 libstockcamera camera_mrvl;
+pthread_mutex_t camera_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 extern "C" {
 
 static int camera_get_number_of_cameras()
 {
+    int res = 0;
+    // Make sure we don't call this in the same time as other threads
+    pthread_mutex_lock(&camera_mutex);
     if( camera_mrvl.iNumOfSensors )
     {
         if( *camera_mrvl.iNumOfSensors != 2 )
-            return camera_mrvl.camera_get_number_of_cameras();
+            camera_mrvl.camera_get_number_of_cameras();
 
-        return *camera_mrvl.iNumOfSensors;
+        res = *camera_mrvl.iNumOfSensors;
     }
-    return 0;
+    pthread_mutex_unlock(&camera_mutex);
+    return res;
 }
 
 static int camera_get_camera_info(int id, struct camera_info* info)
