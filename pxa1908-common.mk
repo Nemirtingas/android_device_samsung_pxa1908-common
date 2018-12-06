@@ -45,8 +45,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstlport \
     camera.mrvl \
-    camera_client \
-    Snap
+    camera_client
 
 # Data patterns
 PRODUCT_COPY_FILES += \
