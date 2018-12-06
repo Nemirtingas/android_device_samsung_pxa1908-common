@@ -47,12 +47,8 @@ class __DEBUG_CLASS__
 #define log_func_entry         __DEBUG_CLASS__ __debug_obj__(__LINE__, __func__)
 #define log_func_line(fmt,...) ALOGD("%s at %d: " fmt, __func__, __LINE__, ## __VA_ARGS__)
 
+#include "stockcamera.h"
 #include "CameraHAL.h"
-
-#include "Engine.h"
-#include "CameraHardwareSmt.h"
-#include "CameraHardwareDxO.h"
-#include "FakeCam.h"
 
 #include <dlfcn.h>
 
@@ -64,28 +60,30 @@ class __DEBUG_CLASS__
 
 namespace default_camera_hal {
 
+libstockcamera camera_mrvl;
+
 extern "C" {
 
 static int camera_get_number_of_cameras()
 {
-    if( libstockcamera::Inst().iNumOfSensors )
+    if( camera_mrvl.iNumOfSensors )
     {
-        if( *libstockcamera::Inst().iNumOfSensors != 2 )
-            return libstockcamera::Inst().camera_get_number_of_cameras();
+        if( *camera_mrvl.iNumOfSensors != 2 )
+            return camera_mrvl.camera_get_number_of_cameras();
 
-        return *libstockcamera::Inst().iNumOfSensors;
+        return *camera_mrvl.iNumOfSensors;
     }
     return 0;
 }
 
 static int camera_get_camera_info(int id, struct camera_info* info)
 {
-    return libstockcamera::Inst().camera_get_camera_info(id, info);
+    return camera_mrvl.camera_get_camera_info(id, info);
 }
 
 static int camera_device_open(const hw_module_t* mod, const char* name, hw_device_t** dev)
 {
-    return libstockcamera::Inst().camera_open_dev(mod, name, dev);
+    return camera_mrvl.camera_open_dev(mod, name, dev);
 }
 
 static hw_module_methods_t gCameraModuleMethods = {
@@ -99,7 +97,7 @@ camera_module_t HAL_MODULE_INFO_SYM __attribute__ ((visibility("default"))) = {
         hal_api_version    : HARDWARE_HAL_API_VERSION,
         id                 : CAMERA_HARDWARE_MODULE_ID,
         name               : "Default Camera HAL",
-        author             : "The Android Open Source Project",
+        author             : "Nemirtingas",
         methods            : &gCameraModuleMethods,
         dso                : NULL,
         reserved           : {0},
@@ -107,7 +105,6 @@ camera_module_t HAL_MODULE_INFO_SYM __attribute__ ((visibility("default"))) = {
     get_number_of_cameras : camera_get_number_of_cameras,
     get_camera_info       : camera_get_camera_info,
     set_callbacks         : NULL,
-    //set_callbacks         : (int (*)(const camera_module_callbacks_t*))null,
     get_vendor_tag_ops    : NULL,
     open_legacy           : NULL,
     set_torch_mode        : NULL,

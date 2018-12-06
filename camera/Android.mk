@@ -26,14 +26,6 @@ LOCAL_C_INCLUDES += \
 
 LOCAL_SRC_FILES := \
     CameraHAL.cpp \
-    Camera.cpp \
-    CameraSetting.cpp \
-    CameraHardwareBase.cpp \
-    CameraHardwareSmt.cpp \
-    CameraHardwareDxO.cpp \
-    FakeCam.cpp \
-    Engine.cpp \
-    cameraengine.cpp \
     stockcamera.cpp \
 
 LOCAL_SHARED_LIBRARIES := \
