@@ -194,7 +194,7 @@ int mvmem_get_usage(int fd, int *note)
 {
     int result;
 
-    result = mvmem_notify(fd, 0);
+    result = mvmem_notify(fd, ION_BUFFER_NOTIFY_QUERY);
     if( result >= 0 )
     {
         *note = result;
