@@ -10,7 +10,7 @@
 
 libstockcamera::libstockcamera()
 {
-    _lib = dlopen("/system/lib/hw/camera.stock.mrvl.so", RTLD_NOW);
+    _lib = dlopen("/system/lib/hw/camera.stock.so", RTLD_NOW);
 
     // Get the original exported structure so we can get the camera_get_camera_info & camera_get_number_of_cameras
     LOAD_FUNC(_lib, HMI);

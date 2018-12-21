@@ -44,6 +44,7 @@ PRODUCT_PACKAGES += \
 ############
 PRODUCT_PACKAGES += \
     libstlport \
+    camera.stock \
     camera.mrvl \
     camera_client
 
@@ -104,7 +105,7 @@ PRODUCT_COPY_FILES += \
 
 # Display
 PRODUCT_PACKAGES += \
-    gralloc.default \
+    gralloc.stock \
     gralloc.mrvl \
     hwcomposer.mrvl \
     memtrack.mrvl \
@@ -124,7 +125,6 @@ PRODUCT_COPY_FILES += \
 
 # Keystore
 PRODUCT_PACKAGES += \
-    keystore.default \
     keystore.mrvl
 
 # Lights
@@ -136,7 +136,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml
 
 # OMX
@@ -210,6 +209,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/firmware/mrvl/txbackoff.txt:system/etc/firmware/mrvl/txbackoff.txt \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpower_FC.bin:system/etc/firmware/mrvl/txpower_FC.bin \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpwrlimit_cfg.bin:system/etc/firmware/mrvl/txpwrlimit_cfg.bin
+
+# FMRadio
+PRODUCT_PACKAGES += \
+    FMRadio
 
 # XML
 PRODUCT_PACKAGES += \
