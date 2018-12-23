@@ -425,22 +425,28 @@ on property:ro.debug_level=0x4f4c
     # set ring buf size to 4KB * 4 = 16KB
     write /sys/kernel/debug/tracing/buffer_size_kb 4
 
-# LPM
-on property:ro.bootmode=charger
-    mount ext4 /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name/SYSTEM /system wait ro
-    mount ext4 /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
-    chown system system /sys/class/graphics/fb0/blank
-    chmod 0664 /sys/class/graphics/fb0/blank
-    chown system system /sys/class/graphics/fb0/device/power/control
-    chmod 0664 /sys/class/graphics/fb0/device/power/control
-    chown system system  /sys/bus/platform/drivers/mmp-disp/mmp-disp/power/control
-    chmod 0664 /sys/bus/platform/drivers/mmp-disp/mmp-disp/power/control
-    mount debugfs debugfs /sys/kernel/debug
-    class_start sec_charger
-
-service playlpm /system/bin/lpm
-    class sec_charger
+service charger /sbin/healthd -c
+    class charger
     critical
+    seclabel u:r:healthd:s0
+#    class_start sec_charger
+
+# LPM
+#on property:ro.bootmode=charger
+#    mount ext4 /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name/SYSTEM /system wait ro
+#    mount ext4 /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+#    chown system system /sys/class/graphics/fb0/blank
+#    chmod 0664 /sys/class/graphics/fb0/blank
+#    chown system system /sys/class/graphics/fb0/device/power/control
+#    chmod 0664 /sys/class/graphics/fb0/device/power/control
+#    chown system system  /sys/bus/platform/drivers/mmp-disp/mmp-disp/power/control
+#    chmod 0664 /sys/bus/platform/drivers/mmp-disp/mmp-disp/power/control
+#    mount debugfs debugfs /sys/kernel/debug
+#    class_start sec_charger
+
+#service playlpm /system/bin/lpm
+#    class sec_charger
+#    critical
 
 on property:sys.boot_completed=1
     # 1. due to emmc calibration, kernel disable touch input by default.
