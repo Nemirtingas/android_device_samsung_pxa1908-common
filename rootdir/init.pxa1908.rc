@@ -8,7 +8,6 @@ on early-init
     export LD_SHIM_LIBS "/system/lib/libui.so|libui_shim.so:/system/lib/libutils.so|libutils_shim.so"
 
 on init
-    write /sys/devices/platform/sd8x-rfkill/pwr_ctrl 1
     symlink /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name /dev/block/platform/soc.2/by-name
 
     # See storage config details at http://source.android.com/tech/storage/
@@ -428,9 +427,8 @@ on property:ro.debug_level=0x4f4c
 
 # LPM
 on property:ro.bootmode=charger
-    # mount_all /fstab_lpm.pxa1908
-    mount ext4 /dev/block/platform/soc.2/by-name/SYSTEM /system wait ro
-    mount ext4 /dev/block/platform/soc.2/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+    mount ext4 /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name/SYSTEM /system wait ro
+    mount ext4 /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name/EFS /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
     chown system system /sys/class/graphics/fb0/blank
     chmod 0664 /sys/class/graphics/fb0/blank
     chown system system /sys/class/graphics/fb0/device/power/control

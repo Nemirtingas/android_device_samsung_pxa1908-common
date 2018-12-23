@@ -194,6 +194,7 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    MarvellWirelessDaemon \
     hostapd \
     wpa_supplicant
 
