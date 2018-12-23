@@ -1,5 +1,4 @@
-rild.libpath=/system/lib/libsec-ril.so
 ro.telephony.ril_class=SamsungPXA1908RIL
 ro.telephony.ril.config=simactivation
 
-cm.updater.uri=https://serverprive.serveftp.com/LineageOSOTA/api/v1
+cm.updater.uri=https://serverprive.serveftp.com/LineageOSOTA/api

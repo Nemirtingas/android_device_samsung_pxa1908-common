@@ -8,7 +8,7 @@ LOCAL_C_INCLUDES       := hardware/marvell/pxa1908/original-kernel-headers syste
 LOCAL_SRC_FILES := mvmem.cpp
 LOCAL_MODULE    := libmvmem
 LOCAL_MODULE_TAGS := optional
-LOCAL_EXPORT_C_INCLUDES := mvmem.h
+LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)
 
 include $(BUILD_SHARED_LIBRARY)
 
