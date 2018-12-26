@@ -105,11 +105,9 @@ PRODUCT_COPY_FILES += \
 
 # Display
 PRODUCT_PACKAGES += \
-    gralloc.stock \
     gralloc.mrvl \
     hwcomposer.mrvl \
-    memtrack.mrvl \
-    libion
+    memtrack.mrvl
 
 # Input Device Config
 PRODUCT_COPY_FILES += \
