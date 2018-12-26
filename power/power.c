@@ -18,6 +18,7 @@
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
+#include <stdlib.h>
 #include <stdbool.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -34,7 +35,22 @@
 /* touchkeys */
 #define TK_POWER "/sys/class/input/input1/enabled"
 /* touchscreen */
-#define TS_POWER "/sys/class/input/input2/enabled"
+const char* TS_PATHS[] =
+{
+    /* Don't know what thoses devices are, but disable them too :) */
+    "/sys/devices/platform/aksm/power",
+    "/sys/bus/i2c/devices/3-0020/power",
+    "/sys/class/graphics/fb0/device/power",
+    "/sys/bus/platform/drivers/mmp-vdma/d4209000.vdma/power",
+    "/sys/bus/platform/drivers/mmp-disp/mmp-disp/power",
+    NULL,
+};
+
+/* This will hold all the paths that can be disabled */
+const char** TS_POWER = NULL;
+static int TS_NUMBER = 0;
+
+static int is_init = 0;
 
 #define CPUFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/"
 #define INTERACTIVE_PATH "/sys/devices/system/cpu/cpufreq/interactive/"
@@ -92,9 +108,100 @@ static int is_profile_valid(int profile)
     return profile >= 0 && profile < PROFILE_MAX;
 }
 
+int is_pm_supported( const char *control, const char *runtime )
+{
+    char buff[12];
+    int fd;
+
+    if( access(control, F_OK) < 0 )
+        return 0;
+    
+    fd = open(runtime, 0);
+    if( fd < 0 )
+        return 0;
+
+    if( read(fd, buff, sizeof(buff)-1) < 0 )
+    {
+        close(fd);
+        return 0;
+    }
+
+    close(fd);
+    if( !strncmp(buff, "unsupported", 11) )
+        return 0;
+
+    /* Runtime power mode is supported! */
+    return 1;
+}
+
+void wait_pm_changed( const char *device_path, int on )
+{
+    const char *state;
+    char *runtime;
+    int retry = 1000;
+    int fd;
+    char buff[80];
+
+    if( on ) state = "active";
+    else     state = "suspended";
+
+    runtime = (char*)malloc(strlen(device_path) + strlen("/runtime_status") + 1);
+    strcpy(runtime, device_path);
+    strcat(runtime, "/runtime_status");
+
+    while( retry-- > 0 )
+    {
+        fd = open(runtime, 0);
+        if( fd < 0 )
+            break;
+        if( read(fd, buff, sizeof(buff)-1) < 0 )
+        {
+            close(fd);
+            break;
+        }
+        close(fd);
+        if( !strncmp(buff, "unsupported", 11) )
+            break;
+        if( !strncmp(buff, state, strlen(state)) )
+            break;
+
+        usleep(1000);
+    }
+    free(runtime);
+}
+
 static void power_init(__attribute__((unused)) struct power_module *module)
 {
     ALOGI("%s", __func__);
+    char *control, *runtime;
+    const char **device_path;
+    
+    pthread_mutex_lock(&lock);
+    if( !is_init )
+    {
+        /* Make the list of the devices that can be disabled at runtime */
+        for( device_path = TS_PATHS; *device_path != NULL; ++device_path )
+        {
+            control = (char*)malloc(strlen(*device_path) + strlen("/control") + 1);
+            runtime = (char*)malloc(strlen(*device_path) + strlen("/runtime_status") + 1);
+            strcpy(control, *device_path);
+            strcat(control, "/control");
+            strcpy(runtime, *device_path);
+            strcat(runtime, "/runtime_status");
+            if( is_pm_supported(control, runtime) )
+            {
+                ALOGD("%s support runtime pm", *device_path);
+                TS_POWER = realloc(TS_POWER, sizeof(char**)*TS_NUMBER+1);
+                TS_POWER[TS_NUMBER++] = *device_path;
+            }
+            else
+                ALOGD("%s doesn't support runtime pm", *device_path);
+            free(control);
+            free(runtime);
+        }
+        is_init = 1;
+    }
+    pthread_mutex_unlock(&lock);
 }
 
 static int boostpulse_open()
@@ -110,9 +217,33 @@ static int boostpulse_open()
 
 static void power_set_interactive_ext(int on) {
     ALOGD("%s: %s input devices", __func__, on ? "enabling" : "disabling");
-    sysfs_write_str(TK_POWER, on ? "1" : "0");
-    sysfs_write_str(TS_POWER, on ? "1" : "0");
-}
+    char *device_control;
+    const char** device_path = (on ? &TS_POWER[TS_NUMBER-1] : TS_POWER );
+
+    int i;
+    int start, end, inc;
+    if( on )
+    {
+        start = TS_NUMBER-1;
+        end = -1;
+        inc = -1;
+    }
+    else
+    {
+        start = 0;
+        end = TS_NUMBER;
+        inc = 1;
+    }
+
+    for( i = start; i != end; i+=inc )
+    {
+        device_control = (char*)malloc(strlen(TS_POWER[i]) + strlen("/control") + 1);
+        strcpy(device_control, TS_POWER[i]);
+        strcat(device_control, "/control");
+        sysfs_write_str(device_control, on ? "on" : "auto");
+        wait_pm_changed(TS_POWER[i], on);
+    }
+};
 
 static void power_set_interactive(__attribute__((unused)) struct power_module *module, int on)
 {
@@ -245,8 +376,8 @@ struct power_module HAL_MODULE_INFO_SYM = {
         .module_api_version = POWER_MODULE_API_VERSION_0_2,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
-        .name = "msm8226 Power HAL",
-        .author = "Gabriele M",
+        .name = "PXA1908 Power HAL",
+        .author = "Gabriele M & Nemirtingas",
         .methods = &power_module_methods,
     },
 
