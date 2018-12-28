@@ -34,7 +34,7 @@ LOCAL_SHARED_LIBRARIES := \
 	liblog \
 	libsync \
 	libutils \
-    libmvmem
+	libmvmem
 
 LOCAL_STATIC_LIBRARIES := libcamera_parameters
 
