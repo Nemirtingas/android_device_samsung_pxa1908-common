@@ -137,8 +137,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml
 
 # OMX
-#PRODUCT_PACKAGES += \
-#    libstagefrighthw
+PRODUCT_PACKAGES += \
+    libstagefrighthw
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -224,6 +224,7 @@ PRODUCT_PACKAGES += \
     init.pxa1908.tel.rc \
     init.pxa1908.security.rc \
     init.pxa1908.sensor.rc \
+    init.recovery.pxa1908.rc \
     ueventd.pxa1908.rc
 
 # Torch

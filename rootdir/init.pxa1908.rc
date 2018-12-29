@@ -8,6 +8,7 @@ on early-init
     export LD_SHIM_LIBS "/system/lib/libui.so|libui_shim.so:/system/lib/libutils.so|libutils_shim.so"
 
 on init
+    chown root system /sys/devices/virtual/camera/rear/Cam_antibanding
     symlink /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name /dev/block/platform/soc.2/by-name
 
     # See storage config details at http://source.android.com/tech/storage/

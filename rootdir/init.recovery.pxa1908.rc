@@ -1,0 +1,4 @@
+on fs
+    wait /dev/block/bootdevice
+    symlink /dev/block/bootdevice /dev/block/platform/pxa_sdcc.1
+
