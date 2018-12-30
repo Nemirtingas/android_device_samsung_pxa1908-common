@@ -234,7 +234,5 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg
 
-ADDITIONAL_DEFAULT_PROPERTIES += ro.boot.bootdevice=soc.2/d4200000.axi/d4281000.sdh
-
 # Inherit from mrvl-common
 $(call inherit-product, device/samsung/mrvl-common/mrvl-common.mk)

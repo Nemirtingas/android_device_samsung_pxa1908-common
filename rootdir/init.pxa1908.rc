@@ -167,9 +167,6 @@ on init
     setprop battery.fake_ac 1
 
 on fs
-    wait /dev/block/bootdevice
-    symlink /dev/block/bootdevice /dev/block/platform/pxa_sdcc.1
-
     # create directory for NVM data, and mount nvm partition on it
     mkdir /NVM 0744 system system
     # mount /data by fstab to support encryption.
