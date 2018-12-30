@@ -16,25 +16,22 @@ libstockcamera::libstockcamera()
 {
     _lib = dlopen(STOCKCAMLIB, RTLD_NOW);
 
-    if( _lib == NULL )
-        throw(std::exception());
-
     // Get the original exported structure so we can get the camera_get_camera_info & camera_get_number_of_cameras
-    LOAD_FUNC(_lib, HMI);
-    if( HMI == NULL )
-        throw(std::exception());
+    if( _lib )
+    {
+        LOAD_FUNC(_lib, HMI);
 
-    camera_open_dev = HMI->common.methods->open;
-    camera_get_number_of_cameras = HMI->get_number_of_cameras;
-    camera_get_camera_info = HMI->get_camera_info;
-
+        camera_open_dev = HMI->common.methods->open;
+        camera_get_number_of_cameras = HMI->get_number_of_cameras;
+        camera_get_camera_info = HMI->get_camera_info;
+        // Get the number of sensors, it not working on Android 6.0+ so we'll skip the sensor detection if we already have detected the 2 cameras
+        LOAD_FUNC_CXX(_lib, iNumOfSensors, "_ZN7android13CameraSetting13iNumOfSensorsE");
+    }
     ALOGE("HMI: %p", HMI);
     ALOGE("camera_open_dev: %p", camera_open_dev);
     ALOGE("camera_get_number_of_cameras: %p", camera_get_number_of_cameras);
     ALOGE("camera_get_camera_info: %p", camera_get_camera_info);
 
-    // Get the number of sensors, it not working on Android 6.0+ so we'll skip the sensor detection if we already have detected the 2 cameras
-    LOAD_FUNC_CXX(_lib, iNumOfSensors, "_ZN7android13CameraSetting13iNumOfSensorsE");
 }
 
 libstockcamera::~libstockcamera()
