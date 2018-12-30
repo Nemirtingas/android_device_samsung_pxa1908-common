@@ -42,14 +42,6 @@ LOCAL_CFLAGS += -Wall -Wextra -fvisibility=hidden
 
 LOCAL_MODULE_TAGS := optional
 
+LOCAL_ADDITIONAL_DEPENDENCIES += camera.stock
+
 include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := camera.stock.so
-
-LOCAL_MODULE := camera.stock
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_SUFFIX := .so
-LOCAL_MODULE_TAG := optional
-LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
-include $(BUILD_PREBUILT)
