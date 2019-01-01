@@ -8,9 +8,6 @@ on early-init
     export LD_SHIM_LIBS "/system/lib/libui.so|libui_shim.so:/system/lib/libutils.so|libutils_shim.so"
 
 on init
-    chmod 0710 /sys/kernel/debug
-    chown root system /sys/kernel/debug
-    chown root media /sys/devices/virtual/camera/rear/Cam_antibanding
     symlink /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name /dev/block/platform/soc.2/by-name
 
     # See storage config details at http://source.android.com/tech/storage/
@@ -271,6 +268,10 @@ on early-boot
     setrlimit 8 16777216 16777216
 
 on boot
+    chmod 0710 /sys/kernel/debug
+    chown root system /sys/kernel/debug
+    chown root media /sys/devices/virtual/camera/rear/Cam_antibanding
+
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor performance
     write /sys/class/devfreq/devfreq-ddr/governor performance
     write /sys/block/mmcblk0/queue/scheduler noop
@@ -364,11 +365,6 @@ on charger
     # Assume SMP uses shared cpufreq policy for all CPUs
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-
-# virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 /mnt/shell/emulated
-    class late_start
-    oneshot
 
 # RTCC V3
 service rtccd /system/bin/rtccd3 -a 350m -x 0.5

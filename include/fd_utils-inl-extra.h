@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// galcore doesn't support openning or reoppening.
 /*
 #define PATH_WHITELIST_EXTRA_H \
     "/dev/graphics/galcore",
