@@ -21,7 +21,7 @@ include $(COMMON_PATH)/board/*.mk
 
 TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
 
-# Enabling this resolv zygote's descriptor table, but ROM doesn't boot...
+# Board specific headers
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
 BOARD_PROVIDES_MKBOOTIMG := true
@@ -45,11 +45,14 @@ EXTENDED_FONT_FOOTPRINT := true
 TARGET_INIT_VENDOR_LIB := libinit_pxa1908
 TARGET_UNIFIED_DEVICE := true
 
+BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
+-include device/marvell/sepolicy/sepolicy.mk
+
 # Display & Graphics
+BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl/egl.cfg
 USE_OPENGL_RENDERER := true
 ENABLE_WEBGL := true
 LOCAL_CFLAGS += -DSK_SUPPORT_LEGACY_SETCONFIG
-BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl/egl.cfg
 BOARD_HAVE_PIXEL_FORMAT_INFO := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_ENABLE_MULTI_DISPLAYS := true

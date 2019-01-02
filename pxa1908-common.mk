@@ -42,7 +42,7 @@ PRODUCT_PACKAGES += \
 ############
 ##  WIP  ###
 ############
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     libstlport \
     camera.stock \
     camera.mrvl \
@@ -134,11 +134,14 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml
+    $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media/somxreg.conf:system/etc/somxreg.conf
 
 # OMX
-#PRODUCT_PACKAGES += \
-    libstagefrighthw
+PRODUCT_PACKAGES += \
+    libstagefright_soft_h264dec \
+    libstagefright_soft_h264enc \
+#    libstagefrighthw \
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -191,7 +194,7 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 
 # Wifi
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     MarvellWirelessDaemon \
     hostapd \
     wpa_supplicant

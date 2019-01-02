@@ -44,21 +44,18 @@ public class SamsungPXA1908RIL extends RIL {
 
     public SamsungPXA1908RIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
-        riljLog("Building SamsungPXA1908RIL");
         mQANElements = 6;
     }
 
     public SamsungPXA1908RIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
-        riljLog("Building SamsungPXA1908RIL");
         mQANElements = 6;
     }
 
     @Override
     public void
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
-        riljLog("SamsungPXA1908RIL::dial");
         if (PhoneNumberUtils.isEmergencyNumber(address)) {
             dialEmergencyCall(address, clirMode, result);
             return;
@@ -89,13 +86,14 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     protected Object
     responseIccCardStatus(Parcel p) {
+        IccCardApplicationStatus appStatus;
+
         IccCardStatus cardStatus = new IccCardStatus();
         cardStatus.setCardState(p.readInt());
         cardStatus.setUniversalPinState(p.readInt());
         cardStatus.mGsmUmtsSubscriptionAppIndex = p.readInt();
         cardStatus.mCdmaSubscriptionAppIndex = p.readInt();
         cardStatus.mImsSubscriptionAppIndex = p.readInt();
-        riljLog("SamsungPXA1908RIL::responseIccCardStatus");
 
         int numApplications = p.readInt();
 
@@ -106,7 +104,7 @@ public class SamsungPXA1908RIL extends RIL {
         cardStatus.mApplications = new IccCardApplicationStatus[numApplications];
 
         for (int i = 0 ; i < numApplications ; i++) {
-            IccCardApplicationStatus appStatus = new IccCardApplicationStatus();
+            appStatus = new IccCardApplicationStatus();
             appStatus.app_type       = appStatus.AppTypeFromRILInt(p.readInt());
             appStatus.app_state      = appStatus.AppStateFromRILInt(p.readInt());
             appStatus.perso_substate = appStatus.PersoSubstateFromRILInt(p.readInt());
@@ -129,7 +127,6 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     protected Object
     responseCallList(Parcel p) {
-        riljLog("SamsungPXA1908RIL::responseCallList");
         int num;
         int voiceSettings;
         ArrayList<DriverCall> response;
@@ -138,6 +135,11 @@ public class SamsungPXA1908RIL extends RIL {
         num = p.readInt();
         response = new ArrayList<DriverCall>(num);
 
+        if (RILJ_LOGV) {
+            riljLog("responseCallList: num=" + num +
+                    " mEmergencyCallbackModeRegistrant=" + mEmergencyCallbackModeRegistrant +
+                    " mTestingEmergencyCall=" + mTestingEmergencyCall.get());
+        }
         for (int i = 0 ; i < num ; i++) {
             dc = new DriverCall();
 
@@ -207,7 +209,6 @@ public class SamsungPXA1908RIL extends RIL {
     @Override
     protected Object
     responseSignalStrength(Parcel p) {
-        riljLog("SamsungPXA1908RIL::responseSignalStrength");
         int gsmSignalStrength = p.readInt() & 0xff;
         int gsmBitErrorRate = p.readInt();
         int cdmaDbm = p.readInt();
@@ -249,8 +250,7 @@ public class SamsungPXA1908RIL extends RIL {
 
     @Override
     protected void
-    processUnsolicited (Parcel p) {
-        riljLog("SamsungPXA1908RIL::processUnsolicited");
+    processUnsolicited (Parcel p, int type) {
         Object ret;
         int dataPosition = p.dataPosition();
         int response = p.readInt();
@@ -260,42 +260,32 @@ public class SamsungPXA1908RIL extends RIL {
             case RIL_UNSOL_ON_SS_LL:
                 newResponse = RIL_UNSOL_ON_SS;
                 break;
-	        case RIL_UNSOL_STK_SEND_SMS_RESULT:
-                riljLog("SamsungPXA1908RIL::processUnsolicited process specialized request: " + response);
-		        // responseInts(Parcel p)
-		        int numInts = p.readInt();
-		        int[] responses = new int[numInts];
-		        for( int i = 0; i < numInts; ++i )
-		        {
-			        responses[i] = p.readInt();
-		        }
-		        ret = (Object)responses;
-		        if( this.mCatSendSmsResultRegistrant != null )
-		        {
-			        this.mCatSendSmsResultRegistrant.notifyRegistrant(new AsyncResult(null, ret, null));
-		        }
-		        return;
-            case 11064:
-                ret = responseString(p);
-                riljLog("SamsungPXA1908RIL::processUnsolicited process specialized request: " + response);
-                //if (this.mSimIccIdNotiRegistrants != null) {
-                //    this.mSimIccIdNotiRegistrants.notifyRegistrants(new AsyncResult(null, ret, null));
-                //    return;
-                //}
-                return;
+	    case RIL_UNSOL_STK_SEND_SMS_RESULT:
+		// responseInts(Parcel p)
+		int numInts = p.readInt();
+		int[] responses = new int[numInts];
+		for( int i = 0; i < numInts; ++i )
+		{
+			responses[i] = p.readInt();
+		}
+		ret = (Object)responses;
+		if( this.mCatSendSmsResultRegistrant != null )
+		{
+			this.mCatSendSmsResultRegistrant.notifyRegistrant(new AsyncResult(null, ret, null));
+		}
+		return;
         }
         if (newResponse != response) {
             p.setDataPosition(dataPosition);
             p.writeInt(newResponse);
         }
         p.setDataPosition(dataPosition);
-        super.processUnsolicited(p);
+        super.processUnsolicited(p, type);
     }
 
     @Override
     public void
     acceptCall (Message result) {
-        riljLog("SamsungPXA1908RIL::acceptCall");
         RILRequest rr
                 = RILRequest.obtain(RIL_REQUEST_ANSWER, result);
 
@@ -327,19 +317,16 @@ public class SamsungPXA1908RIL extends RIL {
 
     @Override
     protected RILRequest
-    processSolicited (Parcel p) {
-        riljLog("SamsungPXA1908RIL::processSolicited");
+    processSolicited (Parcel p, int type) {
         int serial, error;
         boolean found = false;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         serial = p.readInt();
         error = p.readInt();
         RILRequest rr = null;
-        RILRequest debug_r;
         /* Pre-process the reply before popping it */
         synchronized (mRequestList) {
             RILRequest tr = mRequestList.get(serial);
-            debug_r = tr;
             if (tr != null && tr.mSerial == serial) {
                 if (error == 0 || p.dataAvail() > 0) {
                     try {switch (tr.mRequest) {
@@ -361,9 +348,8 @@ public class SamsungPXA1908RIL extends RIL {
         if (rr == null) {
             /* Nothing we care about, go up */
             p.setDataPosition(dataPosition);
-            riljLog("SamsungPXA1908RIL::processSolicited send to super request: " + debug_r.mRequest);
             // Forward responses that we are not overriding to the super class
-            return super.processSolicited(p);
+            return super.processSolicited(p, type);
         }
         rr = findAndRemoveRequestFromList(serial);
         if (rr == null) {
@@ -371,10 +357,8 @@ public class SamsungPXA1908RIL extends RIL {
         }
         Object ret = null;
         if (error == 0 || p.dataAvail() > 0) {
-            riljLog("SamsungPXA1908RIL::processSolicited process specialized request: " + rr.mRequest + " " + retToString(rr.mRequest, ret) + " " + requestToString(rr.mRequest));
             switch (rr.mRequest) {
-                case RIL_REQUEST_DATA_REGISTRATION_STATE: 
-                ret = responseDataRegistrationState(p); break;
+                case RIL_REQUEST_DATA_REGISTRATION_STATE: ret = responseDataRegistrationState(p); break;
                 default:
                     throw new RuntimeException("Unrecognized solicited response: " + rr.mRequest);
             }
@@ -391,7 +375,6 @@ public class SamsungPXA1908RIL extends RIL {
 
     private Object
     responseDataRegistrationState(Parcel p) {
-        riljLog("SamsungPXA1908RIL::responseDataRegistrationState");
         String response[] = (String[])responseStrings(p);
         /* DANGER WILL ROBINSON
          * In some cases from Vodaphone we are receiving a RAT of 102
