@@ -1,24 +1,24 @@
 # at_distributor
 /system/bin/at_distributor        u:object_r:at_distributor_exec:s0
 
+# Runtime compress cache daemon
+/system/bin/rtccd3                u:object_r:rtcc_exec:s0
+
 # Marvell telephony launcher
-/system/bin/tel_launch\.sh  u:object_r:marvelltel_exec:s0
+/system/bin/tel_launch\.sh        u:object_r:marvelltel_exec:s0
+/system/bin/run_composite\.sh     u:object_r:marvelltel_exec:s0
 
 # Marvell Wireless Daemon (enabled WiFi/BT/NFC/FM modem)
-/system/bin/MarvellWirelessDaemon   u:object_r:mwirelessd_exec:s0
+/system/bin/MarvellWirelessDaemon u:object_r:mwirelessd_exec:s0
+
+# Marvell gps daemon
+/system/bin/gpslpm_srv            u:object_r:gpslpm_srv_exec:s0
 
 # Bluetooth
 /efs/bluetooth/bt_addr                                        u:object_r:bluetooth_efs_file:s0
 
 # Camera
 /sys/devices/virtual/camera(/.*)?                             u:object_r:sysfs_camera:s0
-
-# CMHW
-/sys/devices/virtual/timed_output/vibrator(/.*)?              u:object_r:sysfs_vibeamp:s0
-/sys/class/sec/sec_touchkey/keypad_enable                     u:object_r:sysfs_display:s0
-
-# Display
-/sys/devices/fd922800.qcom,mdss_dsi/lcd/panel/power_reduce    u:object_r:sysfs_display:s0
 
 # EFS
 /dev/block/platform/soc.2/by-name/EFS                   u:object_r:efs_block_device:s0
@@ -27,11 +27,9 @@
 /dev/sec-nfc                                                    u:object_r:nfc_device:s0
 
 # Sensors
-/dev/alps_io                                                  u:object_r:io_device:s0
-/dev/iio:device0                                              u:object_r:io_device:s0
-/efs/FactoryApp/baro_delta                                    u:object_r:sensors_efs_file:s0
-/efs/gyro_cal_data                                            u:object_r:sensors_efs_file:s0
-/efs/prox_cal                                                 u:object_r:sensors_efs_file:s0
+/dev/accelerometer_sensor       u:object_r:sensors_device:s0
+/dev/magnetic_sensor            u:object_r:sensors_device:s0
+/dev/proximity_sensor           u:object_r:sensors_device:s0
 
 # WiFi
 /data/.wifiver.info                                           u:object_r:wifi_data_file:s0
