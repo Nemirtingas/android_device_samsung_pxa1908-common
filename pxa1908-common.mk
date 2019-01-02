@@ -194,7 +194,7 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 
 # Wifi
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     MarvellWirelessDaemon \
     hostapd \
     wpa_supplicant

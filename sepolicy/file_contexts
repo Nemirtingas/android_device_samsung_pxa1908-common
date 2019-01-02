@@ -1,3 +1,12 @@
+# at_distributor
+/system/bin/at_distributor        u:object_r:at_distributor_exec:s0
+
+# Marvell telephony launcher
+/system/bin/tel_launch\.sh  u:object_r:marvelltel_exec:s0
+
+# Marvell Wireless Daemon (enabled WiFi/BT/NFC/FM modem)
+/system/bin/MarvellWirelessDaemon   u:object_r:mwirelessd_exec:s0
+
 # Bluetooth
 /efs/bluetooth/bt_addr                                        u:object_r:bluetooth_efs_file:s0
 
