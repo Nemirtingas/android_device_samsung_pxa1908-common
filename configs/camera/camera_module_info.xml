@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CameraModule>
+
+    <ModuleConfig>
+        <!--
+             "auto" means use the first defined module as sensor's module name
+             "semco" means use name semco as sensor's module name
+             "samsung.sr544,semco" (RECOMMENDED) means if detected sensor is samsung.sr544, use semco as modelue name,
+             if detected sensor is not samsung.sr544, will use "auto" setting
+        -->
+        <BackModule>auto</BackModule>
+        <FrontModule>auto</FrontModule>
+    </ModuleConfig>
+
+    <!--
+         here is the complete module information, if any element is missed for each sensor,
+         the below value will be used, sensor informatin must be defined BEHIND it!
+    -->
+    <DefaultModuleInfo>
+        <VCM>dw9714</VCM>
+        <Flash>board</Flash>
+        <IsoFor1Gain>50</IsoFor1Gain>
+        <FocusParam>
+            <FocalLen35mm>31</FocalLen35mm>
+            <FocalLen>3.31</FocalLen>
+            <TouchWindow>240x320</TouchWindow>
+            <ContinuousWindow>330x440</ContinuousWindow>
+            <GoldenHyperPos>350</GoldenHyperPos>
+            <StartOffset>0</StartOffset>
+            <EndOffset>0</EndOffset>
+        </FocusParam>
+        <MeteringParam>
+            <!-- StatWin: left,top,right,bottom -->
+            <StatWin>0x20,0x20,0x20,0x28</StatWin>
+            <StatWinVideo>0x20,0x0136,0x20,0x0136</StatWinVideo>
+            <!-- CenterWin: left,top,width,height -->
+            <CenterWin>0x0288,0x0170,0x0510,0x04b8</CenterWin>
+            <CenterWinVideo>0x01a6,0x026e,0x0972,0x04b0</CenterWinVideo>
+            <WinWeight mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+            <WinWeight mode = "center_weighted">0x1,0x1,0x1,0x1,0x2,0x5,0x2,0x5,0xf,0x5,0x2,0x5,0x2</WinWeight>
+            <WinWeight mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeight>
+            <WinWeight mode = "matrix">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+            <WinWeightVideo mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeightVideo>
+            <WinWeightVideo mode = "center_weighted">0x1,0x1,0x1,0x1,0x2,0x5,0x2,0x5,0xf,0x5,0x2,0x5,0x2</WinWeightVideo>
+            <WinWeightVideo mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeightVideo>
+            <WinWeightVideo mode = "matrix">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeightVideo>
+        </MeteringParam>
+        <FlashParam>
+            <FlashMeanY>65.0</FlashMeanY>
+            <ExposureThreshQ4>0x1c500</ExposureThreshQ4>
+            <GainThreshQ16>0x54f1a</GainThreshQ16>
+            <StartGain>1.0</StartGain>
+            <EndGain>15.0</EndGain>
+            <CompRatio>1.0</CompRatio>
+            <VsTorchRatio>1.0</VsTorchRatio>
+            <MainFlashUseTableAWB>1</MainFlashUseTableAWB>
+            <MainFlashWB>215,128,128,189</MainFlashWB>
+        </FlashParam>
+        <OTPParam enabled = "false" />
+        <FNumber>2.2</FNumber>
+        <OutputProp>1</OutputProp>
+        <Resolution>2592x1944</Resolution>
+        <FullSizeFps>30.0</FullSizeFps>
+        <RawFormat>bggr16</RawFormat>
+        <SensorBinNum mode = "preview">1.0</SensorBinNum>
+        <SensorBinNum mode = "video">1.0</SensorBinNum>
+        <IDIBinNum mode = "preview">1.0</IDIBinNum>
+        <IDIBinNum mode = "video">1.0</IDIBinNum>
+    </DefaultModuleInfo>
+
+    <SensorInfo sensor = "samsung.sr544" facing = "back">
+        <ModuleInfo module = "semco">
+            <VCM>dw9804</VCM>
+            <FocusParam>
+                <TouchWindow>240x320</TouchWindow>
+                <ContinuousWindow>330x440</ContinuousWindow>
+                <GoldenHyperPos>350</GoldenHyperPos>
+            </FocusParam>
+            <MeteringParam>
+                <!-- StatWin: left,top,right,bottom -->
+                <StatWin>0x20,0x20,0x20,0x28</StatWin>
+                <StatWinVideo>0x20,0x0136,0x20,0x0136</StatWinVideo>
+                <!-- CenterWin: left,top,width,height -->
+                <CenterWin>0x0288,0x0170,0x0510,0x04b8</CenterWin>
+                <WinWeight mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+                <WinWeight mode = "center_weighted">0x1,0x1,0x1,0x1,0x4,0x4,0x4,0x4,0x8,0x4,0x4,0x4,0x4</WinWeight>
+                <WinWeight mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeight>
+                <WinWeight mode = "matrix">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+                <WinWeightVideo mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeightVideo>
+                <WinWeightVideo mode = "center_weighted">0x1,0x1,0x1,0x1,0x2,0x5,0x2,0x5,0xf,0x5,0x2,0x5,0x2</WinWeightVideo>
+                <WinWeightVideo mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeightVideo>
+                <WinWeightVideo mode = "matrix">0x1,0x1,0x1,0x1,0x4,0x4,0x4,0x4,0x8,0x4,0x4,0x4,0x4</WinWeightVideo>
+            </MeteringParam>
+            <FlashParam>
+                <VsTorchRatio>1.0</VsTorchRatio>
+            </FlashParam>
+            <OTPParam enabled = "true">
+                <NeedStreamOn>true</NeedStreamOn>
+                <!-- ApplyEntity: isp/sensor -->
+                <ApplyEntity>isp</ApplyEntity>
+                <!-- ProcessUnit: decode/merge/decode,merge -->
+                <ProcessUnit>merge</ProcessUnit>
+                <ModuleId>A05MFHK01</ModuleId>
+            </OTPParam>
+            <Resolution>2592x1944</Resolution>
+        </ModuleInfo>
+        <ModuleInfo module = "semco_xcover">
+            <VCM>dw9804</VCM>
+            <FocusParam>
+                <TouchWindow>240x320</TouchWindow>
+                <ContinuousWindow>330x440</ContinuousWindow>
+                <GoldenHyperPos>350</GoldenHyperPos>
+            </FocusParam>
+            <MeteringParam>
+                <!-- StatWin: left,top,right,bottom -->
+                <StatWin>0x20,0x20,0x20,0x28</StatWin>
+                <StatWinVideo>0x20,0x0136,0x20,0x0136</StatWinVideo>
+                <!-- CenterWin: left,top,width,height -->
+                <CenterWin>0x0144,0x00f3,0x0798,0x05b2</CenterWin>
+                <WinWeight mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+                <WinWeight mode = "center_weighted">0x1,0x1,0x1,0x1,0x2,0x5,0x2,0x5,0xf,0x5,0x2,0x5,0x2</WinWeight>
+                <WinWeight mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeight>
+                <WinWeight mode = "matrix">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+                <WinWeightVideo mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeightVideo>
+                <WinWeightVideo mode = "center_weighted">0x1,0x1,0x1,0x1,0x2,0x5,0x2,0x5,0xf,0x5,0x2,0x5,0x2</WinWeightVideo>
+                <WinWeightVideo mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeightVideo>
+                <WinWeightVideo mode = "matrix">0x1,0x1,0x1,0x1,0x4,0x4,0x4,0x4,0x8,0x4,0x4,0x4,0x4</WinWeightVideo>
+            </MeteringParam>
+            <FlashParam>
+                <VsTorchRatio>4.6</VsTorchRatio>
+            </FlashParam>
+            <OTPParam enabled = "true">
+                <NeedStreamOn>true</NeedStreamOn>
+                <!-- ApplyEntity: isp/sensor -->
+                <ApplyEntity>isp</ApplyEntity>
+                <!-- ProcessUnit: decode/merge/decode,merge -->
+                <ProcessUnit>merge</ProcessUnit>
+                <ModuleId>B05MFIA01</ModuleId>
+            </OTPParam>
+            <Resolution>2592x1944</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "samsung.s5k3l2" facing = "back">
+        <ModuleInfo module = "semco">
+            <VCM>dw9807</VCM>
+            <FocusParam>
+                <TouchWindow>384x512</TouchWindow>
+                <ContinuousWindow>522x696</ContinuousWindow>
+                <GoldenHyperPos>350</GoldenHyperPos>
+                <StartOffset>-50</StartOffset>
+                <EndOffset>150</EndOffset>
+            </FocusParam>
+            <MeteringParam>
+                <!-- StatWin: left,top,right,bottom -->
+                <StatWin>0x20,0x20,0x20,0x20</StatWin>
+                <StatWinVideo>0x20,0x01ee,0x20,0x01ee</StatWinVideo>
+                <!-- CenterWin: left,top,width,height -->
+                <CenterWin>0x0210,0x0188,0x0bf0,0x0910</CenterWin>
+            </MeteringParam>
+            <FlashParam>
+                <FlashMeanY>49.0</FlashMeanY>
+                <ExposureThreshQ4>0x16740</ExposureThreshQ4>
+                <GainThreshQ16>0xff000</GainThreshQ16>
+                <VsTorchRatio>3.5</VsTorchRatio>
+                <MainFlashUseTableAWB>1</MainFlashUseTableAWB>
+                <MainFlashWB>222,128,128,183</MainFlashWB>
+            </FlashParam>
+            <OTPParam enabled = "true">
+                <NeedStreamOn>false</NeedStreamOn>
+                <!-- ApplyEntity: isp/sensor -->
+                <ApplyEntity>isp</ApplyEntity>
+                <!-- ProcessUnit: decode/merge/decode,merge -->
+                <ProcessUnit>merge</ProcessUnit>
+                <ModuleId>H13MLIA00,T13MLIA00</ModuleId>
+            </OTPParam>
+            <Resolution>4128x3096</Resolution>
+            <RawFormat>grbg16</RawFormat>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "ovt.ov13850" facing = "back">
+        <ModuleInfo module = "sunny">
+            <Resolution>3264x2448</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "ovt.ov13850r2a" facing = "back">
+        <ModuleInfo module = "sunny">
+            <FocusParam>
+                <TouchWindow>384x512</TouchWindow>
+                <ContinuousWindow>522x696</ContinuousWindow>
+            </FocusParam>
+            <Resolution>4224x3136</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "imx219" facing = "back">
+        <ModuleInfo module = "semco">
+            <Resolution>3264x2448</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "ovt.ov5648" facing = "back">
+        <ModuleInfo module = "sunny">
+            <Resolution>2592x1944</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "ovt.ov5670" facing = "back">
+        <ModuleInfo module = "sunny">
+            <Resolution>2592x1944</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "ovt.ov8858r2a" facing = "back">
+        <ModuleInfo module = "qtech">
+            <Resolution>3264x2448</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "ssa.s5k5e3" facing = "front">
+         <ModuleInfo module = "semco">
+            <VCM>none</VCM>
+            <Flash>none</Flash>
+            <FocusParam>
+            	<FocalLen35mm>23</FocalLen35mm>
+                <FocalLen>1.92</FocalLen>
+                <TouchWindow>240x320</TouchWindow>
+                <ContinuousWindow>330x440</ContinuousWindow>
+            </FocusParam>
+         <MeteringParam>
+                <!-- StatWin: left,top,right,bottom -->
+                <StatWin>0x10,0x0c,0x10,0x0c</StatWin>
+                <StatWinVideo>0x10,0xfc,0x10,0xfc</StatWinVideo>
+                <!-- CenterWin: left,top,width,height -->
+                <CenterWin>0x0150,0x00fc,0x0780,0x05a0</CenterWin>
+            <CenterWinVideo>0x0150,0x01ec,0x0780,0x03c0</CenterWinVideo>
+            <WinWeight mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+                <WinWeight mode = "center_weighted">0x1,0x1,0x1,0x1,0x2,0x4,0x2,0x4,0xa,0x4,0x2,0x4,0x2</WinWeight>
+                <WinWeight mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeight>
+                <WinWeight mode = "matrix">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeight>
+                <WinWeightVideo mode = "average">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeightVideo>
+                <WinWeightVideo mode = "center_weighted">0x1,0x1,0x1,0x1,0x2,0x4,0x2,0x4,0xa,0x4,0x2,0x4,0x2</WinWeightVideo>
+                <WinWeightVideo mode = "spot">0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0</WinWeightVideo>
+                <WinWeightVideo mode = "matrix">0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1</WinWeightVideo>
+         </MeteringParam>
+            <Resolution>2576x1932</Resolution>
+            <RawFormat>gbrg16</RawFormat>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "ovt.ov2680" facing = "front">
+        <ModuleInfo module = "sunny">
+            <Resolution>1600x1200</Resolution>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "hynix.hi551" facing = "back">
+        <ModuleInfo module = "kerr">
+            <Resolution>2592x1944</Resolution>
+            <RawFormat>gbrg16</RawFormat>
+        </ModuleInfo>
+    </SensorInfo>
+
+    <SensorInfo sensor = "samsung.s5k4h5" facing = "back">
+        <ModuleInfo module = "kerr">
+            <VCM>dw9807</VCM>
+            <MeteringParam>
+                <!-- StatWin: left,top,right,bottom -->
+                <StatWin>0x10,0x0c,0x10,0x0c</StatWin>
+                <StatWinVideo>0x10,0x013e,0x10,0x013e</StatWinVideo>
+                <!-- CenterWin: left,top,width,height -->
+                <CenterWin>0x01a7,0x013d,0x0971,0x0715</CenterWin>
+            <CenterWinVideo>0x01a6,0x026e,0x0972,0x04b0</CenterWinVideo>
+            </MeteringParam>
+            <FocusParam>
+                <FocalLen>3.3</FocalLen>
+                <TouchWindow>300x400</TouchWindow>
+                <ContinuousWindow>420x560</ContinuousWindow>
+                <GoldenHyperPos>340</GoldenHyperPos>
+                <StartOffset>-60</StartOffset>
+                <EndOffset>150</EndOffset>
+            </FocusParam>
+            <FlashParam>
+                 <FlashMeanY>31.0</FlashMeanY>
+                 <ExposureThreshQ4>0x11760</ExposureThreshQ4>
+                 <GainThreshQ16>0xff000</GainThreshQ16>
+                 <StartGain>0.0</StartGain>
+                 <EndGain>0.0</EndGain>
+                 <CompRatio>0.73</CompRatio>
+                 <VsTorchRatio>3.6</VsTorchRatio>
+                 <MainFlashUseTableAWB>1</MainFlashUseTableAWB>
+                 <MainFlashWB>182,128,128,185</MainFlashWB>
+             </FlashParam>
+            <OTPParam enabled = "true">
+                <NeedStreamOn>false</NeedStreamOn>
+                <!-- ApplyEntity: isp/sensor -->
+                <ApplyEntity>isp</ApplyEntity>
+                <!-- ProcessUnit: decode/merge/decode,merge -->
+                <ProcessUnit>merge</ProcessUnit>
+                <ModuleId>J08MLIA00</ModuleId>
+            </OTPParam>
+            <Resolution>3264x2448</Resolution>
+            <RawFormat>grbg16</RawFormat>
+        </ModuleInfo>
+    </SensorInfo>
+
+</CameraModule>

@@ -1,0 +1,3 @@
+ro.telephony.ril.config=simactivation
+
+cm.updater.uri=https://serverprive.serveftp.com/LineageOSOTA/api

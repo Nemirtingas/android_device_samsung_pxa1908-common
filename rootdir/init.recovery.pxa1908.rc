@@ -1,0 +1,8 @@
+on init
+    write /proc/sys/kernel/hung_task_timeout_secs 0
+    write /sys/block/mmcblk0boot0/force_ro 0
+    write /sys/block/mmcblk0boot1/force_ro 0
+
+on fs
+    symlink /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name /dev/block/platform/soc.2/by-name
+
