@@ -21,7 +21,7 @@ include $(COMMON_PATH)/board/*.mk
 
 TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
 
-# Enabling this resolv zygote's descriptor table, but ROM doesn't boot...
+# Board specific headers
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
 BOARD_PROVIDES_MKBOOTIMG := true
@@ -43,30 +43,12 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_pxa1908
-TARGET_UNIFIED_DEVICE := true
 
-# Display & Graphics
-USE_OPENGL_RENDERER := true
-ENABLE_WEBGL := true
-LOCAL_CFLAGS += -DSK_SUPPORT_LEGACY_SETCONFIG
-BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl/egl.cfg
-BOARD_HAVE_PIXEL_FORMAT_INFO := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-BOARD_ENABLE_MULTI_DISPLAYS := true
-BOARD_USE_VIVANTE_GRALLOC := true
-HDMI_SUPPORT_3D := true
-# Enable Marvell interface in SurfaceFlinger
-MRVL_INTERFACE_ANIMATION := true
-# Launch DMS in SurfaceFlinger process
-MRVL_LAUNCH_DMS_IN_SURFACEFLINGER := true
+ifneq ($(BOARD_FRAMEBUFFER_FORCE_FORMAT),)
+LOCAL_CFLAGS += -DFRAMEBUFFER_FORCE_FORMAT=$(BOARD_FRAMEBUFFER_FORCE_FORMAT)
+endif
 
-# Flags
-LOCAL_CFLAGS += -DMRVL_HARDWARE
-LOCAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-LOCAL_CFLAGS += -DNO_SECURE_DISCARD
+#BOARD_EGL_NEEDS_HANDLE_VALUE := true
 
-# Webkit
-ENABLE_WEBGL := true
-BOARD_USE_SKIA_LCDTEXT := true
-BOARD_NEEDS_CUTILS_LOG := true
-BOARD_USES_HWCOMPOSER := true
+BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
+-include device/marvell/sepolicy/sepolicy.mk

@@ -240,8 +240,8 @@ static void power_set_interactive_ext(int on) {
         device_control = (char*)malloc(strlen(TS_POWER[i]) + strlen("/control") + 1);
         strcpy(device_control, TS_POWER[i]);
         strcat(device_control, "/control");
-        sysfs_write_str(device_control, on ? "on" : "auto");
-        wait_pm_changed(TS_POWER[i], on);
+        //sysfs_write_str(device_control, on ? "on" : "auto");
+        //wait_pm_changed(TS_POWER[i], on);
     }
 };
 

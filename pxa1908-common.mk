@@ -134,11 +134,14 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml
+    $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media/somxreg.conf:system/etc/somxreg.conf
 
 # OMX
-#PRODUCT_PACKAGES += \
-    libstagefrighthw
+PRODUCT_PACKAGES += \
+    libstagefright_soft_h264dec \
+    libstagefright_soft_h264enc \
+    libstagefrighthw \
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -209,10 +212,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpower_FC.bin:system/etc/firmware/mrvl/txpower_FC.bin \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpwrlimit_cfg.bin:system/etc/firmware/mrvl/txpwrlimit_cfg.bin
 
-# FMRadio
-PRODUCT_PACKAGES += \
-    FMRadio
-
 # XML
 PRODUCT_PACKAGES += \
     libxml2
@@ -227,9 +226,21 @@ PRODUCT_PACKAGES += \
     init.recovery.pxa1908.rc \
     ueventd.pxa1908.rc
 
-# Torch
 PRODUCT_PACKAGES += \
-    Torch
+    libgpucsc \
+
+# NFC
+#PRODUCT_PACKAGES += \
+    Nfc \
+    Nfc-nci \
+    Tag \
+    libnfc-nci \
+
+# FMRadio
+PRODUCT_PACKAGES += \
+    FMRadio \
+    Torch \
+    Snap \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg

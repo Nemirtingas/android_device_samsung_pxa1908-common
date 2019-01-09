@@ -1,0 +1,26 @@
+# at_distributor
+/system/bin/at_distributor        u:object_r:at_distributor_exec:s0
+
+# Runtime compress cache daemon
+/system/bin/rtccd3                u:object_r:rtcc_exec:s0
+
+# Marvell telephony launcher
+/system/bin/tel_launch\.sh        u:object_r:marvelltel_exec:s0
+/system/bin/run_composite\.sh     u:object_r:marvelltel_exec:s0
+
+# Marvell Wireless Daemon (enabled WiFi/BT/NFC/FM modem)
+/system/bin/MarvellWirelessDaemon u:object_r:mwirelessd_exec:s0
+
+# Marvell gps daemon
+/system/bin/gpslpm_srv            u:object_r:gpslpm_srv_exec:s0
+
+# Bluetooth
+/efs/bluetooth/bt_addr                                        u:object_r:bluetooth_efs_file:s0
+
+# NFC
+/dev/sec-nfc                                                    u:object_r:nfc_device:s0
+
+# Sensors
+/dev/accelerometer_sensor       u:object_r:sensors_device:s0
+/dev/magnetic_sensor            u:object_r:sensors_device:s0
+/dev/proximity_sensor           u:object_r:sensors_device:s0
