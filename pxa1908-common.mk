@@ -38,12 +38,13 @@ PRODUCT_PACKAGES += \
     audio.primary.mrvl \
     audio.usb.default
 
+PRODUCT_PACKAGES += libstlport
+
 # Camera
 ############
 ##  WIP  ###
 ############
 #PRODUCT_PACKAGES += \
-    libstlport \
     camera.stock \
     camera.mrvl \
     camera_client
@@ -230,9 +231,15 @@ PRODUCT_PACKAGES += \
     init.recovery.pxa1908.rc \
     ueventd.pxa1908.rc
 
+PRODCT_PACKAGES += \
+    libgpucsc \
+
 # Torch
 PRODUCT_PACKAGES += \
     Torch
+
+#PRODUCT_PACKAGES += \
+    Snap
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg

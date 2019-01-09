@@ -6,7 +6,6 @@ import init.wifi.rc
 
 on early-init
     export LD_SHIM_LIBS "/system/lib/libui.so|libui_shim.so:/system/lib/libutils.so|libutils_shim.so"
-
 on init
     symlink /dev/block/platform/soc.2/d4200000.axi/d4281000.sdh/by-name /dev/block/platform/soc.2/by-name
 
