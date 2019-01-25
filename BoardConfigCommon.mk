@@ -36,7 +36,7 @@ BOARD_CUSTOM_BOOTIMG_MK := hardware/marvell/bootimage/mkbootimg.mk
 #BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
 
 # Custom RIL class
-BOARD_RIL_CLASS := ../../../$(COMMON_PATH)/ril
+BOARD_RIL_CLASS := ../../../$(COMMON_PATH)/ril_class
 
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -50,5 +50,6 @@ BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
 # Display & Graphics
 BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl/egl.cfg
-USE_OPENGL_RENDERER := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+
+BOARD_USE_MARVELL_ION := true
+BOARD_USE_MARVELL_AUDIOUTILS := true

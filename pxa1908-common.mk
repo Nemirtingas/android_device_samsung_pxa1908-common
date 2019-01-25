@@ -198,7 +198,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     MarvellWirelessDaemon \
     hostapd \
-    wpa_supplicant
+    wpa_supplicant \
+    wpa_supplicant.conf
 
 # Bluetooth & Wifi Firmware
 PRODUCT_COPY_FILES += \
@@ -215,7 +216,8 @@ PRODUCT_COPY_FILES += \
 
 # FMRadio
 PRODUCT_PACKAGES += \
-    FMRadio
+    FMRadio \
+    libfmjni
 
 # XML
 PRODUCT_PACKAGES += \

@@ -20,6 +20,7 @@
 #define CAMERA_PARAMETERS_EXTRA_C \
 const char CameraParameters::KEY_SUPPORTED_ISO_MODES[]    = "iso-mode-values"; \
 const char CameraParameters::PIXEL_FORMAT_YUV420P_I420[]  = "yuv420p-i420"; \
+const char CameraParameters::PIXEL_FORMAT_YUV420SP_NV21[] = "nv21"; \
 const char CameraParameters::PIXEL_FORMAT_YUV420SP_NV12[] = "yuv420sp-nv12"; \
 const char CameraParameters::PIXEL_FORMAT_YUV422I_UYVY[]  = "yuv422i-uyvy"; \
 const char CameraParameters::PIXEL_FORMAT_YUV422P[]       = "yuv422p"; \
@@ -94,6 +95,7 @@ const char CameraParameters::KEY_VIDEO_TNR[]              = "video-tnr";
 #define CAMERA_PARAMETERS_EXTRA_H \
     static const char KEY_SUPPORTED_ISO_MODES[]; \
     static const char PIXEL_FORMAT_YUV420P_I420[]; \
+    static const char PIXEL_FORMAT_YUV420SP_NV21[]; \
     static const char PIXEL_FORMAT_YUV420SP_NV12[]; \
     static const char PIXEL_FORMAT_YUV422I_UYVY[]; \
     static const char PIXEL_FORMAT_YUV422P[]; \

@@ -1,5 +1,7 @@
 # at_distributor
 /system/bin/at_distributor        u:object_r:at_distributor_exec:s0
+# at_router
+/system/bin/at_router             u:object_r:at_router_exec:s0
 
 # Runtime compress cache daemon
 /system/bin/rtccd3                u:object_r:rtcc_exec:s0
