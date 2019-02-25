@@ -232,10 +232,8 @@ PRODUCT_PACKAGES += \
 
 # NFC
 #PRODUCT_PACKAGES += \
-    Nfc \
     Nfc-nci \
     Tag \
-    libnfc-nci \
 
 # FMRadio
 PRODUCT_PACKAGES += \
