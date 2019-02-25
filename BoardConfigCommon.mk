@@ -32,6 +32,8 @@ BOARD_MKIMAGE_MRVL := true
 
 BOARD_CUSTOM_BOOTIMG_MK := hardware/marvell/bootimage/mkbootimg.mk
 
+BOARD_USE_MARVELL_ION := true
+
 # CMHW
 #BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
 
