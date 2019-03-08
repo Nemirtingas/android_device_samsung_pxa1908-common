@@ -31,12 +31,13 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.primary.default.so \
-    audio_policy.default.so \
+    audio.primary.default \
+    audio_policy.default \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.primary.mrvl \
-    audio.usb.default
+    audio.usb.default \
+    libvcm \
 
 # Camera
 ############
@@ -44,6 +45,7 @@ PRODUCT_PACKAGES += \
 ############
 PRODUCT_PACKAGES += \
     libstlport \
+    vndbinder \
     camera.stock \
     camera.mrvl \
     camera_client
@@ -141,7 +143,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libstagefright_soft_h264dec \
     libstagefright_soft_h264enc \
-    libstagefrighthw \
+    #libstagefrighthw \
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -184,6 +186,7 @@ PRODUCT_PACKAGES += \
     gps.mrvl
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/gps/gnss_ulc1.bin:system/etc/gnss_ulc1.bin \
     $(LOCAL_PATH)/configs/gps/mrvl_gps_platform.conf:system/etc/mrvl_gps_platform.conf \
     $(LOCAL_PATH)/configs/gps/mrvl_agps_default.conf:system/etc/mrvl_agps_default.conf \
@@ -239,7 +242,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     FMRadio \
     Torch \
-    Snap \
+    #Snap \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg
