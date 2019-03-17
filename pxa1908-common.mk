@@ -216,6 +216,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpower_FC.bin:system/etc/firmware/mrvl/txpower_FC.bin \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpwrlimit_cfg.bin:system/etc/firmware/mrvl/txpwrlimit_cfg.bin
 
+# RIL
+PRODUCT_PACKAGES += \
+    $(LOCAL_PATH)/configs/ril/plmn_se13.bin:system/etc/plmn_se13.bin
+
 # XML
 PRODUCT_PACKAGES += \
     libxml2
