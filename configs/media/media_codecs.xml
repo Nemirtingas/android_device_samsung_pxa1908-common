@@ -15,7 +15,6 @@
 -->
 <MediaCodecs>
     <Encoders>
-        <!--
         <MediaCodec name="OMX.MARVELL.VIDEO.HW.CODA7542ENCODER" >
             <Type name="video/mp4v-es" >
                 <Limit name="size" min="64x64" max="1920x1088" />
@@ -30,7 +29,6 @@
             </Type>
             <Quirk name="avoid-memcpy-input-recording-frames"/>
         </MediaCodec>
-        -->
     </Encoders>
     <Decoders>
         <!--
