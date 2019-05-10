@@ -37,7 +37,6 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.primary.mrvl \
     audio.usb.default \
-    libvcm \
 
 # Camera
 ############
@@ -45,7 +44,7 @@ PRODUCT_PACKAGES += \
 ############
 PRODUCT_PACKAGES += \
     libstlport \
-    vndbinder \
+    libvndbnd \
     camera.stock \
     camera.mrvl \
     camera_client
@@ -143,7 +142,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libstagefright_soft_h264dec \
     libstagefright_soft_h264enc \
-    #libstagefrighthw \
+    libstagefrighthw \
+    libMrvlOmx \
 
 # Shims
 PRODUCT_PACKAGES += \
