@@ -47,7 +47,7 @@ PRODUCT_PACKAGES += \
     libvndbnd \
     camera.stock \
     camera.mrvl \
-    camera_client
+    camera_client \
     Torch \
     #Snap \
 
