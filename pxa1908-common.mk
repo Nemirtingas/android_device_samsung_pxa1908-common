@@ -249,6 +249,7 @@ PRODUCT_PACKAGES += \
     FMRadio \
     libfmjni \
     libfmhal \
+    libMarvellWireless \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/fm/mrvlfm-amon.cfg:system/etc/mrvlfm-amon.cfg \
