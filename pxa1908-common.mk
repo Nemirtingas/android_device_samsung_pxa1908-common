@@ -48,6 +48,8 @@ PRODUCT_PACKAGES += \
     camera.stock \
     camera.mrvl \
     camera_client
+    Torch \
+    #Snap \
 
 # Data patterns
 PRODUCT_COPY_FILES += \
@@ -245,8 +247,12 @@ PRODUCT_PACKAGES += \
 # FMRadio
 PRODUCT_PACKAGES += \
     FMRadio \
-    Torch \
-    #Snap \
+    libfmjni \
+    libfmhal \
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/fm/mrvlfm-amon.cfg:system/etc/mrvlfm-amon.cfg \
+    $(LOCAL_PATH)/configs/fm/mrvlfm-horus.cfg:system/etc/mrvlfm-horus.cfg \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/egl/gfx.cfg:system/etc/gfx.cfg

@@ -1,0 +1,1 @@
+BOARD_USES_MRVL_HARDWARE := true
