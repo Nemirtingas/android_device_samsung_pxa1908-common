@@ -44,10 +44,15 @@ PRODUCT_PACKAGES += libstlport
 ############
 ##  WIP  ###
 ############
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
+    vndbinder \
+    libgpucsc \
     camera.stock \
     camera.mrvl \
     camera_client
+
+
+PRODUCT_PACKAGES += vndui
 
 # Data patterns
 PRODUCT_COPY_FILES += \

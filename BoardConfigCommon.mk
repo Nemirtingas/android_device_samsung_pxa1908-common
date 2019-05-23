@@ -51,7 +51,7 @@ BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 # Display & Graphics
 BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl/egl.cfg
 
-BOARD_USE_MARVELL_ION := true
+#BOARD_USE_MARVELL_ION := true
 BOARD_USE_MARVELL_AUDIOUTILS := true
 
 BOARD_GRAPHICS_ENABLE_3D := true
