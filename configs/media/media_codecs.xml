@@ -13,10 +13,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <MediaCodecs>
     <Encoders>
-<!--
         <MediaCodec name="OMX.MARVELL.VIDEO.HW.CODA7542ENCODER" >
             <Type name="video/mp4v-es" >
                 <Limit name="size" min="64x64" max="1920x1088" />
@@ -31,10 +29,9 @@
             </Type>
             <Quirk name="avoid-memcpy-input-recording-frames"/>
         </MediaCodec>
--->
     </Encoders>
     <Decoders>
-<!--
+        <!--
         <MediaCodec name="OMX.MARVELL.VIDEO.HW.CODA7542DECODER" >
             <Type name="video/mp4v-es" />
             <Type name="video/3gpp" />
@@ -49,9 +46,9 @@
             <Feature name="secure-playback" required="true" />
             <Quirk name="video-controller-check-enable" />
         </MediaCodec>
--->
+        -->
         <!-- Video Software -->
-<!--
+        <!--
         <MediaCodec name="OMX.SEC.h263.sw.dec" type="video/3gpp" >
             <Quirk name="decoder-ignores-streamcorrupt-error" />
             </MediaCodec>
@@ -73,9 +70,9 @@
             <Limit name="size" min="64x64" max="2048x2048" />
             <Feature name="adaptive-playback" />
         </MediaCodec>       
--->
+        -->
         <!-- Audio Software  -->
-<!--
+        <!--
         <MediaCodec name="OMX.SEC.amr.dec">
             <Type name="audio/amr-wb" />
             <Type name="audio/3gpp"  />
@@ -101,7 +98,7 @@
             <Quirk name="needs-flush-before-disable" />
             <Quirk name="decoder-ignores-streamcorrupt-error" />
         </MediaCodec>
--->
+        -->
     </Decoders>
 
     <Include href="media_codecs_google_audio.xml" />

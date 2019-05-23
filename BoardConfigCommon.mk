@@ -21,6 +21,11 @@ include $(COMMON_PATH)/board/*.mk
 
 TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
 
+# RIL
+BOARD_PROVIDES_LIBRIL := true
+ANDROID_MULTI_SIM := true
+ANDROID_SIM_COUNT_2 := true
+
 # Board specific headers
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
@@ -31,6 +36,8 @@ BOARD_PROVIDES_MKIMAGE := true
 BOARD_MKIMAGE_MRVL := true
 
 BOARD_CUSTOM_BOOTIMG_MK := hardware/marvell/bootimage/mkbootimg.mk
+
+BOARD_USE_MARVELL_ION := true
 
 # CMHW
 #BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
@@ -47,11 +54,3 @@ TARGET_UNIFIED_DEVICE := true
 
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 -include device/marvell/sepolicy/sepolicy.mk
-
-# Display & Graphics
-BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl/egl.cfg
-
-#BOARD_USE_MARVELL_ION := true
-BOARD_USE_MARVELL_AUDIOUTILS := true
-
-BOARD_GRAPHICS_ENABLE_3D := true

@@ -31,12 +31,12 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.primary.default.so \
-    audio_policy.default.so \
+    audio.primary.default \
+    audio_policy.default \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.primary.mrvl \
-    audio.usb.default
+    audio.usb.default \
 
 PRODUCT_PACKAGES += libstlport
 
@@ -45,11 +45,13 @@ PRODUCT_PACKAGES += libstlport
 ##  WIP  ###
 ############
 PRODUCT_PACKAGES += \
-    vndbinder \
-    libgpucsc \
+    libstlport \
+    libvndbnd \
     camera.stock \
     camera.mrvl \
-    camera_client
+    camera_client \
+    Torch \
+    #Snap \
 
 
 PRODUCT_PACKAGES += vndui
@@ -147,7 +149,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libstagefright_soft_h264dec \
     libstagefright_soft_h264enc \
-#    libstagefrighthw \
+    libstagefrighthw \
+    libMrvlOmx \
 
 # Shims
 PRODUCT_PACKAGES += \
@@ -190,6 +193,7 @@ PRODUCT_PACKAGES += \
     gps.mrvl
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/gps/gnss_ulc1.bin:system/etc/gnss_ulc1.bin \
     $(LOCAL_PATH)/configs/gps/mrvl_gps_platform.conf:system/etc/mrvl_gps_platform.conf \
     $(LOCAL_PATH)/configs/gps/mrvl_agps_default.conf:system/etc/mrvl_agps_default.conf \
@@ -220,10 +224,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpower_FC.bin:system/etc/firmware/mrvl/txpower_FC.bin \
     $(LOCAL_PATH)/configs/firmware/mrvl/txpwrlimit_cfg.bin:system/etc/firmware/mrvl/txpwrlimit_cfg.bin
 
-# FMRadio
+# RIL
 PRODUCT_PACKAGES += \
-    FMRadio \
-    libfmjni
+    $(LOCAL_PATH)/configs/ril/plmn_se13.bin:system/etc/plmn_se13.bin
 
 # XML
 PRODUCT_PACKAGES += \
@@ -239,12 +242,24 @@ PRODUCT_PACKAGES += \
     init.recovery.pxa1908.rc \
     ueventd.pxa1908.rc
 
-PRODCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     libgpucsc \
 
-# Torch
+# NFC
+#PRODUCT_PACKAGES += \
+    Nfc-nci \
+    Tag \
+
+# FMRadio
 PRODUCT_PACKAGES += \
-    Torch
+    FMRadio \
+    libfmjni \
+    libfmhal \
+    libMarvellWireless \
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/fm/mrvlfm-amon.cfg:system/etc/mrvlfm-amon.cfg \
+    $(LOCAL_PATH)/configs/fm/mrvlfm-horus.cfg:system/etc/mrvlfm-horus.cfg \
 
 #PRODUCT_PACKAGES += \
     Snap

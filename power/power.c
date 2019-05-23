@@ -40,9 +40,10 @@ const char* TS_PATHS[] =
     /* Don't know what thoses devices are, but disable them too :) */
     "/sys/devices/platform/aksm/power",
     "/sys/bus/i2c/devices/3-0020/power",
-    "/sys/class/graphics/fb0/device/power",
+    "/sys/class/graphics/fb0/device/power",                   // screen framebuffer
+    "/sys/class/graphics/fb1/device/power",                   // screen overlay framebuffer
     "/sys/bus/platform/drivers/mmp-vdma/d4209000.vdma/power",
-    "/sys/bus/platform/drivers/mmp-disp/mmp-disp/power",
+    "/sys/bus/platform/drivers/mmp-disp/mmp-disp/power",      // screen display
     NULL,
 };
 
@@ -58,7 +59,7 @@ static int is_init = 0;
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 static int boostpulse_fd = -1;
 
-static int current_power_profile = -1;
+static int current_power_profile = PROFILE_BALANCED;
 static int requested_power_profile = -1;
 
 static int sysfs_write_str(char *path, char *s)
@@ -317,7 +318,8 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
     char buf[80];
     int len;
 
-    switch (hint) {
+    switch (hint)
+    {
     case POWER_HINT_INTERACTION:
         if (!is_profile_valid(current_power_profile)) {
             ALOGD("%s: no power profile selected yet", __func__);
