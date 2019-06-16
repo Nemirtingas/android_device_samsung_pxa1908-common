@@ -212,6 +212,7 @@ static SocketListenParam s_ril_param_socket2;
 static pthread_mutex_t s_pendingRequestsMutex_socket2  = PTHREAD_MUTEX_INITIALIZER;
 static pthread_mutex_t s_writeMutex_socket2            = PTHREAD_MUTEX_INITIALIZER;
 static RequestInfo *s_pendingRequests_socket2          = NULL;
+
 #endif
 
 #if (SIM_COUNT >= 3)

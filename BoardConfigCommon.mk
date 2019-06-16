@@ -23,8 +23,7 @@ TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true
-ANDROID_MULTI_SIM := true
-ANDROID_SIM_COUNT_2 := true
+SIM_COUNT := 2
 
 # Board specific headers
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include

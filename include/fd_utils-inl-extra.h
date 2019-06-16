@@ -15,10 +15,10 @@
  */
 
 // galcore doesn't support openning or reoppening.
-/*
+
 #define PATH_WHITELIST_EXTRA_H \
     "/dev/graphics/galcore",
-*/
+
 // Overload this file in your device specific config if you need
 // to add extra whitelisted paths.
 // WARNING: Only use this if necessary. Custom inits should be
