@@ -20,6 +20,8 @@ allow kernel self:capability mknod;
 allow kernel self:capability fsetid;
 allow kernel device:chr_file create;
 allow kernel device:chr_file setattr;
+allow kernel device:blk_file create;
+allow kernel device:blk_file setattr;
 
 #============= marvelltel ==============
 allow marvelltel shell_exec:file getattr;
@@ -64,6 +66,7 @@ allow bootanim mediaserver_service:service_manager find;
 binder_call(mediaserver, bootanim);
 
 #============= zygote ==============
+allow zygote graphics_device:dir search;
 allow zygote gpu_device:chr_file { read write };
 allow zygote gpu_device:chr_file open;
 allow zygote gpu_device:chr_file ioctl;
