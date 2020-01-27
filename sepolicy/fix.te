@@ -1,0 +1,79 @@
+#============= audioserver ==============
+allow audioserver system_file:file execmod;
+allow audioserver unlabeled:dir search;
+allow audioserver unlabeled:file { getattr open read };
+allow audioserver system_data_file:dir { add_name write };
+
+#============= gpslpm_srv ==============
+allow gpslpm_srv shell_exec:file execute;
+allow gpslpm_srv shell_exec:file { open read };
+allow gpslpm_srv system_data_file:dir write;
+
+#============= init ==============
+allow init debugfs:file write;
+
+#============= kernel ==============
+allow kernel device:dir write;
+allow kernel device:dir add_name;
+allow kernel self:capability { chown fowner };
+allow kernel self:capability mknod;
+allow kernel self:capability fsetid;
+allow kernel device:chr_file create;
+allow kernel device:chr_file setattr;
+
+#============= marvelltel ==============
+allow marvelltel shell_exec:file getattr;
+
+#============= mwirelessd ==============
+allow mwirelessd efs_file:dir search;
+allow mwirelessd init:unix_stream_socket connectto;
+
+#============= rtcc ==============
+allow rtcc shell_exec:file getattr;
+allow rtcc shell_exec:file read;
+allow rtcc proc:file write;
+allow rtcc sysfs:file write;
+allow rtcc sysfs_zram:dir search;
+allow rtcc system_file:file execute_no_trans;
+allow rtcc toolbox_exec:file getattr;
+allow rtcc swap_block_device:blk_file { getattr write };
+allow rtcc sysfs:file setattr;
+allow rtcc sysfs_zram:file write;
+allow rtcc toolbox_exec:file execute;
+allow rtcc sysfs_zram:file open;
+allow rtcc toolbox_exec:file { open read };
+
+#============= system_server ==============
+allow system_server efs_file:dir search;
+allow system_server shell_exec:file execute;
+
+#============= ueventd ==============
+allow ueventd sysfs_camera:file write;
+allow ueventd sysfs_camera:file open;
+
+#============= mediaserver ==============
+#allow mediaserver device:chr_file { read };
+
+#============= bootanim ==============
+allow bootanim graphics_device:dir search;
+
+# allow bootanim to binder mediaserver
+binder_call(bootanim, mediaserver);
+allow bootanim mediaserver_service:service_manager find;
+# allow mediaserver to communicate with bootanim
+binder_call(mediaserver, bootanim);
+
+#============= zygote ==============
+allow zygote gpu_device:chr_file { read write };
+allow zygote gpu_device:chr_file open;
+allow zygote gpu_device:chr_file ioctl;
+allow zygote gpu_device:chr_file getattr;
+
+#============= system_server ==============
+allow system_server efs_file:dir getattr;
+
+#============= vold ==============
+allow vold efs_file:dir { ioctl open read };
+
+#============= init ==============
+allow init system_file:system module_load;

@@ -27,9 +27,10 @@
 // skips conn update at conn completion
 #define BTA_BLE_SKIP_CONN_UPD FALSE
 
-#define BTA_GATT_INCLUDED FALSE
-#define BLE_INCLUDED FALSE
-
 /* Defined if the kernel does not have support for CLOCK_BOOTTIME_ALARM */
 #define KERNEL_MISSING_CLOCK_BOOTTIME_ALARM TRUE
+
+//#define BTA_GATT_INCLUDED FALSE
+//#define BLE_INCLUDED FALSE
+
 #endif

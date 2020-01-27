@@ -28,6 +28,10 @@
 # NFC
 /dev/sec-nfc                                                    u:object_r:nfc_device:s0
 
+# Galcore
+/dev/galcore u:object_r:gpu_device:s0
+/dev/graphics/galcore u:object_r:gpu_device:s0
+
 # Sensors
 /dev/accelerometer_sensor       u:object_r:sensors_device:s0
 /dev/magnetic_sensor            u:object_r:sensors_device:s0
