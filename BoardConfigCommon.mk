@@ -52,5 +52,7 @@ EXTENDED_FONT_FOOTPRINT := true
 TARGET_INIT_VENDOR_LIB := libinit_pxa1908
 TARGET_UNIFIED_DEVICE := true
 
+#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 -include device/marvell/sepolicy/sepolicy.mk
