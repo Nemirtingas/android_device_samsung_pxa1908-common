@@ -67,6 +67,8 @@ extern "C" {
 
 static int camera_get_number_of_cameras()
 {
+    return 0;
+
     int res = 0;
     // Make sure we don't call this in the same time as other threads
     pthread_mutex_lock(&camera_mutex);
@@ -83,12 +85,14 @@ static int camera_get_number_of_cameras()
 
 static int camera_get_camera_info(int id, struct camera_info* info)
 {
-    return camera_mrvl.camera_get_camera_info(id, info);
+    //return camera_mrvl.camera_get_camera_info(id, info);
+    return -EINVAL;
 }
 
 static int camera_device_open(const hw_module_t* mod, const char* name, hw_device_t** dev)
 {
-    return camera_mrvl.camera_open_dev(mod, name, dev);
+    //return camera_mrvl.camera_open_dev(mod, name, dev);
+    return -EINVAL;
 }
 
 static hw_module_methods_t gCameraModuleMethods = {
