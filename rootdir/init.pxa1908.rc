@@ -267,13 +267,6 @@ on early-boot
     setrlimit 8 16777216 16777216
 
 on boot
-    insmod /system/lib/modules/galcore.ko
-    insmod /system/lib/modules/mlan8777.ko
-    insmod /system/lib/modules/mbt8777.ko
-    insmod /system/lib/modules/sd8777.ko
-    insmod /system/lib/modules/sd8x_rfkill.ko
-    insmod /system/lib/modules/zram.ko
-
     chmod 0710 /sys/kernel/debug
     chown root system /sys/kernel/debug
     chown root media /sys/devices/virtual/camera/rear/Cam_antibanding

@@ -2,5 +2,8 @@ ro.telephony.ril.config=simactivation
 
 cm.updater.uri=https://serverprive.serveftp.com/LineageOSOTA/api/v1/{device}/{type}/{incr}
 
-hwc.overlay.enable=1
+hwc.overlay.enable=0
 hwc.virtual.gcu.enable=0
+
+debug.falsing_log=true
+debug.falsing_logcat=true
